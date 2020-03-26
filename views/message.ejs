@@ -1,0 +1,7 @@
+<% Object.keys(messages).forEach(function (type) { %>
+    <% messages[type].forEach(function (message) { %>
+        <div style="padding:42px;" class="alert alert-<%= type %>">
+            <%= message %>
+        </div>
+    <% }) %>
+<% }) %>

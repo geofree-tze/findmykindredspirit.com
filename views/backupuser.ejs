@@ -1,0 +1,11 @@
+<% include ../views/partials/header %>
+
+<form method="POST" action="/backupuser" id="backupuser">
+            <input type="submit" value="Submit" class="btn btn-default btn-sm">
+</form>
+<br>
+
+<textarea rows="10" cols="70" name="email" form="backupuser">email</textarea>
+<textarea rows="10" cols="10" name="addCount" form="backupuser">addCount</textarea>
+
+<% include ../views/partials/footer %>

@@ -1,0 +1,116 @@
+<% include ../views/partials/header %>
+
+<style>
+/* https://codepen.io/aaroniker/pen/XxPNqY */
+.github {
+  position: fixed;
+  display: block;
+  right: 20px;
+  bottom: 20px;
+}
+
+.ytvid {
+  position: fixed;
+  display: block;
+  left: 20px;
+  bottom: 20px;
+}
+
+
+/* https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_background7 */
+body {
+  background-image: url('https://i.imgur.com/Byt20En.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+
+
+
+    </head>
+    <body>      
+    
+    <div class="container">
+        <%- messages('message', locals) %>
+
+
+
+
+
+
+<br>
+<div class="row">
+    <div class="col-xs-11">
+
+	<!-- https://stackoverflow.com/questions/1622027/percentage-height-html-5-css -->
+	<div style="height:15vh;"></div>
+
+	<h1 style="color:white;text-align:center;font-size:63px;font-weight:bold;">
+		<span style="color:#ff44ff;">K</span><span style="color:#e063ff;">i</span><span style="color:#c182ff;">n</span>·<span style="color:#a2a2ff;">d</span><span style="color:#82c1ff;">r</span><span style="color:#63e0ff;">e</span><span style="color:#44ffff;">d</span>
+	</h1>
+
+	<br>
+
+	<form id="yes" style="text-align:center;">
+
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;
+
+		<button type="submit" id="redirect" name="redirect" class="btn btn-default btn-lg" value="login">
+		<span style="color:blue;font-weight:bold;">
+			<i class="fas fa-search"></i> find your kind
+		</span>		
+		</button>
+		
+	</form>
+    </div>
+</div>
+
+	<iframe class="github" width="224" height="126" src="https://www.youtube.com/embed/oiE9x9jAuIY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+	<a class="github" href="https://github.com/geofree-tze/findmykindredspirit.com" target="_blank" style="font-size:42px;">
+		<i class="fab fa-github"></i>
+	</a>
+
+<br>
+<br>
+
+
+
+<script>
+
+// there was a bug in the code. the 1st time a user tried to either sign up or login, it did not work.
+// my guess is that the web browser had to cache a cookie the 1st time.
+// my workaround was to cache a cookie on the home page when they click the sign up or login button
+
+    document.getElementById('yes').addEventListener('submit', submitForm);
+    function submitForm(e){
+        e.preventDefault();
+
+        const redirect = document.querySelector('#redirect').value;
+      
+        fetch('/', {
+            method:'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-type':'application/json'
+            },
+            body:JSON.stringify({redirect: redirect})
+        })
+        .then((res) => res.json())
+        .then((data) => {
+                document.location.replace('http://www.<%= domainName %>/email');
+        });
+    }
+</script>
+
+
+</div>
+<script   src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<% include ../views/partials/header %>
+
+<style>
+/* https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_background7 */
+body {
+  background-image: url('https://stmedia.stimg.co/ows_140815515069674.jpg?fit=crop&crop=faces');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+
+    </head>
+    <body>      
+
+
+<div class="row">
+	<div class="col-md-3">
+		<img src="https://i.imgur.com/cDDHol4.gif" alt="" style="max-width:100%;">
+	</div>
+	<div class="col-md-6">
+	</div>
+	<div class="col-md-3" style="background-color:#dddddd;">
+
+<div style="text-align:center;">
+	<br>
+	<h3>
+		<u>Guest List</u>
+	</h3>
+	<br>
+
+
+
+	<% emailDomains.forEach(function(domain){ %>
+<!--                you<a target="_blank" href="http://<%= domain.substring(1) %>"><%= domain %></a> -->
+
+		<% if (domain == "@harvard.edu") { %>
+	                lil_pump<a href="email">@harvard.edu</a>
+		<% } else { %>
+	                you<a href="email"><%= domain %></a>
+		<% } %>
+
+		<br>
+	<% }) %>
+
+
+<br><br><br><br><br>
+</div>
+	</div>
+</div>
+</body>
+</html>

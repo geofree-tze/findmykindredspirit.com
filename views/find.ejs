@@ -1,0 +1,602 @@
+<% include ../views/partials/header %>
+
+<!-- https://codepen.io/kathykato/pen/jzOxgv -->
+<style>
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*::before, *::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.toggle {
+  position: absolute;
+  width: calc(12.25rem/2);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+[type="checkbox"] {
+  display: none;
+}
+
+.check-label {
+  display: block;
+  width: calc(12.25rem/2);
+  height: calc(5.5rem/2);
+  border: none;
+  border-radius: calc(3rem/2);
+  background: #d7d7d7;
+  cursor: pointer;
+  overflow: hidden;
+}
+.check-label .face {
+  display: block;
+  position: absolute;
+  content: '';
+  top: calc(0.45rem/2);
+  bottom: 0;
+  right: calc(7.25rem/2);
+  width: calc(4.5rem/2);
+  height: calc(4.5rem/2);
+  margin: 0;
+  border: none;
+  border-radius: calc(3rem/2);
+  background: -webkit-linear-gradient(45deg, #dedede 0%, #fff 70%);
+  background: -o-linear-gradient(45deg, #dedede 0%, #fff 70%);
+  background: linear-gradient(45deg, #dedede 0%, #fff 70%);
+  -webkit-transition: all 0.45s ease-in-out;
+  -o-transition: all 0.45s ease-in-out;
+  transition: all 0.45s ease-in-out;
+  overflow: hidden;
+}
+
+[type="checkbox"] + .check-label .background {
+  width: inherit;
+  height: inherit;
+  border: none;
+  border-radius: inherit;
+  background: -webkit-gradient(linear, right top, left top, from(#f39ab6), to(#f39af3));
+  background: -webkit-linear-gradient(right, #f39ab6, #f39af3);
+  background: -o-linear-gradient(right, #f39ab6, #f39af3);
+  background: linear-gradient(to left, #f39ab6, #f39af3);
+  opacity: 0;
+  -webkit-transition: all 0.45s ease-in-out;
+  -o-transition: all 0.45s ease-in-out;
+  transition: all 0.45s ease-in-out;
+}
+[type="checkbox"]:checked + .check-label .background {
+  opacity: 1;
+}
+
+.face-container {
+  position: absolute;
+  width: calc(4.5rem/2);
+  height: calc(4.5rem/2);
+}
+
+.face {
+  -webkit-box-shadow: 0 calc(0.3rem/2) calc(0.3rem/2) 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 calc(0.3rem/2) calc(0.3rem/2) 0 rgba(0, 0, 0, 0.25);
+}
+
+.eye {
+  position: absolute;
+  top: calc(2.25rem/2);
+  height: calc(0.25rem/2);
+  width: calc(0.625rem/2);
+  background: #8e8e8e;
+  border-radius: 0 0 100% 50%;
+}
+.eye.left {
+  left: calc(0.75rem/2);
+}
+.eye.right {
+  left: calc(2.125rem/2);
+}
+
+.mouth {
+  position: absolute;
+  top: calc(3.125rem/2);
+  left: calc(1.45rem/2);
+  width: calc(0.475rem/2);
+  height: calc(0.25rem/2);
+  background: #8e8e8e;
+  border-radius: 40% 40% 100% 50%;
+}
+
+[type="checkbox"]:checked + .check-label .face {
+  right: calc(0.6rem/2);
+}
+[type="checkbox"]:checked + .check-label .face .face-container {
+  -webkit-animation: rotateElement forwards 0.3s;
+  animation: rotateElement forwards 0.3s;
+}
+[type="checkbox"]:checked + .check-label .face .eye.left, [type="checkbox"]:checked + .check-label .face .eye.right {
+  -webkit-animation: changeFace forwards 0.3s 0.075s;
+  animation: changeFace forwards 0.3s 0.075s;
+}
+[type="checkbox"]:checked + .check-label .face .mouth {
+  -webkit-animation: changeMouth forwards 0.3s 0.075s;
+  animation: changeMouth forwards 0.3s 0.075s;
+}
+[type="checkbox"]:checked + .check-label .face .eye.left {
+  left: calc(1rem/2);
+}
+[type="checkbox"]:checked + .check-label .face .eye.right {
+  left: calc(2.5rem/2);
+}
+[type="checkbox"] + .check-label .face .face-container {
+  -webkit-animation: rotateElementReverse forwards 0.3s;
+  animation: rotateElementReverse forwards 0.3s;
+}
+[type="checkbox"] + .check-label .face .eye.left, [type="checkbox"] + .check-label .face .eye.right {
+  -webkit-animation: changeFaceReverse forwards 0.3s;
+  animation: changeFaceReverse forwards 0.3s;
+}
+[type="checkbox"] + .check-label .face .mouth {
+  -webkit-animation: changeMouthReverse forwards 0.3s;
+  animation: changeMouthReverse forwards 0.3s;
+}
+
+@-webkit-keyframes rotateElement {
+  0% {
+    left: 0;
+  }
+  25% {
+    left: calc(4rem/2);
+  }
+  30% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+    left: calc(-4rem/2);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(1rem/2);
+    opacity: 1;
+  }
+}
+@keyframes rotateElement {
+  0% {
+    left: 0;
+  }
+  25% {
+    left: calc(4rem/2);
+  }
+  30% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+    left: calc(-4rem/2);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(1rem/2);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes changeFace {
+  100% {
+    top: calc(1.7rem/2);
+    width: calc(0.375rem/2);
+    height: calc(0.375rem/2);
+    background: #8e8e8e;
+    border: none;
+    border-radius: 100%;
+  }
+}
+@keyframes changeFace {
+  100% {
+    top: calc(1.7rem/2);
+    width: calc(0.375rem/2);
+    height: calc(0.375rem/2);
+    background: #8e8e8e;
+    border: none;
+    border-radius: 100%;
+  }
+}
+@-webkit-keyframes changeMouth {
+  100% {
+    top: calc(2.55rem/2);
+    left: calc(1.125rem/2);
+    height: calc(0.625rem/2);
+    width: calc(1.625rem/2);
+    background: #8e8e8e;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#8e8e8e), to(#a4a4a4));
+    background-image: -webkit-linear-gradient(top, #8e8e8e, #a4a4a4);
+    background-image: -o-linear-gradient(top, #8e8e8e, #a4a4a4);
+    background-image: linear-gradient(to bottom, #8e8e8e, #a4a4a4);
+    border-radius: calc(0.2rem/2) calc(0.2rem/2) calc(1rem/2) calc(1rem/2);
+  }
+}
+@keyframes changeMouth {
+  100% {
+    top: calc(2.55rem/2);
+    left: calc(1.125rem/2);
+    height: calc(0.625rem/2);
+    width: calc(1.625rem/2);
+    background: #8e8e8e;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#8e8e8e), to(#a4a4a4));
+    background-image: -webkit-linear-gradient(top, #8e8e8e, #a4a4a4);
+    background-image: -o-linear-gradient(top, #8e8e8e, #a4a4a4);
+    background-image: linear-gradient(to bottom, #8e8e8e, #a4a4a4);
+    border-radius: calc(0.2rem/2) calc(0.2rem/2) calc(1rem/2) calc(1rem/2);
+  }
+}
+@-webkit-keyframes rotateElementReverse {
+  0% {
+    left: 0;
+  }
+  25% {
+    left: calc(-4rem/2);
+  }
+  30% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+    left: clac(4rem/2);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+@keyframes rotateElementReverse {
+  0% {
+    left: 0;
+  }
+  25% {
+    left: calc(-4rem/2);
+  }
+  30% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+    left: calc(4rem/2);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes changeFaceReverse {
+  0% {
+    top: calc(1.7rem/2);
+    width: calc(0.375rem/2);
+    height: calc(0.375rem/2);
+    border: none;
+    border-radius: 100%;
+    background: #8e8e8e;
+  }
+}
+@keyframes changeFaceReverse {
+  0% {
+    top: calc(1.7rem/2);
+    width: calc(0.375rem/2);
+    height: calc(0.375rem/2);
+    border: none;
+    border-radius: 100%;
+    background: #8e8e8e;
+  }
+}
+@-webkit-keyframes changeMouthReverse {
+  0% {
+    top: calc(2.55rem/2);
+    left: calc(0.9rem/2);
+    height: calc(0.625rem/2);
+    width: calc(1.625rem/2);
+    background: #8e8e8e;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#8e8e8e), to(#a4a4a4));
+    background-image: -webkit-linear-gradient(top, #8e8e8e, #a4a4a4);
+    background-image: -o-linear-gradient(top, #8e8e8e, #a4a4a4);
+    background-image: linear-gradient(to bottom, #8e8e8e, #a4a4a4);
+    border: none;
+    border-radius: calc(0.2rem/2) calc(0.2rem/2) calc(1rem/2) calc(1rem/2);
+  }
+  25% {
+    left: calc(1.125rem/2);
+  }
+}
+@keyframes changeMouthReverse {
+  0% {
+    top: calc(2.55rem/2);
+    left: calc(0.9rem/2);
+    height: calc(0.625rem/2);
+    width: calc(1.625rem/2);
+    background: #8e8e8e;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#8e8e8e), to(#a4a4a4));
+    background-image: -webkit-linear-gradient(top, #8e8e8e, #a4a4a4);
+    background-image: -o-linear-gradient(top, #8e8e8e, #a4a4a4);
+    background-image: linear-gradient(to bottom, #8e8e8e, #a4a4a4);
+    border: none;
+    border-radius: calc(0.2rem/2) calc(0.2rem/2) calc(1rem/2) calc(1rem/2);
+  }
+  25% {
+    left: calc(1.125rem/2);
+  }
+}
+
+
+.carousel-content {
+    color:black;
+    display:flex;
+    align-items:center;
+}
+
+#text-carousel {
+  width: 100%;
+  height: auto;
+  padding: 50px;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+    <body style="background-color:black;">          
+    <div class="container">
+        <%- messages('message', locals) %>
+
+
+<br>
+<br>
+<%if (frozen) { %>
+	<h1 style="color:#ff8800;">Your account is under review.</h1>
+<% } else { %>
+
+
+<div class="row">
+
+    <div class="col-md-5" style="background-color:#bbbbbb;margin:10px;">
+	<br>
+        <!-- answered by DJ18 https://stackoverflow.com/questions/9707397/making-a-div-vertically-scrollable-using-css -->
+        <div style="overflow-y:scroll; overflow-x:hidden; height:350px;">
+        <table class="table table-hover" style="background-color:#cccccc;">
+            <% var i = 0; %>
+            <% tagsAll.forEach(function(tag){ %>
+            <tr><td><div class="row"><div class="col-xs-9" style="word-wrap:break-word;display:inline-block;">
+			    <!-- https://stackoverflow.com/questions/499137/how-can-i-force-a-long-string-without-any-blank-to-be-wrapped -->
+                                <%= tag.description %>
+	        </div>
+	        <div class="col-xs-3" style="text-align:right;">
+
+
+                            <%# this chunk of code makes sure that a plus sign only appears in front of tags that the user hasn't added yet %>
+                            <%
+				i++;
+                                var userAlreadyAddedTag = false;
+                                if (tags.length > 0) {
+                                    tags.forEach(function(userTag) {
+                                        if (userTag.description == tag.description) {
+                                            userAlreadyAddedTag = true;
+                                        }
+                                    })
+                                }
+                            %>
+                            <%if (!userAlreadyAddedTag) { %>
+                                    <form id="<%= tag.description %>" method="POST" class="form-inline" action="/find/add_tag"> <!-- https://stackoverflow.com/questions/37954005/keep-scroll-position-of-a-div-after-a-form-submit-using-session-var-or-css -->
+                                        <input type="hidden" name="tag" value="<%= tag.description %>">
+  <div class="toggle">
+    <input type="checkbox" class="check-checkbox" id="mytoggle<%= i %>" onChange="this.form.submit()">
+    <label class="check-label" for="mytoggle<%= i %>">
+      <div class="background"></div>
+      <span class="face">
+        <span class="face-container">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="mouth"></span>
+        </span>
+      </span>
+    </label>
+  </div>
+                                    </form>
+                            <% } else{ %>
+                                <form id="<%= tag.description %>" method="POST" class="form-inline" action="/find/remove_tag">
+                                        <input type="hidden" name="tag" value="<%= tag.description %>">
+
+  <div class="toggle">
+    <input type="checkbox" class="check-checkbox" id="mytoggle<%= i %>" onChange="this.form.submit()" checked>
+    <label class="check-label" for="mytoggle<%= i %>">
+      <div class="background"></div>
+      <span class="face">
+        <span class="face-container">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="mouth"></span>
+        </span>
+      </span>
+    </label>
+  </div>
+                                </form>
+                            <% } %>
+            </div></div></td></tr>
+            <% }) %>
+        </table>
+        </div>
+
+	<br><br>
+
+	<div class="row">
+	<div class="col-md-12">
+            <div class="well" style="background-color:#888888;margin-right:20px;">
+            <form class="form-inline" method="POST" action="/find/add_tag">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <input type="text" name="tag" placeholder=" new entry name" maxlength="100" required="required">
+                    </div>
+                    <div class="col-xs-5" style="text-align:right;">
+
+					<button type="submit" class="btn btn-warning" style="background-color:#f39ab6;">
+                                            <span style="font-size:11px;font-family:Helvetica;font-weight:bold;">CREATE</span>
+                                        </button>
+                    </div>
+                </div>
+            </form>
+            </div>
+	</div>
+	</div>
+    </div>
+
+
+<%if (kindred.length > 0) { %>
+    <div class="col-md-4" style="background-color:#ffbcd9;margin:10px;">
+    <br>
+
+
+
+<!-- https://codepen.io/matthewhirsch/pen/OPwQRL -->
+<div id="text-carousel" class="carousel" data-interval="false"> <!-- https://stackoverflow.com/questions/14977392/bootstrap-carousel-remove-auto-slide -->
+    <!-- Wrapper for slides -->
+    <div class="row">
+        <div class="col-xs-offset-1 col-xs-10">
+            <div class="carousel-inner">
+
+		<% var j = 1; %>
+                <% kindred.forEach(function(user) { %>
+
+                <div class="item <% if (j == 1) { %>active<% } %>">
+                    <div class="carousel-content">
+                        <div>
+				<span style="font-size:10px;"><%= j++ %> of <%= kindred.length %></span>
+				<br>
+
+				<%= user.email %><br>
+				<br>
+
+
+				<b><u>Things In Common</u></b><br>
+				<ul style="font-size:12px;">
+                	        <% user.tags.forEach(function(tag) { %>
+	                            <li><%= tag %></li>
+        	                <% }); %>
+				</ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <% }); %>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Controls --> <a class="left carousel-control" href="#text-carousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+ <a class="right carousel-control" href="#text-carousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+
+</div>
+
+
+
+
+
+
+
+		<table class="table table-hover" style="background-color:#ffdcf9;">
+
+		</table>
+
+
+
+    </div>
+<% } else{ %>
+    <div class="col-md-4">
+	<br>
+    </div>
+<% } %>
+
+
+   <div class="col-md-2" style="text-align:left;">
+<% } %>
+
+	<br><br>
+
+        <button type="button" class="btn btn-outline-secondary btn-lg" style="padding:20px;background-color:#888888;">
+		<a style="color:white;" href="/logout">
+			Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
+		</a>
+        </button>
+
+	<br><br><br>
+
+<% if (!frozen) { %>
+
+	<form method="POST" class="form-inline" action="/find/all_schools">
+		<span style="color:white;">search other schools?</span><br>
+		<% if (searchAllSchools) { %>
+                        <input type="hidden" name="allSchools" value="false">
+			  <div class="toggle">
+			    <input type="checkbox" name="toggle" class="check-checkbox" id="mytoggleAllSchools" onChange="this.form.submit()" checked>
+			    <label class="check-label" for="mytoggleAllSchools">
+			      <div class="background"></div>
+			      <span class="face">
+			        <span class="face-container">
+			          <span class="eye left"></span>
+			          <span class="eye right"></span>
+			          <span class="mouth"></span>
+			        </span>
+			      </span>
+			    </label>
+			  </div>
+		<% } else { %>
+			<input type="hidden" name="allSchools" value="true">
+			  <div class="toggle">
+			    <input type="checkbox" name="toggle" class="check-checkbox" id="mytoggleAllSchools" onChange="this.form.submit()">
+			    <label class="check-label" for="mytoggleAllSchools">
+			      <div class="background"></div>
+			      <span class="face">
+			        <span class="face-container">
+			          <span class="eye left"></span>
+			          <span class="eye right"></span>
+			          <span class="mouth"></span>
+			        </span>
+			      </span>
+			    </label>
+			  </div>
+		<% } %>
+	</form>
+
+	<br><br><br>
+
+    </div>
+</div>
+<% } %>
+
+
+<% include ../views/partials/footer %>

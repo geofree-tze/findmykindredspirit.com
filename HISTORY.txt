@@ -1,0 +1,2450 @@
+
+
+2020-03-20 23:46:55
+tzetabakovgeofree@student.foothill.edu
+EMAIL_SENT
+
+2020-03-20 23:47:2
+tzetabakovgeofree@student.foothill.edu
+LOGIN
+
+2020-03-20 23:47:49
+tzetabakovgeofree@student.foothill.edu
+LOGIN
+
+2020-03-20 23:50:49
+tzetabakovgeofree@student.foothill.edu
+LOGIN
+
+2020-03-20 23:51:0
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+true
+
+2020-03-20 23:53:28
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+false
+
+2020-03-20 23:55:25
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Ayurveda for mental health
+
+2020-03-20 23:55:31
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+Ayurveda for mental health
+
+2020-03-20 23:55:32
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Ayurveda for mental health
+
+2020-03-20 23:55:34
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+Ayurveda for mental health
+
+2020-03-21 0:0:18
+tzetabakovgeofree@student.foothill.edu
+LOGIN
+
+2020-03-21 0:2:49
+tzetabakovgeofree@student.foothill.edu
+LOGIN
+
+2020-03-21 0:2:53
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+true
+
+2020-03-21 0:6:58
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+false
+
+2020-03-21 0:7:0
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+true
+
+2020-03-21 0:7:2
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+420
+
+2020-03-21 0:7:5
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+alan walker
+
+2020-03-21 0:7:9
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+anime
+
+2020-03-21 0:7:16
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+gym
+
+2020-03-21 0:7:21
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+video games
+
+2020-03-21 0:7:51
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+false
+
+2020-03-21 0:7:53
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+alan walker
+
+2020-03-21 0:7:54
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+anime
+
+2020-03-21 0:7:55
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+gym
+
+2020-03-21 0:7:56
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+Universal Basic Income
+
+2020-03-21 0:7:57
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+video games
+
+2020-03-21 0:7:58
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+420
+
+2020-03-21 0:7:59
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Universal Basic Income
+
+2020-03-22 2:29:19
+tzetabakovgeofree@student.foothill.edu
+EMAIL_SENT
+
+2020-03-22 2:29:28
+tzetabakovgeofree@student.foothill.edu
+LOGIN
+
+2020-03-22 23:49:8
+tzetabakovgeofree@student.foothill.edu
+EMAIL_SENT
+
+2020-03-22 23:50:9
+tzetabakovgeofree@student.foothill.edu
+LOGIN
+
+2020-03-22 23:55:50
+tzetabakovgeofree@student.foothill.edu
+LOGIN
+
+2020-03-23 5:31:47
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+Universal Basic Income
+
+2020-03-23 5:31:49
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Universal Basic Income
+
+2020-03-23 5:31:50
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+true
+
+2020-03-23 5:31:52
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+false
+
+2020-03-23 5:31:53
+tzetabakovgeofree@student.foothill.edu
+REMOVE_TAG
+Universal Basic Income
+
+2020-03-23 20:45:38
+tzetabakovgeofree@student.foothill.edu
+EMAIL_SENT
+
+2020-03-23 20:45:59
+tzetabakovgeofree@student.foothill.edu
+LOGIN
+
+2020-03-23 20:47:44
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+true
+
+2020-03-23 20:48:43
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+false
+
+2020-03-23 20:48:45
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+true
+
+2020-03-23 20:48:49
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+false
+
+2020-03-23 20:52:6
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Universal Basic Income
+
+2020-03-23 21:11:50
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Ayurveda for mental health
+
+2020-03-23 21:11:51
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+surfing
+
+2020-03-23 21:11:57
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+true
+
+2020-03-23 21:12:24
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+anime
+
+2020-03-23 21:12:28
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+video games
+
+2020-03-23 21:12:31
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+gym
+
+2020-03-23 21:12:36
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+breath of the wild
+
+2020-03-23 21:21:14
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+420
+
+2020-03-23 21:21:18
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+afrobeats
+
+2020-03-23 21:21:22
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+always sunny
+
+2020-03-23 21:21:25
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Arrested Development
+
+2020-03-23 21:21:31
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+ben shapiro
+
+2020-03-23 21:21:35
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Breaking Bad
+
+2020-03-23 21:22:21
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Community the TV show
+
+2020-03-23 21:22:25
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+Destiny 2
+
+2020-03-23 21:23:19
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+false
+
+2020-03-23 21:23:23
+tzetabakovgeofree@student.foothill.edu
+ALL_SCHOOLS
+true
+
+2020-03-23 23:20:20
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+warframe
+
+2020-03-23 23:20:23
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+violin
+
+2020-03-23 23:20:33
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+uwu
+
+2020-03-23 23:20:38
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+spider-man
+
+2020-03-23 23:20:44
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+smash bros
+
+2020-03-23 23:21:5
+tzetabakovgeofree@student.foothill.edu
+ADD_TAG
+sci-fi
+
+2020-03-24 0:57:55
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 0:58:7
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 0:58:20
+gat58@cornell.edu
+ADD_TAG
+warframe
+
+2020-03-24 0:58:25
+gat58@cornell.edu
+ADD_TAG
+violin
+
+2020-03-24 3:30:56
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 3:31:3
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 3:31:15
+gat58@cornell.edu
+ADD_TAG
+video games
+
+2020-03-24 3:31:24
+gat58@cornell.edu
+ADD_TAG
+uwu
+
+2020-03-24 3:31:32
+gat58@cornell.edu
+ADD_TAG
+spider-man
+
+2020-03-24 3:31:50
+gat58@cornell.edu
+ADD_TAG
+smash bros
+
+2020-03-24 3:31:58
+gat58@cornell.edu
+ADD_TAG
+sci-fi
+
+2020-03-24 3:32:5
+gat58@cornell.edu
+ADD_TAG
+orchestra
+
+2020-03-24 3:32:13
+gat58@cornell.edu
+ADD_TAG
+music
+
+2020-03-24 3:32:20
+gat58@cornell.edu
+ALL_SCHOOLS
+true
+
+2020-03-24 3:32:25
+gat58@cornell.edu
+ALL_SCHOOLS
+false
+
+2020-03-24 3:32:32
+gat58@cornell.edu
+ADD_TAG
+movies
+
+2020-03-24 3:32:48
+gat58@cornell.edu
+ADD_TAG
+monster hunter
+
+2020-03-24 3:32:52
+gat58@cornell.edu
+ADD_TAG
+marvel
+
+2020-03-24 3:32:59
+gat58@cornell.edu
+ADD_TAG
+lo-fi
+
+2020-03-24 3:33:3
+gat58@cornell.edu
+ADD_TAG
+hip hop
+
+2020-03-24 3:33:9
+gat58@cornell.edu
+ADD_TAG
+gym
+
+2020-03-24 3:33:13
+gat58@cornell.edu
+ADD_TAG
+gaming
+
+2020-03-24 3:33:16
+gat58@cornell.edu
+ADD_TAG
+game of thrones
+
+2020-03-24 3:33:23
+gat58@cornell.edu
+ADD_TAG
+comics
+
+2020-03-24 3:33:28
+gat58@cornell.edu
+ADD_TAG
+biology
+
+2020-03-24 3:33:34
+gat58@cornell.edu
+ADD_TAG
+biological sciences
+
+2020-03-24 3:33:42
+gat58@cornell.edu
+ADD_TAG
+anime
+
+2020-03-24 3:35:0
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 3:35:10
+gat58@cornell.edu
+ADD_TAG
+3d printing
+
+2020-03-24 3:35:42
+gat58@cornell.edu
+ADD_TAG
+brooklyn 99
+
+2020-03-24 3:35:44
+gat58@cornell.edu
+ADD_TAG
+civ 6
+
+2020-03-24 3:35:47
+gat58@cornell.edu
+ADD_TAG
+computer science
+
+2020-03-24 3:35:52
+gat58@cornell.edu
+ADD_TAG
+fortnite
+
+2020-03-24 3:35:58
+gat58@cornell.edu
+ADD_TAG
+frank ocean
+
+2020-03-24 3:36:4
+gat58@cornell.edu
+ADD_TAG
+league of legends
+
+2020-03-24 3:36:15
+gat58@cornell.edu
+ADD_TAG
+420
+
+2020-03-24 3:36:16
+gat58@cornell.edu
+ADD_TAG
+90’s pc fps games
+
+2020-03-24 3:36:17
+gat58@cornell.edu
+ADD_TAG
+activism
+
+2020-03-24 3:36:18
+gat58@cornell.edu
+ADD_TAG
+adventure
+
+2020-03-24 3:36:19
+gat58@cornell.edu
+ADD_TAG
+afrobeats
+
+2020-03-24 3:36:20
+gat58@cornell.edu
+ADD_TAG
+afrofuturism
+
+2020-03-24 3:36:21
+gat58@cornell.edu
+ADD_TAG
+alan walker
+
+2020-03-24 3:36:22
+gat58@cornell.edu
+ADD_TAG
+alex jones intellect
+
+2020-03-24 3:36:23
+gat58@cornell.edu
+ADD_TAG
+always sunny
+
+2020-03-24 3:36:24
+gat58@cornell.edu
+ADD_TAG
+animals
+
+2020-03-24 3:36:26
+gat58@cornell.edu
+ADD_TAG
+architecture students on couches
+
+2020-03-24 3:36:27
+gat58@cornell.edu
+ADD_TAG
+arctic & antarctic history
+
+2020-03-24 3:36:28
+gat58@cornell.edu
+ADD_TAG
+austen
+
+2020-03-24 3:36:29
+gat58@cornell.edu
+ADD_TAG
+authoritarianism
+
+2020-03-24 3:36:31
+gat58@cornell.edu
+ADD_TAG
+badminton
+
+2020-03-24 3:36:32
+gat58@cornell.edu
+ADD_TAG
+baking
+
+2020-03-24 3:36:33
+gat58@cornell.edu
+ADD_TAG
+baseball
+
+2020-03-24 3:36:34
+gat58@cornell.edu
+ADD_TAG
+basketball
+
+2020-03-24 3:36:35
+gat58@cornell.edu
+ADD_TAG
+ben shapiro
+
+2020-03-24 3:36:45
+gat58@cornell.edu
+ADD_TAG
+blaxican
+
+2020-03-24 3:36:46
+gat58@cornell.edu
+ADD_TAG
+board games
+
+2020-03-24 3:36:48
+gat58@cornell.edu
+ADD_TAG
+books
+
+2020-03-24 3:36:49
+gat58@cornell.edu
+ADD_TAG
+breath of the wild
+
+2020-03-24 3:36:50
+gat58@cornell.edu
+ADD_TAG
+broadway
+
+2020-03-24 3:36:51
+gat58@cornell.edu
+ADD_TAG
+bros who smash
+
+2020-03-24 3:36:52
+gat58@cornell.edu
+ADD_TAG
+chemistry
+
+2020-03-24 3:36:54
+gat58@cornell.edu
+ADD_TAG
+chad
+
+2020-03-24 3:36:55
+gat58@cornell.edu
+ADD_TAG
+christian
+
+2020-03-24 3:36:57
+gat58@cornell.edu
+ADD_TAG
+climate change
+
+2020-03-24 3:37:1
+gat58@cornell.edu
+ADD_TAG
+climbing
+
+2020-03-24 3:37:2
+gat58@cornell.edu
+ADD_TAG
+coffee
+
+2020-03-24 3:37:3
+gat58@cornell.edu
+ADD_TAG
+communism
+
+2020-03-24 3:37:5
+gat58@cornell.edu
+ADD_TAG
+cooking
+
+2020-03-24 3:37:6
+gat58@cornell.edu
+ADD_TAG
+cyberpunk
+
+2020-03-24 3:37:7
+gat58@cornell.edu
+ADD_TAG
+disney
+
+2020-03-24 3:37:8
+gat58@cornell.edu
+ADD_TAG
+donut earth theory
+
+2020-03-24 3:37:9
+gat58@cornell.edu
+ADD_TAG
+drinking
+
+2020-03-24 3:37:10
+gat58@cornell.edu
+ADD_TAG
+drinks
+
+2020-03-24 3:37:11
+gat58@cornell.edu
+ADD_TAG
+drums
+
+2020-03-24 3:37:12
+gat58@cornell.edu
+ADD_TAG
+economics
+
+2020-03-24 3:37:14
+gat58@cornell.edu
+ADD_TAG
+environmental engineering
+
+2020-03-24 3:37:15
+gat58@cornell.edu
+ADD_TAG
+fashion
+
+2020-03-24 3:37:16
+gat58@cornell.edu
+ADD_TAG
+fc bayern
+
+2020-03-24 3:37:17
+gat58@cornell.edu
+ADD_TAG
+feet
+
+2020-03-24 3:37:28
+gat58@cornell.edu
+ADD_TAG
+film
+
+2020-03-24 3:37:30
+gat58@cornell.edu
+ADD_TAG
+flute
+
+2020-03-24 3:37:31
+gat58@cornell.edu
+ADD_TAG
+food
+
+2020-03-24 3:37:32
+gat58@cornell.edu
+ADD_TAG
+football
+
+2020-03-24 3:37:34
+gat58@cornell.edu
+ADD_TAG
+friends
+
+2020-03-24 3:37:35
+gat58@cornell.edu
+ADD_TAG
+frisbee
+
+2020-03-24 3:37:37
+gat58@cornell.edu
+ADD_TAG
+games
+
+2020-03-24 3:37:38
+gat58@cornell.edu
+ADD_TAG
+gay
+
+2020-03-24 3:37:52
+gat58@cornell.edu
+ADD_TAG
+going out
+
+2020-03-24 3:37:53
+gat58@cornell.edu
+ADD_TAG
+guitar
+
+2020-03-24 3:37:54
+gat58@cornell.edu
+ADD_TAG
+hiking
+
+2020-03-24 3:37:56
+gat58@cornell.edu
+ADD_TAG
+hispanic
+
+2020-03-24 3:37:57
+gat58@cornell.edu
+ADD_TAG
+history
+
+2020-03-24 3:37:58
+gat58@cornell.edu
+ADD_TAG
+hotelie
+
+2020-03-24 3:37:58
+gat58@cornell.edu
+ADD_TAG
+house music
+
+2020-03-24 3:37:59
+gat58@cornell.edu
+ADD_TAG
+idm and ambient music
+
+2020-03-24 3:38:1
+gat58@cornell.edu
+ADD_TAG
+jazz
+
+2020-03-24 3:38:2
+gat58@cornell.edu
+ADD_TAG
+jets
+
+2020-03-24 3:38:3
+gat58@cornell.edu
+ADD_TAG
+jj lin
+
+2020-03-24 3:38:3
+gat58@cornell.edu
+ADD_TAG
+johann sebastian bach
+
+2020-03-24 3:38:4
+gat58@cornell.edu
+ADD_TAG
+junior
+
+2020-03-24 3:38:5
+gat58@cornell.edu
+ADD_TAG
+la croix
+
+2020-03-24 3:38:6
+gat58@cornell.edu
+ADD_TAG
+languages
+
+2020-03-24 3:38:7
+gat58@cornell.edu
+ADD_TAG
+leninism
+
+2020-03-24 3:38:9
+gat58@cornell.edu
+ADD_TAG
+leonhard euler
+
+2020-03-24 3:38:20
+gat58@cornell.edu
+ADD_TAG
+liar's dice
+
+2020-03-24 3:38:21
+gat58@cornell.edu
+ADD_TAG
+lotr
+
+2020-03-24 3:38:23
+gat58@cornell.edu
+ADD_TAG
+love
+
+2020-03-24 3:38:24
+gat58@cornell.edu
+ADD_TAG
+melee
+
+2020-03-24 3:38:26
+gat58@cornell.edu
+ADD_TAG
+mets
+
+2020-03-24 3:38:27
+gat58@cornell.edu
+ADD_TAG
+micro & cell biology
+
+2020-03-24 3:38:28
+gat58@cornell.edu
+ADD_TAG
+mochi ice cream
+
+2020-03-24 3:38:29
+gat58@cornell.edu
+ADD_TAG
+museums
+
+2020-03-24 3:38:34
+gat58@cornell.edu
+ADD_TAG
+music production
+
+2020-03-24 3:38:36
+gat58@cornell.edu
+ADD_TAG
+mussolini
+
+2020-03-24 3:38:37
+gat58@cornell.edu
+ADD_TAG
+netflix
+
+2020-03-24 3:38:38
+gat58@cornell.edu
+ADD_TAG
+nirvana
+
+2020-03-24 3:38:39
+gat58@cornell.edu
+ADD_TAG
+nyc
+
+2020-03-24 3:38:40
+gat58@cornell.edu
+ADD_TAG
+overwatch
+
+2020-03-24 3:38:41
+gat58@cornell.edu
+ADD_TAG
+pc
+
+2020-03-24 3:38:43
+gat58@cornell.edu
+ADD_TAG
+party
+
+2020-03-24 3:38:44
+gat58@cornell.edu
+ADD_TAG
+philosophy
+
+2020-03-24 3:38:45
+gat58@cornell.edu
+ADD_TAG
+photography
+
+2020-03-24 3:38:46
+gat58@cornell.edu
+ADD_TAG
+physics
+
+2020-03-24 3:38:47
+gat58@cornell.edu
+ADD_TAG
+piano
+
+2020-03-24 3:38:48
+gat58@cornell.edu
+ADD_TAG
+plants
+
+2020-03-24 3:38:49
+gat58@cornell.edu
+ADD_TAG
+pokemon
+
+2020-03-24 3:38:50
+gat58@cornell.edu
+ADD_TAG
+pokemon go
+
+2020-03-24 3:38:51
+gat58@cornell.edu
+ADD_TAG
+politics
+
+2020-03-24 3:38:52
+gat58@cornell.edu
+ADD_TAG
+project +
+
+2020-03-24 3:39:8
+gat58@cornell.edu
+ADD_TAG
+project m
+
+2020-03-24 3:39:9
+gat58@cornell.edu
+ADD_TAG
+ra ra rasputin russia’s greatest uwu bean
+
+2020-03-24 3:39:10
+gat58@cornell.edu
+ADD_TAG
+radiohead
+
+2020-03-24 3:39:11
+gat58@cornell.edu
+ADD_TAG
+reading
+
+2020-03-24 3:39:12
+gat58@cornell.edu
+ADD_TAG
+riley jacobs
+
+2020-03-24 3:39:13
+gat58@cornell.edu
+ADD_TAG
+robots
+
+2020-03-24 3:39:14
+gat58@cornell.edu
+ADD_TAG
+san antonio
+
+2020-03-24 3:39:15
+gat58@cornell.edu
+ADD_TAG
+secret hitler
+
+2020-03-24 3:39:17
+gat58@cornell.edu
+ADD_TAG
+shoegaze
+
+2020-03-24 3:39:18
+gat58@cornell.edu
+ADD_TAG
+smash
+
+2020-03-24 3:39:19
+gat58@cornell.edu
+ADD_TAG
+smash ultimate
+
+2020-03-24 3:39:21
+gat58@cornell.edu
+ADD_TAG
+smashbros ultimate
+
+2020-03-24 3:39:22
+gat58@cornell.edu
+ADD_TAG
+soccer
+
+2020-03-24 3:39:23
+gat58@cornell.edu
+ADD_TAG
+softball
+
+2020-03-24 3:39:24
+gat58@cornell.edu
+ADD_TAG
+sophomore
+
+2020-03-24 3:39:24
+gat58@cornell.edu
+ADD_TAG
+south park
+
+2020-03-24 3:39:26
+gat58@cornell.edu
+ADD_TAG
+spikeball
+
+2020-03-24 3:39:27
+gat58@cornell.edu
+ADD_TAG
+sports
+
+2020-03-24 3:39:28
+gat58@cornell.edu
+ADD_TAG
+stalin
+
+2020-03-24 3:39:29
+gat58@cornell.edu
+ADD_TAG
+stanley kubrick
+
+2020-03-24 3:39:30
+gat58@cornell.edu
+ADD_TAG
+steven universe
+
+2020-03-24 3:39:30
+gat58@cornell.edu
+ADD_TAG
+stupid hard classes
+
+2020-03-24 3:39:31
+gat58@cornell.edu
+ADD_TAG
+tennis
+
+2020-03-24 3:39:32
+gat58@cornell.edu
+ADD_TAG
+terraforming mars
+
+2020-03-24 3:39:34
+gat58@cornell.edu
+ADD_TAG
+the good place
+
+2020-03-24 3:39:37
+gat58@cornell.edu
+ADD_TAG
+theater
+
+2020-03-24 3:39:38
+gat58@cornell.edu
+ADD_TAG
+thrifting
+
+2020-03-24 3:39:39
+gat58@cornell.edu
+ADD_TAG
+tiananmen square
+
+2020-03-24 3:39:40
+gat58@cornell.edu
+ADD_TAG
+trump
+
+2020-03-24 3:39:41
+gat58@cornell.edu
+ADD_TAG
+tunnels
+
+2020-03-24 3:39:42
+gat58@cornell.edu
+ADD_TAG
+vegan
+
+2020-03-24 3:39:43
+gat58@cornell.edu
+ADD_TAG
+video production
+
+2020-03-24 3:39:46
+gat58@cornell.edu
+ADD_TAG
+viola
+
+2020-03-24 3:39:47
+gat58@cornell.edu
+ADD_TAG
+vogue (ballroom culture)
+
+2020-03-24 3:39:48
+gat58@cornell.edu
+ADD_TAG
+youtube
+
+2020-03-24 3:39:49
+gat58@cornell.edu
+ADD_TAG
+zelda
+
+2020-03-24 4:23:21
+gat58@cornell.edu
+REMOVE_TAG
+zelda
+
+2020-03-24 4:23:22
+gat58@cornell.edu
+REMOVE_TAG
+youtube
+
+2020-03-24 4:23:24
+gat58@cornell.edu
+REMOVE_TAG
+warframe
+
+2020-03-24 4:23:25
+gat58@cornell.edu
+REMOVE_TAG
+vogue (ballroom culture)
+
+2020-03-24 4:23:26
+gat58@cornell.edu
+REMOVE_TAG
+violin
+
+2020-03-24 4:23:27
+gat58@cornell.edu
+REMOVE_TAG
+viola
+
+2020-03-24 4:23:28
+gat58@cornell.edu
+REMOVE_TAG
+video production
+
+2020-03-24 4:23:29
+gat58@cornell.edu
+REMOVE_TAG
+video games
+
+2020-03-24 4:23:30
+gat58@cornell.edu
+REMOVE_TAG
+vegan
+
+2020-03-24 4:23:34
+gat58@cornell.edu
+REMOVE_TAG
+3d printing
+
+2020-03-24 4:23:34
+gat58@cornell.edu
+REMOVE_TAG
+420
+
+2020-03-24 4:23:35
+gat58@cornell.edu
+REMOVE_TAG
+90’s pc fps games
+
+2020-03-24 4:23:36
+gat58@cornell.edu
+REMOVE_TAG
+activism
+
+2020-03-24 4:23:37
+gat58@cornell.edu
+REMOVE_TAG
+adventure
+
+2020-03-24 4:23:38
+gat58@cornell.edu
+REMOVE_TAG
+afrobeats
+
+2020-03-24 4:23:39
+gat58@cornell.edu
+REMOVE_TAG
+afrofuturism
+
+2020-03-24 4:23:40
+gat58@cornell.edu
+REMOVE_TAG
+alex jones intellect
+
+2020-03-24 4:23:41
+gat58@cornell.edu
+REMOVE_TAG
+animals
+
+2020-03-24 4:23:48
+gat58@cornell.edu
+REMOVE_TAG
+always sunny
+
+2020-03-24 4:23:49
+gat58@cornell.edu
+REMOVE_TAG
+anime
+
+2020-03-24 4:23:51
+gat58@cornell.edu
+REMOVE_TAG
+architecture students on couches
+
+2020-03-24 4:23:52
+gat58@cornell.edu
+REMOVE_TAG
+arctic & antarctic history
+
+2020-03-24 4:24:8
+gat58@cornell.edu
+REMOVE_TAG
+austen
+
+2020-03-24 4:24:10
+gat58@cornell.edu
+REMOVE_TAG
+authoritarianism
+
+2020-03-24 4:24:11
+gat58@cornell.edu
+REMOVE_TAG
+badminton
+
+2020-03-24 4:24:12
+gat58@cornell.edu
+REMOVE_TAG
+baking
+
+2020-03-24 4:24:13
+gat58@cornell.edu
+REMOVE_TAG
+baseball
+
+2020-03-24 4:24:14
+gat58@cornell.edu
+REMOVE_TAG
+basketball
+
+2020-03-24 4:24:15
+gat58@cornell.edu
+REMOVE_TAG
+ben shapiro
+
+2020-03-24 4:24:16
+gat58@cornell.edu
+REMOVE_TAG
+biological sciences
+
+2020-03-24 4:24:17
+gat58@cornell.edu
+REMOVE_TAG
+biology
+
+2020-03-24 4:24:19
+gat58@cornell.edu
+REMOVE_TAG
+blaxican
+
+2020-03-24 4:24:20
+gat58@cornell.edu
+REMOVE_TAG
+board games
+
+2020-03-24 4:24:21
+gat58@cornell.edu
+REMOVE_TAG
+books
+
+2020-03-24 4:24:22
+gat58@cornell.edu
+REMOVE_TAG
+breath of the wild
+
+2020-03-24 4:24:22
+gat58@cornell.edu
+REMOVE_TAG
+broadway
+
+2020-03-24 4:24:23
+gat58@cornell.edu
+REMOVE_TAG
+brooklyn 99
+
+2020-03-24 4:24:24
+gat58@cornell.edu
+REMOVE_TAG
+bros who smash
+
+2020-03-24 4:24:25
+gat58@cornell.edu
+REMOVE_TAG
+chad
+
+2020-03-24 4:24:26
+gat58@cornell.edu
+REMOVE_TAG
+chemistry
+
+2020-03-24 4:24:27
+gat58@cornell.edu
+REMOVE_TAG
+christian
+
+2020-03-24 4:24:27
+gat58@cornell.edu
+REMOVE_TAG
+civ 6
+
+2020-03-24 4:24:28
+gat58@cornell.edu
+REMOVE_TAG
+climate change
+
+2020-03-24 4:24:29
+gat58@cornell.edu
+REMOVE_TAG
+climbing
+
+2020-03-24 4:24:30
+gat58@cornell.edu
+REMOVE_TAG
+coffee
+
+2020-03-24 4:24:31
+gat58@cornell.edu
+REMOVE_TAG
+comics
+
+2020-03-24 4:24:32
+gat58@cornell.edu
+REMOVE_TAG
+communism
+
+2020-03-24 4:24:32
+gat58@cornell.edu
+REMOVE_TAG
+computer science
+
+2020-03-24 4:24:33
+gat58@cornell.edu
+REMOVE_TAG
+cooking
+
+2020-03-24 4:24:34
+gat58@cornell.edu
+ADD_TAG
+420
+
+2020-03-24 4:24:35
+gat58@cornell.edu
+REMOVE_TAG
+420
+
+2020-03-24 4:24:40
+gat58@cornell.edu
+REMOVE_TAG
+cyberpunk
+
+2020-03-24 4:24:41
+gat58@cornell.edu
+REMOVE_TAG
+disney
+
+2020-03-24 4:24:42
+gat58@cornell.edu
+REMOVE_TAG
+donut earth theory
+
+2020-03-24 4:24:43
+gat58@cornell.edu
+REMOVE_TAG
+drinking
+
+2020-03-24 4:24:44
+gat58@cornell.edu
+REMOVE_TAG
+drinks
+
+2020-03-24 4:24:45
+gat58@cornell.edu
+REMOVE_TAG
+drums
+
+2020-03-24 4:24:46
+gat58@cornell.edu
+REMOVE_TAG
+economics
+
+2020-03-24 4:24:47
+gat58@cornell.edu
+REMOVE_TAG
+environmental engineering
+
+2020-03-24 4:24:48
+gat58@cornell.edu
+REMOVE_TAG
+fashion
+
+2020-03-24 4:24:49
+gat58@cornell.edu
+REMOVE_TAG
+fc bayern
+
+2020-03-24 4:24:49
+gat58@cornell.edu
+REMOVE_TAG
+feet
+
+2020-03-24 4:24:50
+gat58@cornell.edu
+REMOVE_TAG
+film
+
+2020-03-24 4:24:51
+gat58@cornell.edu
+REMOVE_TAG
+flute
+
+2020-03-24 4:24:52
+gat58@cornell.edu
+REMOVE_TAG
+food
+
+2020-03-24 4:24:53
+gat58@cornell.edu
+REMOVE_TAG
+football
+
+2020-03-24 4:24:53
+gat58@cornell.edu
+REMOVE_TAG
+fortnite
+
+2020-03-24 4:24:54
+gat58@cornell.edu
+REMOVE_TAG
+frank ocean
+
+2020-03-24 4:24:56
+gat58@cornell.edu
+REMOVE_TAG
+friends
+
+2020-03-24 4:24:57
+gat58@cornell.edu
+REMOVE_TAG
+frisbee
+
+2020-03-24 4:24:58
+gat58@cornell.edu
+REMOVE_TAG
+game of thrones
+
+2020-03-24 4:24:58
+gat58@cornell.edu
+REMOVE_TAG
+games
+
+2020-03-24 4:24:59
+gat58@cornell.edu
+REMOVE_TAG
+gaming
+
+2020-03-24 4:25:0
+gat58@cornell.edu
+REMOVE_TAG
+gay
+
+2020-03-24 4:25:1
+gat58@cornell.edu
+REMOVE_TAG
+going out
+
+2020-03-24 4:25:2
+gat58@cornell.edu
+REMOVE_TAG
+guitar
+
+2020-03-24 4:25:3
+gat58@cornell.edu
+REMOVE_TAG
+gym
+
+2020-03-24 4:25:4
+gat58@cornell.edu
+REMOVE_TAG
+hiking
+
+2020-03-24 4:25:5
+gat58@cornell.edu
+REMOVE_TAG
+hip hop
+
+2020-03-24 4:25:5
+gat58@cornell.edu
+REMOVE_TAG
+hispanic
+
+2020-03-24 4:25:6
+gat58@cornell.edu
+REMOVE_TAG
+history
+
+2020-03-24 4:25:7
+gat58@cornell.edu
+REMOVE_TAG
+hotelie
+
+2020-03-24 4:25:8
+gat58@cornell.edu
+REMOVE_TAG
+house music
+
+2020-03-24 4:25:9
+gat58@cornell.edu
+REMOVE_TAG
+idm and ambient music
+
+2020-03-24 4:25:10
+gat58@cornell.edu
+REMOVE_TAG
+jazz
+
+2020-03-24 4:25:11
+gat58@cornell.edu
+REMOVE_TAG
+jets
+
+2020-03-24 4:25:11
+gat58@cornell.edu
+REMOVE_TAG
+jj lin
+
+2020-03-24 4:25:12
+gat58@cornell.edu
+REMOVE_TAG
+johann sebastian bach
+
+2020-03-24 4:25:13
+gat58@cornell.edu
+REMOVE_TAG
+junior
+
+2020-03-24 4:25:14
+gat58@cornell.edu
+REMOVE_TAG
+la croix
+
+2020-03-24 4:25:15
+gat58@cornell.edu
+REMOVE_TAG
+languages
+
+2020-03-24 4:25:16
+gat58@cornell.edu
+REMOVE_TAG
+league of legends
+
+2020-03-24 4:25:18
+gat58@cornell.edu
+REMOVE_TAG
+leninism
+
+2020-03-24 4:25:18
+gat58@cornell.edu
+REMOVE_TAG
+leonhard euler
+
+2020-03-24 4:25:19
+gat58@cornell.edu
+REMOVE_TAG
+liar's dice
+
+2020-03-24 4:25:20
+gat58@cornell.edu
+REMOVE_TAG
+lo-fi
+
+2020-03-24 4:25:22
+gat58@cornell.edu
+REMOVE_TAG
+lotr
+
+2020-03-24 4:25:23
+gat58@cornell.edu
+REMOVE_TAG
+love
+
+2020-03-24 4:25:23
+gat58@cornell.edu
+REMOVE_TAG
+marvel
+
+2020-03-24 4:25:24
+gat58@cornell.edu
+REMOVE_TAG
+melee
+
+2020-03-24 4:25:26
+gat58@cornell.edu
+REMOVE_TAG
+mets
+
+2020-03-24 4:25:27
+gat58@cornell.edu
+REMOVE_TAG
+micro & cell biology
+
+2020-03-24 4:25:28
+gat58@cornell.edu
+REMOVE_TAG
+mochi ice cream
+
+2020-03-24 4:25:29
+gat58@cornell.edu
+REMOVE_TAG
+monster hunter
+
+2020-03-24 4:25:30
+gat58@cornell.edu
+REMOVE_TAG
+movies
+
+2020-03-24 4:25:31
+gat58@cornell.edu
+REMOVE_TAG
+museums
+
+2020-03-24 4:25:32
+gat58@cornell.edu
+REMOVE_TAG
+music
+
+2020-03-24 4:25:33
+gat58@cornell.edu
+REMOVE_TAG
+music production
+
+2020-03-24 4:25:34
+gat58@cornell.edu
+REMOVE_TAG
+mussolini
+
+2020-03-24 4:25:35
+gat58@cornell.edu
+REMOVE_TAG
+netflix
+
+2020-03-24 4:25:36
+gat58@cornell.edu
+REMOVE_TAG
+nirvana
+
+2020-03-24 4:25:36
+gat58@cornell.edu
+REMOVE_TAG
+nyc
+
+2020-03-24 4:25:37
+gat58@cornell.edu
+REMOVE_TAG
+orchestra
+
+2020-03-24 4:25:38
+gat58@cornell.edu
+REMOVE_TAG
+overwatch
+
+2020-03-24 4:25:39
+gat58@cornell.edu
+REMOVE_TAG
+party
+
+2020-03-24 4:25:40
+gat58@cornell.edu
+REMOVE_TAG
+pc
+
+2020-03-24 4:25:40
+gat58@cornell.edu
+REMOVE_TAG
+philosophy
+
+2020-03-24 4:25:41
+gat58@cornell.edu
+REMOVE_TAG
+photography
+
+2020-03-24 4:25:42
+gat58@cornell.edu
+REMOVE_TAG
+physics
+
+2020-03-24 4:25:43
+gat58@cornell.edu
+REMOVE_TAG
+piano
+
+2020-03-24 4:25:44
+gat58@cornell.edu
+REMOVE_TAG
+plants
+
+2020-03-24 4:25:45
+gat58@cornell.edu
+REMOVE_TAG
+pokemon
+
+2020-03-24 4:25:46
+gat58@cornell.edu
+REMOVE_TAG
+pokemon go
+
+2020-03-24 4:25:47
+gat58@cornell.edu
+REMOVE_TAG
+politics
+
+2020-03-24 4:25:48
+gat58@cornell.edu
+REMOVE_TAG
+project +
+
+2020-03-24 4:25:48
+gat58@cornell.edu
+REMOVE_TAG
+project m
+
+2020-03-24 4:25:50
+gat58@cornell.edu
+REMOVE_TAG
+ra ra rasputin russia’s greatest uwu bean
+
+2020-03-24 4:25:50
+gat58@cornell.edu
+REMOVE_TAG
+radiohead
+
+2020-03-24 4:25:51
+gat58@cornell.edu
+REMOVE_TAG
+reading
+
+2020-03-24 4:25:52
+gat58@cornell.edu
+REMOVE_TAG
+riley jacobs
+
+2020-03-24 4:25:53
+gat58@cornell.edu
+REMOVE_TAG
+robots
+
+2020-03-24 4:25:54
+gat58@cornell.edu
+REMOVE_TAG
+san antonio
+
+2020-03-24 4:25:55
+gat58@cornell.edu
+REMOVE_TAG
+sci-fi
+
+2020-03-24 4:25:55
+gat58@cornell.edu
+REMOVE_TAG
+secret hitler
+
+2020-03-24 4:25:56
+gat58@cornell.edu
+REMOVE_TAG
+shoegaze
+
+2020-03-24 4:25:57
+gat58@cornell.edu
+REMOVE_TAG
+smash
+
+2020-03-24 4:25:58
+gat58@cornell.edu
+REMOVE_TAG
+smash bros
+
+2020-03-24 4:25:59
+gat58@cornell.edu
+REMOVE_TAG
+smash ultimate
+
+2020-03-24 4:26:0
+gat58@cornell.edu
+REMOVE_TAG
+smashbros ultimate
+
+2020-03-24 4:26:1
+gat58@cornell.edu
+REMOVE_TAG
+soccer
+
+2020-03-24 4:26:2
+gat58@cornell.edu
+REMOVE_TAG
+softball
+
+2020-03-24 4:26:2
+gat58@cornell.edu
+REMOVE_TAG
+sophomore
+
+2020-03-24 4:26:3
+gat58@cornell.edu
+REMOVE_TAG
+south park
+
+2020-03-24 4:26:4
+gat58@cornell.edu
+REMOVE_TAG
+spider-man
+
+2020-03-24 4:26:5
+gat58@cornell.edu
+ADD_TAG
+420
+
+2020-03-24 4:26:6
+gat58@cornell.edu
+REMOVE_TAG
+420
+
+2020-03-24 4:26:12
+gat58@cornell.edu
+REMOVE_TAG
+spikeball
+
+2020-03-24 4:26:13
+gat58@cornell.edu
+REMOVE_TAG
+sports
+
+2020-03-24 4:26:15
+gat58@cornell.edu
+REMOVE_TAG
+stalin
+
+2020-03-24 4:26:20
+gat58@cornell.edu
+REMOVE_TAG
+stanley kubrick
+
+2020-03-24 4:26:21
+gat58@cornell.edu
+REMOVE_TAG
+steven universe
+
+2020-03-24 4:26:22
+gat58@cornell.edu
+REMOVE_TAG
+stupid hard classes
+
+2020-03-24 4:26:23
+gat58@cornell.edu
+REMOVE_TAG
+tennis
+
+2020-03-24 4:26:24
+gat58@cornell.edu
+REMOVE_TAG
+terraforming mars
+
+2020-03-24 4:26:25
+gat58@cornell.edu
+REMOVE_TAG
+the good place
+
+2020-03-24 4:26:27
+gat58@cornell.edu
+REMOVE_TAG
+theater
+
+2020-03-24 4:26:28
+gat58@cornell.edu
+REMOVE_TAG
+thrifting
+
+2020-03-24 4:26:29
+gat58@cornell.edu
+REMOVE_TAG
+tiananmen square
+
+2020-03-24 4:26:31
+gat58@cornell.edu
+REMOVE_TAG
+trump
+
+2020-03-24 4:26:32
+gat58@cornell.edu
+REMOVE_TAG
+tunnels
+
+2020-03-24 4:26:33
+gat58@cornell.edu
+REMOVE_TAG
+uwu
+
+2020-03-24 4:26:39
+gat58@cornell.edu
+REMOVE_TAG
+alan walker
+
+2020-03-24 4:36:3
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 4:36:9
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 6:46:5
+gat58@cornell.edu
+LOGOUT
+
+2020-03-24 6:59:38
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 7:2:41
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 7:6:38
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 7:6:58
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 7:7:52
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 7:8:31
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 7:11:54
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 7:18:3
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 7:23:26
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 7:24:32
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 7:24:54
+gat58@cornell.edu
+LOGOUT
+
+2020-03-24 7:59:25
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 18:40:5
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 18:43:4
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 19:10:33
+gat58@cornell.edu
+LOGOUT
+
+2020-03-24 19:22:51
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 19:22:53
+gat58@cornell.edu
+LOGOUT
+
+2020-03-24 19:22:56
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 19:22:58
+gat58@cornell.edu
+LOGOUT
+
+2020-03-24 19:23:2
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 19:23:4
+gat58@cornell.edu
+LOGOUT
+
+2020-03-24 19:25:57
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 19:26:7
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 19:33:15
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 21:7:26
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 21:12:53
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 21:14:30
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 21:14:34
+gat58@cornell.edu
+LOGOUT
+
+2020-03-24 23:9:1
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 23:9:9
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 23:9:23
+gat58@cornell.edu
+ADD_TAG
+breath of the wild
+
+2020-03-24 23:9:28
+gat58@cornell.edu
+ADD_TAG
+civ 6
+
+2020-03-24 23:9:37
+gat58@cornell.edu
+ADD_TAG
+frank ocean
+
+2020-03-24 23:9:47
+gat58@cornell.edu
+ADD_TAG
+league of legends
+
+2020-03-24 23:9:54
+gat58@cornell.edu
+ADD_TAG
+nirvana
+
+2020-03-24 23:10:4
+gat58@cornell.edu
+ADD_TAG
+south park
+
+2020-03-24 23:10:11
+gat58@cornell.edu
+ADD_TAG
+video production
+
+2020-03-24 23:10:25
+gat58@cornell.edu
+ADD_TAG
+Universal Basic Income
+
+2020-03-24 23:10:32
+gat58@cornell.edu
+ADD_TAG
+Aaron Swartz
+
+2020-03-24 23:10:55
+gat58@cornell.edu
+ADD_TAG
+video games
+
+2020-03-24 23:10:58
+gat58@cornell.edu
+ADD_TAG
+anime
+
+2020-03-24 23:11:6
+gat58@cornell.edu
+ADD_TAG
+violin
+
+2020-03-24 23:11:48
+gat58@cornell.edu
+REMOVE_TAG
+video games
+
+2020-03-24 23:11:59
+gat58@cornell.edu
+ADD_TAG
+video games
+
+2020-03-24 23:12:3
+gat58@cornell.edu
+ADD_TAG
+warframe
+
+2020-03-24 23:12:9
+gat58@cornell.edu
+ADD_TAG
+420
+
+2020-03-24 23:12:16
+gat58@cornell.edu
+ADD_TAG
+always sunny
+
+2020-03-24 23:12:20
+gat58@cornell.edu
+ADD_TAG
+biological sciences
+
+2020-03-24 23:12:24
+gat58@cornell.edu
+ADD_TAG
+biology
+
+2020-03-24 23:12:31
+gat58@cornell.edu
+ADD_TAG
+christian
+
+2020-03-24 23:12:39
+gat58@cornell.edu
+LOGOUT
+
+2020-03-24 23:30:39
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-24 23:30:43
+gat58@cornell.edu
+LOGIN
+
+2020-03-24 23:30:48
+gat58@cornell.edu
+REMOVE_TAG
+420
+
+2020-03-24 23:30:49
+gat58@cornell.edu
+REMOVE_TAG
+Aaron Swartz
+
+2020-03-24 23:30:52
+gat58@cornell.edu
+REMOVE_TAG
+always sunny
+
+2020-03-24 23:30:53
+gat58@cornell.edu
+REMOVE_TAG
+anime
+
+2020-03-24 23:30:56
+gat58@cornell.edu
+REMOVE_TAG
+biological sciences
+
+2020-03-24 23:30:57
+gat58@cornell.edu
+REMOVE_TAG
+biology
+
+2020-03-24 23:30:59
+gat58@cornell.edu
+REMOVE_TAG
+breath of the wild
+
+2020-03-24 23:31:1
+gat58@cornell.edu
+REMOVE_TAG
+christian
+
+2020-03-24 23:31:2
+gat58@cornell.edu
+REMOVE_TAG
+civ 6
+
+2020-03-24 23:31:6
+gat58@cornell.edu
+REMOVE_TAG
+frank ocean
+
+2020-03-24 23:31:8
+gat58@cornell.edu
+REMOVE_TAG
+league of legends
+
+2020-03-24 23:31:11
+gat58@cornell.edu
+REMOVE_TAG
+nirvana
+
+2020-03-24 23:31:14
+gat58@cornell.edu
+REMOVE_TAG
+south park
+
+2020-03-24 23:31:16
+gat58@cornell.edu
+REMOVE_TAG
+Universal Basic Income
+
+2020-03-24 23:31:21
+gat58@cornell.edu
+REMOVE_TAG
+video games
+
+2020-03-24 23:31:23
+gat58@cornell.edu
+REMOVE_TAG
+video production
+
+2020-03-24 23:31:24
+gat58@cornell.edu
+REMOVE_TAG
+warframe
+
+2020-03-24 23:31:25
+gat58@cornell.edu
+REMOVE_TAG
+violin
+
+2020-03-24 23:44:36
+gat58@cornell.edu
+ALL_SCHOOLS
+true
+
+2020-03-24 23:44:39
+gat58@cornell.edu
+ALL_SCHOOLS
+false
+
+2020-03-24 23:50:4
+gat58@cornell.edu
+ALL_SCHOOLS
+true
+
+2020-03-24 23:50:5
+gat58@cornell.edu
+ALL_SCHOOLS
+false
+
+2020-03-24 23:50:23
+gat58@cornell.edu
+ADD_TAG
+anime
+
+2020-03-24 23:50:30
+gat58@cornell.edu
+ADD_TAG
+biological sciences
+
+2020-03-24 23:50:35
+gat58@cornell.edu
+ADD_TAG
+frank ocean
+
+2020-03-24 23:50:39
+gat58@cornell.edu
+ADD_TAG
+gym
+
+2020-03-24 23:50:45
+gat58@cornell.edu
+ADD_TAG
+league of legends
+
+2020-03-24 23:50:59
+gat58@cornell.edu
+ADD_TAG
+the good place
+
+2020-03-24 23:51:5
+gat58@cornell.edu
+ADD_TAG
+warframe
+
+2020-03-24 23:51:13
+gat58@cornell.edu
+ADD_TAG
+Universal Basic Income
+
+2020-03-24 23:51:20
+gat58@cornell.edu
+ADD_TAG
+Aaron Swartz
+
+2020-03-24 23:51:31
+gat58@cornell.edu
+LOGOUT
+
+2020-03-25 2:35:7
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-25 2:35:19
+gat58@cornell.edu
+LOGIN
+
+2020-03-25 2:38:4
+gat58@cornell.edu
+LOGOUT
+
+2020-03-25 2:43:52
+gat58@cornell.edu
+EMAIL_SENT
+
+2020-03-25 2:43:59
+gat58@cornell.edu
+LOGIN
+
+2020-03-25 19:28:12
+gat58@cornell.edu
+REMOVE_TAG
+Aaron Swartz
+
+2020-03-25 19:28:17
+gat58@cornell.edu
+ADD_TAG
+Aaron Swartz
+
+2020-03-25 19:28:35
+gat58@cornell.edu
+ADD_TAG
+Of Mice and Men
+
+2020-03-25 20:18:56
+gat58@cornell.edu
+REMOVE_TAG
+Aaron Swartz
+
+2020-03-25 20:19:0
+gat58@cornell.edu
+REMOVE_TAG
+anime
+
+2020-03-25 20:19:2
+gat58@cornell.edu
+REMOVE_TAG
+biological sciences
+
+2020-03-25 20:19:5
+gat58@cornell.edu
+REMOVE_TAG
+frank ocean
+
+2020-03-25 20:19:7
+gat58@cornell.edu
+REMOVE_TAG
+gym
+
+2020-03-25 20:19:9
+gat58@cornell.edu
+REMOVE_TAG
+league of legends
+
+2020-03-25 20:19:11
+gat58@cornell.edu
+REMOVE_TAG
+Of Mice and Men
+
+2020-03-25 20:19:19
+gat58@cornell.edu
+REMOVE_TAG
+the good place
+
+2020-03-25 20:19:21
+gat58@cornell.edu
+REMOVE_TAG
+Universal Basic Income
+
+2020-03-25 20:19:25
+gat58@cornell.edu
+REMOVE_TAG
+warframe
+
+2020-03-25 20:54:35
+gat58@cornell.edu
+LOGOUT
