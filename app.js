@@ -926,13 +926,6 @@ app.post('/email', function (req, res) {
         return res.json({"success": true});
     }
 
-    // is foothill student email a mistaken student id?
-    // https://stackoverflow.com/questions/5778020/check-whether-an-input-string-contains-a-number-in-javascript
-    if (email.endsWith("@student.foothill.edu") && /\d/.test(email)) {
-        req.flash('danger', 'Your student email should look like this --> simpsonsbart@student.foothill.edu');
-        return res.json({"success": false});
-    }
-
     // is email too long?
     if (email.length > 100) {
         req.flash('danger', 'error');
