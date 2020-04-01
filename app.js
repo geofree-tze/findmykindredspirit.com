@@ -34,6 +34,7 @@ const MAX_ADD_COUNT = ; // this is a security feature to catch data scrapers. if
 const MAX_MATCH_COUNT = ; // users get their top matches. matches are ranked by the number of things they have in common. those things are weighted equally
 // i'm considering a weighted system. Lose it = 0, Like it = 1, Love it = 3, Gotta Have it = 9. If you like what someone else loves, your affinity score = min(1,3)
 
+
 // college emails ensure one account per real person
 const ACCEPTED_EMAIL_DOMAINS = 
 [
@@ -926,9 +927,18 @@ app.post('/email', function (req, res) {
         return res.json({"success": true});
     }
 
+    // is foothill student email a mistaken student id?
+    // https://stackoverflow.com/questions/5778020/check-whether-an-input-string-contains-a-number-in-javascript
+    /*
+    if (email.endsWith("@student.foothill.edu") && /\d/.test(email)) {
+        req.flash('danger', 'Your student email should look like this --> simpsonsbart@student.foothill.edu');
+        return res.json({"success": false});
+    }
+    */
+
     // is email too long?
     if (email.length > 100) {
-        req.flash('danger', 'error');
+        req.flash('danger', 'Your email is over 100 characters long.');
         return res.json({"success": false});
     }
 
@@ -1288,15 +1298,15 @@ if (allSchools) {
 
 
 			    neo4j_session
-//			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)")
-			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) RETURN DISTINCT t.description ORDER BY toUpper(t.description)")
+			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)")
+//			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) RETURN DISTINCT t.description ORDER BY toUpper(t.description)")
 			        .then(function (result4) {
 			            var tagArrAll = [];
 			            result4.records.forEach(function (record) {
 			                tagArrAll.push({
-			                    description: record._fields[0]
-//			                    description: record._fields[0].properties.description
-//			                    count: record._fields[1].low
+//			                    description: record._fields[0]
+			                    description: record._fields[0].properties.description,
+			                    count: record._fields[1].low
 			                });
 			            });
  
@@ -1364,15 +1374,15 @@ if (allSchools) {
 
 
 			    neo4j_session
-//			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email ENDS WITH {emailDomainParam} RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)", {emailDomainParam: email.substring(email.indexOf('@'))})
-			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email ENDS WITH {emailDomainParam} RETURN DISTINCT t.description ORDER BY toUpper(t.description)", {emailDomainParam: email.substring(email.indexOf('@'))})
+			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email ENDS WITH {emailDomainParam} RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)", {emailDomainParam: email.substring(email.indexOf('@'))})
+//			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email ENDS WITH {emailDomainParam} RETURN DISTINCT t.description ORDER BY toUpper(t.description)", {emailDomainParam: email.substring(email.indexOf('@'))})
 			        .then(function (result4) {
 			            var tagArrAll = [];
 			            result4.records.forEach(function (record) {
 			                tagArrAll.push({
-			                    description: record._fields[0]
-//			                    description: record._fields[0].properties.description,
-//			                    count: record._fields[1].low
+//			                    description: record._fields[0]
+			                    description: record._fields[0].properties.description,
+			                    count: record._fields[1].low
 			                });
 			            });
  
