@@ -13,7 +13,7 @@
 
 
 	small shoutout to Ben Awad
-		he taught me nodemailer for automatically sending confirmation emails
+		he taught me how to automatically send confirmation emails using nodemailer
 			https://www.youtube.com/watch?v=YU3qstG74nw - How to Send an Email in Node.js
 
 */
@@ -914,16 +914,13 @@ app.post('/email', function (req, res) {
 
     // is valid domain?
     var isDomainAccepted = false;
-    //var domainString = "";
     ACCEPTED_EMAIL_DOMAINS.forEach( function(domain) {
         if (email.endsWith(domain)) {
             isDomainAccepted = true;
 	    //break;
         }
-	//domainString = domainString + " " + domain;
     });
     if (!isDomainAccepted) {
-        //req.flash('danger', 'Your email must end in one of the following: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'+domainString);
         return res.json({"success": true});
     }
 
@@ -993,11 +990,11 @@ fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                     },
                                     EMAIL_SECRET,
                                     {
-                                        expiresIn: 900, // 15 minutes = 900 seconds
+                                        expiresIn: 300, // 5 minutes = 300 seconds
                                     }
                                 );
 
-                                var confirmationURL = "http://"+DOMAIN_NAME+"/confirmation/" + emailToken;
+                                var confirmationURL = "https://"+DOMAIN_NAME+"/confirmation/" + emailToken;
 
                                 // create reusable transporter object using the default SMTP transport
                                 let transporter = nodemailer.createTransport({
@@ -1065,7 +1062,7 @@ app.get('/confirmation/:token', isLoggedInMiddleware(), function (req, res) {
 	});
 
     } catch (err) {
-        res.send('<h3><br><br>For your security,<br>invitations expire 15minutes after send-time.<br><br>Please <a href="http://www.'+DOMAIN_NAME+'/email">go to Kindred</a> and re-enter your email address for a new invitation.<br>Feel free to do this as many times as you\'d like.</h3>');
+        res.send('<h3><br><br>For your security,<br>invitations expire 5minutes after send-time.<br><br>Please <a href="https://www.'+DOMAIN_NAME+'/email">go to Kindred</a> and re-enter your email for a new invitation.</h3>');
     }
 });
 
@@ -1418,9 +1415,9 @@ if (allSchools) {
         });
 });
 
-app.listen(80);
+app.listen(5000);
 
-//console.log('Server started on port 80');
+console.log('Server started on port 5000');
 
 passport.serializeUser(function(email, done) {
     done(null, email);
