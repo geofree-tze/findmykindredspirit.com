@@ -997,7 +997,7 @@ fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                     }
                                 );
 
-                                var confirmationURL = "http://www."+DOMAIN_NAME+"/confirmation/" + emailToken;
+                                var confirmationURL = "http://"+DOMAIN_NAME+"/confirmation/" + emailToken;
 
                                 // create reusable transporter object using the default SMTP transport
                                 let transporter = nodemailer.createTransport({
@@ -1016,7 +1016,7 @@ fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                     to: email, // list of receivers
                                     subject: 'Invite', // Subject line
                                     text: '', // plain text body
-                                    html: 'Hello,<br><br>You requested an invite. Click here to login:<br>&lt;<a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, 47) + '</a>&gt;<br><br>Happy Searching!'
+                                    html: 'Hello,<br><br>You requested an invite. Click here to login:<br>&lt;<a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, confirmationURL.indexOf("confirmation")+12) + '</a>&gt;<br><br>Happy Searching!'
                                 };
 
                                 // send mail with defined transport object
