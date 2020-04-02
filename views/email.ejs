@@ -69,9 +69,9 @@
         .then((res) => res.json())
         .then((data) => {
             if (data.success == true) {
-		document.location.replace('http://www.<%= domainName %>/bouncer');
+		document.location.replace('http://<%= domainName %>/bouncer');
 	    } else {
-		document.location.replace('http://www.<%= domainName %>/email');
+		document.location.replace('http://<%= domainName %>/email');
 	    }
         });
     }
