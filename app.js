@@ -786,11 +786,11 @@ var neo4j_session = driver.session();
 //..........
 // Restoring a backup:
 //     uncomment this block of code
-//     open putty, cd socialclient, pm2 stop app, pm2 start app
+//     open putty, cd findmykindredspirit.com, pm2 stop app, pm2 start app
 //     open /backupuser /backuptag
 //     paste in the data from the Google spreadsheet
 //     re-comment this block of code
-//     open putty, cd socialclient, pm2 stop app, pm2 start app
+//     open putty, cd findmykindredspirit.com, pm2 stop app, pm2 start app
 //
 //     if you backed up the users at /backupuser, then run the following neo4j commands
 //         MATCH (u:User) SET u.addCount = toInteger(u.addCount)
