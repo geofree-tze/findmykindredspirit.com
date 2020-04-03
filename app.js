@@ -856,9 +856,9 @@ app.post('/backuptag', function (req, res) {
 
 
 
-// Bouncer Route
-app.get('/bouncer', isLoggedInMiddleware(), function (req, res) {
-	res.render('bouncer', {
+// Guest List Route
+app.get('/guestlist', isLoggedInMiddleware(), function (req, res) {
+	res.render('guestlist', {
 	    emailDomains: ACCEPTED_EMAIL_DOMAINS
 	});
 });
