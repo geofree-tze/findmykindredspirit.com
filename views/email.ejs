@@ -69,7 +69,7 @@
         .then((res) => res.json())
         .then((data) => {
             if (data.success == true) {
-		document.location.replace('https://<%= domainName %>/bouncer');
+		document.location.replace('https://<%= domainName %>/guestlist');
 	    } else {
 		document.location.replace('https://<%= domainName %>/email');
 	    }
