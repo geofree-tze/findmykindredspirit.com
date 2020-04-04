@@ -912,6 +912,16 @@ app.post('/email', function (req, res) {
         return res.json({"success": false});
     }
 
+
+let date_ob = new Date();
+let date = ("0" + date_ob.getDate()).slice(-2);
+let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+let year = date_ob.getFullYear();
+let hours = date_ob.getHours();
+let minutes = date_ob.getMinutes();
+let seconds = date_ob.getSeconds();
+
+	
     // is valid domain?
     var isDomainAccepted = false;
     ACCEPTED_EMAIL_DOMAINS.forEach( function(domain) {
@@ -921,6 +931,9 @@ app.post('/email', function (req, res) {
         }
     });
     if (!isDomainAccepted) {
+	fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nEMAIL_DOMAIN_REJECTED", (err) => {
+    		if (err) throw err;
+	});
         return res.json({"success": true});
     }
 
@@ -972,13 +985,6 @@ app.post('/email', function (req, res) {
                 }
 
 
-let date_ob = new Date();
-let date = ("0" + date_ob.getDate()).slice(-2);
-let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-let year = date_ob.getFullYear();
-let hours = date_ob.getHours();
-let minutes = date_ob.getMinutes();
-let seconds = date_ob.getSeconds();
 fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nEMAIL_SENT", (err) => {
     if (err) throw err;
 });
