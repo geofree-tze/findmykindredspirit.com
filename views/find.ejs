@@ -14,17 +14,6 @@
 }
 
 
-.poop button:hover span {display:none}
-.poop button:hover:before {
-content:"LEAVE?";
-letter-spacing: 0.07em;
-font-size:11px;
-font-family:Helvetica;
-font-weight:bold;
-color:#ff003e;
-}
-
-
 .toggle {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -112,53 +101,69 @@ color:#ff003e;
         <div style="overflow-y:scroll; overflow-x:hidden; height:350px;">
         <table class="table table-hover" style="background-color:#cccccc;">
             <% tagsAll.forEach(function(tag){ %>
-            <tr><td><div class="row"><div class="col-xs-6" style="word-wrap:break-word;display:inline-block;">
-			    <!-- https://stackoverflow.com/questions/499137/how-can-i-force-a-long-string-without-any-blank-to-be-wrapped -->
-                                <%= tag.description %>
-	        </div>
-	        <div class="col-xs-3" style="text-align:right;">
-				<% if (tag.count == 1) { %>
-					1 <span style="font-size:10px;">member</span>
-				<% } else { %>
-	                                <%= tag.count %> <span style="font-size:10px;">members</span>
-				<% } %>
-	        </div>
-	        <div class="col-xs-3" style="text-align:right;">
+            <tr><td><div class="row">
 
+		<%# this chunk of code makes sure that a plus sign only appears in front of tags that the user hasn't added yet %>
+		<%
+		var userAlreadyAddedTag = false;
+			if (tags.length > 0) {
+				tags.forEach(function(userTag) {
+					if (userTag.description == tag.description) {
+						userAlreadyAddedTag = true;
+					}
+				})
+			}
+		%>
 
-                            <%# this chunk of code makes sure that a plus sign only appears in front of tags that the user hasn't added yet %>
-                            <%
-                                var userAlreadyAddedTag = false;
-                                if (tags.length > 0) {
-                                    tags.forEach(function(userTag) {
-                                        if (userTag.description == tag.description) {
-                                            userAlreadyAddedTag = true;
-                                        }
-                                    })
-                                }
-                            %>
-                            <%if (!userAlreadyAddedTag) { %>
-                                    <form id="<%= tag.description %>" method="POST" class="form-inline" action="/find/add_tag"> <!-- https://stackoverflow.com/questions/37954005/keep-scroll-position-of-a-div-after-a-form-submit-using-session-var-or-css -->
-                                        <input type="hidden" name="tag" value="<%= tag.description %>">
+		<%if (!userAlreadyAddedTag) { %>
+		<div class="col-xs-9" style="word-wrap:break-word;display:inline-block;"> <!-- https://stackoverflow.com/questions/499137/how-can-i-force-a-long-string-without-any-blank-to-be-wrapped -->
 
-					<button type="submit" class="btn btn-warning" style="background-color:#f39ab6;">
-                                            <span style="letter-spacing: 0.07em;font-size:11px;font-family:Helvetica;font-weight:bold;">JOIN</span>
-                                        </button>
+			<form id="<%= tag.description %>" method="POST" class="form-inline" action="/into/add_tag"> <!-- https://stackoverflow.com/questions/37954005/keep-scroll-position-of-a-div-after-a-form-submit-using-session-var-or-css -->
+				<input type="hidden" name="tag" value="<%= tag.description %>">
 
-                                    </form>
-                            <% } else{ %>
-                                <form id="<%= tag.description %>" method="POST" class="form-inline" action="/find/remove_tag">
-                                        <input type="hidden" name="tag" value="<%= tag.description %>">
+				<button type="submit" class="btn btn-danger" style="background-color:#e5e5e5;">
+					<span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#ff4444">I'M NOT INTO</span>
+				</button>
 
-					<span class="poop">
-					<button type="submit" class="btn btn-success" style="background-color:#e5e5e5;">
-                                            <span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#44dd44;">JOINED</span>
-                                        </button>
-					</span>
+				<%= tag.description %>
+			</form>
+		</div>
+		<div class="col-xs-3" style="word-wrap:break-word;display:inline-block;font-size:10px;">
+			
+			<%= tag.count %>
+			<% if (tag.count == 1)  { %>
+				person<br>is
+			<% } else { %>
+				people<br>are
+			<% } %>
+			into this
 
-                                </form>
-                            <% } %>
-            </div></div></td></tr>
+		</div>
+
+		<% } else{ %>
+		<div class="col-xs-9" style="word-wrap:break-word;display:inline-block;"> <!-- https://stackoverflow.com/questions/499137/how-can-i-force-a-long-string-without-any-blank-to-be-wrapped -->
+			<form id="<%= tag.description %>" method="POST" class="form-inline" action="/into/remove_tag">
+				<input type="hidden" name="tag" value="<%= tag.description %>">
+
+				<button type="submit" class="btn btn-success" style="background-color:#e5e5e5;">
+					<span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#44dd44;">I'M INTO</span>
+				</button>
+
+				<%= tag.description %>
+			</form>
+		</div>
+		<div class="col-xs-3" style="word-wrap:break-word;display:inline-block;font-size:10px;">
+			
+			<% if (tag.count == 1)  { %>
+				1 person<br>is into this<br><span style="color:#888888;">(i.e. you)</span>
+			<% } else { %>
+				<%= tag.count %> people<br>are into this<br><span style="color:#888888;">(yourself included)</span>
+			<% } %>
+
+		</div>
+
+		<% } %>
+	    </div></td></tr>
             <% }) %>
         </table>
         </div>
@@ -168,16 +173,16 @@ color:#ff003e;
 	<div class="row">
 	<div class="col-md-12">
             <div class="well" style="background-color:#888888;margin-right:20px;">
-            <form class="form-inline" method="POST" action="/find/add_tag">
+            <form class="form-inline" method="POST" action="/into/add_tag">
                 <div class="row">
-                    <div class="col-xs-7">
-                        <input type="text" name="tag" placeholder=" new entry name" maxlength="100" required="required">
-                    </div>
-                    <div class="col-xs-5" style="text-align:right;">
+                    <div class="col-xs-2" style="text-align:right;">
 
 					<button type="submit" class="btn btn-success" style="background-color:#44dd44;">
-                                            <span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#e5e5e5;">CREATE</span>
+                                            <span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#e5e5e5;">I'M INTO</span>
                                         </button>
+                    </div>
+                    <div class="col-xs-10">
+                        <input type="text" name="tag" placeholder=" something new" maxlength="100" required="required">
                     </div>
                 </div>
             </form>
@@ -213,7 +218,7 @@ color:#ff003e;
 				<br>
 
 
-				<b><u>Things In Common</u></b><br>
+				<b><u>You're Both Into</u></b><br>
 				<ul style="font-size:12px;">
                 	        <% user.tags.forEach(function(tag) { %>
 	                            <li><%= tag %></li>
@@ -273,7 +278,7 @@ color:#ff003e;
 
 <% if (!frozen) { %>
 
-	<form method="POST" class="form-inline" action="/find/all_schools">
+	<form method="POST" class="form-inline" action="/into/all_schools">
 		<span style="color:white;">search other schools?</span><br>
 		<% if (searchAllSchools) { %>
                         <input type="hidden" name="allSchools" value="false">

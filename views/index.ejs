@@ -1,83 +1,108 @@
 <% include ../views/partials/header %>
 
+
 <style>
 /* https://codepen.io/aaroniker/pen/XxPNqY */
 .github {
+  position: fixed;
+  display: block;
+  left: 20px;
+  bottom: 10px;
+}
+
+.github2 {
   position: fixed;
   display: block;
   right: 20px;
   bottom: 20px;
 }
 
-/* https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_background7 */
-body {
-  background-image: url('https://i.imgur.com/Byt20En.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
+.quotes {display: none;}
+.quotes2 {display: none;}
+.quotes3 {display: none;}
+.quotes4 {display: none;}
 </style>
 
 
 
     </head>
-    <body>      
+    <body style="background-color:black;">      
     
     <div class="container">
-        <%- messages('message', locals) %>
+        
 
 
 
 
 
 
-<br>
-<div class="row">
-    <div class="col-xs-11">
+<!-- https://stackoverflow.com/questions/1622027/percentage-height-html-5-css -->
+<div style="height:8vh;"></div>
 
-	<!-- https://stackoverflow.com/questions/1622027/percentage-height-html-5-css -->
-	<div style="height:15vh;"></div>
 
-	<h1 style="color:white;text-align:center;font-size:63px;font-weight:bold;">
-		<span style="color:#ff44ff;">K</span><span style="color:#e063ff;">i</span><span style="color:#c182ff;">n</span>·<span style="color:#a2a2ff;">d</span><span style="color:#82c1ff;">r</span><span style="color:#63e0ff;">e</span><span style="color:#44ffff;">d</span>
+	<div style="text-align:center;">
+
+
+	<div style="display:inline-block;">
+
+	<h1 style="text-align:left;color:white;font-weight:bold;line-height:0.5;font-family:Roboto;">
+		<u>Matchmaking 101</u>
 	</h1>
+		<div style="text-align:left;">
 
-	<br>
+		<h4 style="font-weight:bold;line-height:1.3;font-family:Roboto;">
+			<br>
 
-	<form id="yes" style="text-align:center;">
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<span style="color:#666666;">if </span>
+			<span class="quotes" style="color:#ff4444;">you're into</span>
+			<span class="quotes" style="color:#000000;">you're into</span>
+			<span class="quotes" style="color:#000000;">you're into</span>
 
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;
+			<br>
 
-		<button type="submit" id="redirect" name="redirect" class="btn btn-default btn-lg" value="login">
-		<span style="color:blue;font-weight:bold;">
-			<i class="fas fa-search"></i> find your kind
-		</span>		
-		</button>
-		
-	</form>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<span style="color:#666666;">what </span>
+			<span class="quotes2" style="color:#000000;">i'm into</span>
+			<span class="quotes2" style="color:#4488ff;">i'm into</span>
+			<span class="quotes2" style="color:#000000;">i'm into</span>
 
-	<br>
+			<br>
+
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<span style="font-size:0.5px;">&nbsp;</span>
+			<span style="color:#666666;">then </span>
+			<span class="quotes3" style="color:#000000;">let's talk!</span>
+			<span class="quotes3" style="color:#000000;">let's talk!</span>
+			<span class="quotes3" style="color:#ff44ff;">let's talk!</span>
+			
+		</h4>
+		</div>
+
+
+	</div>
+	</div>
+
 	<br>
 
 	<div style="text-align:center;">
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<iframe width="224" height="126" src="https://www.youtube.com/embed/j_tD0oFzebw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe src="https://www.youtube.com/embed/99ZThTlf0II" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</div>
-    </div>
-</div>
 
 
-	<a class="github" href="https://github.com/geofree-tze/findmykindredspirit.com" target="_blank" style="font-size:42px;">
+
+
+	<form id="yes" class="github2">
+		<button type="submit" id="redirect" name="redirect" class="btn btn-default btn-lg" value="login">
+		<span style="color:blue;font-weight:bold;">
+			continue...
+		</span>		
+		</button>
+	</form>
+
+	<a class="github" href="https://github.com/geofree-tze/foothillicebreaker.com" target="_blank" style="font-size:42px;">
 		<i class="fab fa-github"></i>
 	</a>
-
-<br>
-<br>
-
-
 
 <script>
 
@@ -110,6 +135,72 @@ body {
 </div>
 <script   src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- https://stackoverflow.com/questions/15997581/fade-in-fade-out-with-css-and-jquery -->
+<script>
+(function() {
+
+    var quotes = $(".quotes");
+    var quoteIndex = -1;
+    
+    function showNextQuote() {
+        ++quoteIndex;
+        quotes.eq(quoteIndex % quotes.length)
+            .fadeIn(300)
+            .delay(300)
+            .fadeOut(300, showNextQuote);
+    }
+    
+    showNextQuote();
+})();
+(function() {
+
+    var quotes = $(".quotes2");
+    var quoteIndex = -1;
+    
+    function showNextQuote() {
+        ++quoteIndex;
+        quotes.eq(quoteIndex % quotes.length)
+            .fadeIn(300)
+            .delay(300)
+            .fadeOut(300, showNextQuote);
+    }
+    
+    showNextQuote();
+})();
+
+(function() {
+
+    var quotes = $(".quotes3");
+    var quoteIndex = -1;
+    
+    function showNextQuote() {
+        ++quoteIndex;
+        quotes.eq(quoteIndex % quotes.length)
+            .fadeIn(300)
+            .delay(300)
+            .fadeOut(300, showNextQuote);
+    }
+    
+    showNextQuote();
+})();
+
+(function() {
+
+    var quotes = $(".quotes4");
+    var quoteIndex = -1;
+    
+    function showNextQuote() {
+        ++quoteIndex;
+        quotes.eq(quoteIndex % quotes.length)
+            .fadeIn(300)
+            .delay(300)
+            .fadeOut(300, showNextQuote);
+    }
+    
+    showNextQuote();
+})();
+</script>
 
 </body>
 </html>

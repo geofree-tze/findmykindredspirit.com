@@ -19,22 +19,6 @@
 */
 
 
-const EMAIL_SECRET = ''; // jsonwebtoken
-const secretKey = ''; // node js request
-const EXPRESS_SESSIONSTORE_SECRET = ''; // express sessionstore middleware
-const NEO4J_USERNAME = "";
-const NEO4J_PASSWORD = "";
-const IP_ADDRESS = "";
-const EMAIL_ADDRESS = "";
-const EMAIL_ADDRESS_PASSWORD = "";
-const DOMAIN_NAME = "";
-
-
-const MAX_ADD_COUNT = ; // this is a security feature to catch data scrapers. if you add too many things, the tripwire locks you out
-const MAX_MATCH_COUNT = ; // users get their top matches. matches are ranked by the number of things they have in common. those things are weighted equally
-// i'm considering a weighted system. Lose it = 0, Like it = 1, Love it = 3, Gotta Have it = 9. If you like what someone else loves, your affinity score = min(1,3)
-
-
 // college emails ensure one account per real person
 const ACCEPTED_EMAIL_DOMAINS = 
 [
@@ -207,6 +191,7 @@ const ACCEPTED_EMAIL_DOMAINS =
 "@fit.edu",
 "@fiu.edu",
 "@flsouthern.edu",
+"@student.foothill.edu",
 "@fordham.edu",
 "@fortlewis.edu",
 "@franciscan.edu",
@@ -786,11 +771,11 @@ var neo4j_session = driver.session();
 //..........
 // Restoring a backup:
 //     uncomment this block of code
-//     open putty, cd findmykindredspirit.com, pm2 stop app, pm2 start app
+//     open putty, cd ifuckwithyou.com, pm2 restart app
 //     open /backupuser /backuptag
 //     paste in the data from the Google spreadsheet
 //     re-comment this block of code
-//     open putty, cd findmykindredspirit.com, pm2 stop app, pm2 start app
+//     open putty, cd ifuckwithyou.com, pm2 restart app
 //
 //     if you backed up the users at /backupuser, then run the following neo4j commands
 //         MATCH (u:User) SET u.addCount = toInteger(u.addCount)
@@ -800,7 +785,7 @@ var neo4j_session = driver.session();
 
 
 // Comment /* here
-
+/*
 // Backup user
 app.get('/backupuser', function (req, res) {
 	res.render('backupuser');
@@ -850,7 +835,7 @@ app.post('/backuptag', function (req, res) {
                 });
 	}
 });
-
+*/
 // comment */ here
 
 
@@ -913,6 +898,7 @@ app.post('/email', function (req, res) {
     }
 
 
+
 let date_ob = new Date();
 let date = ("0" + date_ob.getDate()).slice(-2);
 let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
@@ -921,7 +907,8 @@ let hours = date_ob.getHours();
 let minutes = date_ob.getMinutes();
 let seconds = date_ob.getSeconds();
 
-	
+
+
     // is valid domain?
     var isDomainAccepted = false;
     ACCEPTED_EMAIL_DOMAINS.forEach( function(domain) {
@@ -931,7 +918,7 @@ let seconds = date_ob.getSeconds();
         }
     });
     if (!isDomainAccepted) {
-	fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nEMAIL_DOMAIN_REJECTED", (err) => {
+	fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nEMAIL_DOMAIN_REJECTED", (err) => {
     		if (err) throw err;
 	});
         return res.json({"success": true});
@@ -939,12 +926,12 @@ let seconds = date_ob.getSeconds();
 
     // is foothill student email a mistaken student id?
     // https://stackoverflow.com/questions/5778020/check-whether-an-input-string-contains-a-number-in-javascript
-    /*
+    
     if (email.endsWith("@student.foothill.edu") && /\d/.test(email)) {
         req.flash('danger', 'Your student email should look like this --> simpsonsbart@student.foothill.edu');
         return res.json({"success": false});
     }
-    */
+    
 
     // is email too long?
     if (email.length > 100) {
@@ -985,7 +972,7 @@ let seconds = date_ob.getSeconds();
                 }
 
 
-fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nEMAIL_SENT", (err) => {
+fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nEMAIL_SENT", (err) => {
     if (err) throw err;
 });
 
@@ -1015,11 +1002,11 @@ fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
                                 // setup email data with unicode symbols
                                 let mailOptions = {
-                                    from: '"Kindred" <'+EMAIL_ADDRESS+'>', // sender address
+                                    from: '"Foothill icebreaker" <'+EMAIL_ADDRESS+'>', // sender address
                                     to: email, // list of receivers
                                     subject: 'Invite', // Subject line
                                     text: '', // plain text body
-                                    html: 'Hello,<br><br>You requested an invite. Click here to login:<br>&lt;<a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, confirmationURL.indexOf("confirmation")+12) + '</a>&gt;<br><br>Happy Searching!'
+                                    html: 'Hello,<br><br>You requested an invite. Click here to login:<br>&lt;<a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, confirmationURL.indexOf("confirmation")+12) + '</a>&gt;<br><br>'
                                 };
 
                                 // send mail with defined transport object
@@ -1036,7 +1023,7 @@ fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                 });
 
 		                neo4j_session.close();
-                                req.flash('success', 'I sent you an email invitation. (If you don\'t see it, please check your spam folder.)');
+                                req.flash('success', 'I sent you an email.');
                                 return res.json({"success": false});
             })
             .catch(function (error) {
@@ -1059,7 +1046,7 @@ app.get('/confirmation/:token', isLoggedInMiddleware(), function (req, res) {
 	let seconds = date_ob.getSeconds();
 
 
-	fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nLOGIN", (err) => {
+	fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nLOGIN", (err) => {
 	    if (err) throw err;
 	});
 
@@ -1068,7 +1055,7 @@ app.get('/confirmation/:token', isLoggedInMiddleware(), function (req, res) {
 	});
 
     } catch (err) {
-        res.send('<h3><br><br>For your security,<br>invitations expire 5minutes after send-time.<br><br>Please <a href="https://www.'+DOMAIN_NAME+'/email">go to Kindred</a> and re-enter your email for a new invitation.</h3>');
+        res.send('<h3><br><br>For your security,<br>invitations expire 5minutes after send-time.<br><br>Please <a href="https://www.'+DOMAIN_NAME+'/email">go to Foothill icebreaker</a> and re-enter your email for a new invitation.</h3>');
     }
 });
 
@@ -1086,7 +1073,7 @@ let year = date_ob.getFullYear();
 let hours = date_ob.getHours();
 let minutes = date_ob.getMinutes();
 let seconds = date_ob.getSeconds();
-fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+req.user+"\nLOGOUT", (err) => {
+fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+req.user+"\nLOGOUT", (err) => {
     if (err) throw err;
 });
 
@@ -1131,7 +1118,7 @@ let year = date_ob.getFullYear();
 let hours = date_ob.getHours();
 let minutes = date_ob.getMinutes();
 let seconds = date_ob.getSeconds();
-fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nADD_TAG\n"+tag, (err) => {
+fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nADD_TAG\n"+tag, (err) => {
     if (err) throw err;
 });
 
@@ -1169,7 +1156,7 @@ let year = date_ob.getFullYear();
 let hours = date_ob.getHours();
 let minutes = date_ob.getMinutes();
 let seconds = date_ob.getSeconds();
-fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nREMOVE_TAG\n"+tag, (err) => {
+fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nREMOVE_TAG\n"+tag, (err) => {
     if (err) throw err;
 });
 
@@ -1205,7 +1192,7 @@ let year = date_ob.getFullYear();
 let hours = date_ob.getHours();
 let minutes = date_ob.getMinutes();
 let seconds = date_ob.getSeconds();
-fs.appendFile('HISTORY.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nALL_SCHOOLS\n"+allSchools, (err) => {
+fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nALL_SCHOOLS\n"+allSchools, (err) => {
     if (err) throw err;
 });
 
