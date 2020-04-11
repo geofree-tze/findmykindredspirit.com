@@ -771,11 +771,11 @@ var neo4j_session = driver.session();
 //..........
 // Restoring a backup:
 //     uncomment this block of code
-//     open putty, cd ifuckwithyou.com, pm2 restart app
+//     open putty, cd findmykindredspirit.com, pm2 restart app
 //     open /backupuser /backuptag
 //     paste in the data from the Google spreadsheet
 //     re-comment this block of code
-//     open putty, cd ifuckwithyou.com, pm2 restart app
+//     open putty, cd findmykindredspirit.com, pm2 restart app
 //
 //     if you backed up the users at /backupuser, then run the following neo4j commands
 //         MATCH (u:User) SET u.addCount = toInteger(u.addCount)
@@ -1002,7 +1002,7 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
                                 // setup email data with unicode symbols
                                 let mailOptions = {
-                                    from: '"Foothill icebreaker" <'+EMAIL_ADDRESS+'>', // sender address
+                                    from: '"Kindred" <'+EMAIL_ADDRESS+'>', // sender address
                                     to: email, // list of receivers
                                     subject: 'Invite', // Subject line
                                     text: '', // plain text body
@@ -1055,7 +1055,7 @@ app.get('/confirmation/:token', isLoggedInMiddleware(), function (req, res) {
 	});
 
     } catch (err) {
-        res.send('<h3><br><br>For your security,<br>invitations expire 5minutes after send-time.<br><br>Please <a href="https://www.'+DOMAIN_NAME+'/email">go to Foothill icebreaker</a> and re-enter your email for a new invitation.</h3>');
+        res.send('<h3><br><br>For your security,<br>invitations expire 5minutes after send-time.<br><br>Please <a href="https://www.'+DOMAIN_NAME+'/email">go to Kindred</a> and re-enter your email for a new invitation.</h3>');
     }
 });
 
