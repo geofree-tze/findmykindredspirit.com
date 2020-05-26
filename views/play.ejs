@@ -1,0 +1,233 @@
+<% include ../views/partials/header %>
+
+<style>
+.carousel-content {
+    color:black;
+    display:flex;
+    align-items:center;
+}
+
+#text-carousel {
+  width: 100%;
+  height: auto;
+  padding: 50px;
+}
+
+/* https://codepen.io/aaroniker/pen/XxPNqY */
+.bottom_right {
+  position: fixed;
+  display: block;
+  right: 20px;
+  bottom: 20px;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+    <body style="background-color:black;">          
+    <div class="container">
+        <%- messages('message', locals) %>
+
+
+<br>
+<br>
+<%if (frozen) { %>
+	<h1 style="color:#ff8800;">Your account is under review.</h1>
+<% } else { %>
+
+<div class="row">
+
+    <div class="col-md-5" style="background-color:#000000;margin:10px;">
+        <!-- answered by DJ18 https://stackoverflow.com/questions/9707397/making-a-div-vertically-scrollable-using-css -->
+        <div id="poop" onscroll="myFunction()" style="overflow-y:scroll; overflow-x:hidden; height:255px;">
+        <table style="background-color:#000000;">
+            <% tagsAll.forEach(function(tag){ %>
+            <tr><td><div class="row" style="line-height:4;">
+
+		<%# this chunk of code makes sure that a plus sign only appears in front of tags that the user hasn't added yet %>
+		<%
+		var userAlreadyAddedTag = false;
+			if (tags.length > 0) {
+				tags.forEach(function(userTag) {
+					if (userTag.description == tag.description) {
+						userAlreadyAddedTag = true;
+					}
+				})
+			}
+		%>
+
+		<div id="<%= tag.description %>" class="col-xs-12" style="text-align:center;word-wrap:break-word;display:inline-block;max-width:450px;"> <!-- https://stackoverflow.com/questions/499137/how-can-i-force-a-long-string-without-any-blank-to-be-wrapped -->
+			
+
+		<%if (!userAlreadyAddedTag) { %>
+			<form method="POST" class="form-inline" action="/play/add_tag"> <!-- https://stackoverflow.com/questions/37954005/keep-scroll-position-of-a-div-after-a-form-submit-using-session-var-or-css -->
+				<input type="hidden" name="tag" value="<%= tag.description %>">
+
+				<button type="submit" class="btn btn-danger" style="background-color:#ff4444;">
+					<span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#e5e5e5"><%= tag.description %></span>
+				</button>
+			</form>
+
+		<% } else{ %>
+			<%if (tag.count == 1) { %>
+				<button class="btn btn-warning" style="background-color:#ffc107;">
+					<span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#232323;"><%= tag.description %></span>
+				</button>
+			<% } else{ %>
+				<button class="btn btn-success" style="background-color:#44dd44;">
+					<span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#e5e5e5;"><%= tag.description %></span>
+				</button>
+			<% } %>
+
+		<% } %>
+		</div>
+	    </div></td></tr>
+            <% }) %>
+        </table>
+        </div>
+
+	<br><br>
+
+	<div class="row">
+	<div class="col-md-12">
+            <div class="well" style="background-color:#888888;margin-right:20px;">
+            <form class="form-inline" method="POST" action="/play/add_tag">
+				<input type="hidden" name="upload" value="true">
+                <div class="row">
+                    <div class="col-xs-7" style="text-align:right;">
+                        <input type="text" name="tag" placeholder=" 100 chars max." maxlength="100" required="required">
+                    </div>
+                    <div class="col-xs-5" style="text-align:left;">
+
+					<button type="submit" class="btn btn-success" style="background-color:#44dd44;">
+                                            <span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#e5e5e5;">UPLOAD <i class="fas fa-upload"></i></span>
+                                        </button>
+                    </div>
+                </div>
+            </form>
+            </div>
+	</div>
+	</div>
+    </div>
+
+
+<%if (kindred.length > 0) { %>
+    <div class="col-md-4" style="background-color:#ffffff;margin:10px;">
+    <br>
+
+
+
+<!-- https://codepen.io/matthewhirsch/pen/OPwQRL -->
+<div id="text-carousel" class="carousel" data-interval="false"> <!-- https://stackoverflow.com/questions/14977392/bootstrap-carousel-remove-auto-slide -->
+    <!-- Wrapper for slides -->
+    <div class="row">
+        <div class="col-xs-offset-0 col-xs-12">
+            <div class="carousel-inner">
+
+		<% var j = 1; %>
+                <% kindred.forEach(function(user) { %>
+
+                <div class="item <% if (j == 1) { %>active<% } %>">
+                    <div class="carousel-content">
+                        <div>
+				<span style="font-size:14px;">
+					<%= j++ %> of <%= kindred.length %> kindred spirits
+				</span>
+
+				<br>
+				<br>
+
+				<b><u><span style="font-size:21px;word-wrap:break-word;display:inline-block;max-width:215px;">
+<!--
+					<span style="color:#000000;background-color:black;">
+					<%= user.email.substring(0, user.email.indexOf("@")) %></span><%= user.email.substring(user.email.indexOf("@")) %>
+-->
+					<%= user.email %>
+				</span></u></b>
+
+ 
+
+				<ul style="font-size:12px;">
+                	        <% user.tags.forEach(function(tag) { %>
+	                            <li><%= tag %></li>
+        	                <% }); %>
+				</ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <% }); %>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Controls --> <a class="left carousel-control" href="#text-carousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+ <a class="right carousel-control" href="#text-carousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+
+</div>
+
+<br>
+
+    </div>
+<% } else{ %>
+
+    <div class="col-md-4" style="margin:10px;">
+	<br>
+    </div>
+<% } %>
+
+
+
+
+<% } %>
+    <div class="col-md-2" style="text-align:right;">
+
+	<br>
+
+        <button type="button" class="btn btn-outline-secondary btn-md" style="padding:10px;background-color:#888888;">
+		<a style="color:white;" href="/logout">
+			Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
+		</a>
+        </button>
+
+
+    </div>
+
+<% if (!frozen) { %>
+</div>
+<% } %>
+
+<!-- https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_scrollleft -->
+<script>
+
+function myFunction() {
+  localStorage.setItem("scrollPos", document.getElementById("poop").scrollTop);
+}
+
+window.onload = function () { 
+  document.getElementById("poop").scrollTop = localStorage.getItem("scrollPos");
+}
+
+</script>
+
+
+<% include ../views/partials/footer %>

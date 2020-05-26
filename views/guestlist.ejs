@@ -5,22 +5,35 @@
 
 
 <div style="text-align:center;">
-<iframe max src="https://www.youtube.com/embed/5bJi7k-y1Lo?start=57&end=75" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-
-	<br><br>
-	<h2><b><u>Guest List</u></b></h2>
+	<br>
 	<br>
 
+<h2>
+	<b>E-mail not found</b><br>
+</h2>
+
+<h6>
+	Give me a couple hours, please.<br>
+	I have to manually insert your school into the database.<br>
+	I just sent myself a notification.<br>
+	I'll email you when it's ready.<br>
+	P.S. you are the 1st person<br>
+	to sign up from your school.<br>
+</h6>
+
+
+	_________________________________________
+	<br>
+
+<h3>
+students from <%= emailDomains.length %> schools<br>are currently registered
+</h3>
 
 	<% emailDomains.forEach(function(domain){ %>
 <!--                you<a target="_blank" href="http://<%= domain.substring(1) %>"><%= domain %></a> -->
 
-		<% if (domain == "@harvard.edu") { %>
-	                lil_pump<a href="email">@harvard.edu</a>
-		<% } else { %>
-	                people<a href="email"><%= domain %></a>
-		<% } %>
+	                students<a href="email"><%= domain %></a>
 
 		<br>
 	<% }) %>

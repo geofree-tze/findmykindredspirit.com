@@ -1,0 +1,5 @@
+@cornell.edu
+@student.foothill.edu
+@illinois.edu
+@student.ohlone.edu
+@rit.edu
