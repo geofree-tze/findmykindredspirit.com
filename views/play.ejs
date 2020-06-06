@@ -145,7 +145,7 @@
                     <div class="carousel-content">
                         <div>
 				<span style="font-size:14px;">
-					<%= j++ %> of <%= kindred.length %> kindred spirits
+					<%= j++ %> of <%= kindred.length %> matches
 				</span>
 
 				<br>
@@ -153,8 +153,7 @@
 
 				<b><u><span style="font-size:21px;word-wrap:break-word;display:inline-block;max-width:215px;">
 <!--
-					<span style="color:#000000;background-color:black;">
-					<%= user.email.substring(0, user.email.indexOf("@")) %></span><%= user.email.substring(user.email.indexOf("@")) %>
+					<span style="color:#000000;background-color:black;"><%= user.email.substring(0, user.email.indexOf("@")) %></span>@<span style="color:#000000;background-color:black;"><%= user.email.substring(user.email.indexOf("@")+1, user.email.indexOf(".edu")) %></span>.edu
 -->
 					<%= user.email %>
 				</span></u></b>
