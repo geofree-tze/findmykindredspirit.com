@@ -158,6 +158,15 @@ app.post('/backupuser', function (req, res) {
                 });
 	}
 
+	    neo4j_session
+                .run("MATCH (u:User) SET u.addCount = toInteger(u.addCount)")
+                .then(function (result) {
+	                neo4j_session.close();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
         res.redirect('/backupuser');
 
 });
