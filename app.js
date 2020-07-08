@@ -105,29 +105,13 @@ var ACCEPTED_EMAIL_DOMAINS;
 
 
 
-// this code is used to backup the database
-//
 // How to Make a backup:
 //     run the following neo4j commands
 //         MATCH (u:User) RETURN u.email, u.addCount
 //         MATCH (u:User)-[r:HAS]-(t:Tag) RETURN t.description, u.email ORDER BY t.description
 //     save that data on some Google spreadsheet
 //     note: the strings should have quotations marks around them. i included substring(1, str.length-1) in the code to account for this
-//..........
-// Restoring a backup:
-//     uncomment this block of code
-//     open putty, cd socialclient, pm2 restart app
-//     open /backupuser /backuptag
-//     paste in the data from the Google spreadsheet
-//     re-comment this block of code
-//     open putty, cd socialclient, pm2 restart app
-//
-//
-// DO NOT FORGET to re-comment this block of code
-// otherwise someone could access these back-door routes and start injecting into the database
 
-
-// Comment /* here
 
 // Backup user
 app.get('/backupuser', isAdmin(), function (req, res) {
@@ -202,8 +186,6 @@ app.post('/backuptag', function (req, res) {
 
     }
 });
-
-// comment */ here
 
 
 
