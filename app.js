@@ -1,19 +1,19 @@
 /*
 
 	HUGE SHOUTOUT to Brad Traversy
-		the skeleton of this code was based off of his free neo4j course
+		the skeleton of this code was based on Brad's free neo4j course
 			https://www.eduonix.com/courses/Web-Development/learn-to-build-apps-using-neo4j
 			https://www.youtube.com/watch?v=RE2PLyFqCzE - Deploy Node.js App To Digital Ocean Server
 
 
 	Medium Shoutout to Chris Courses
-		he taught me how to use passport.js for the login system
+		Chris taught me how to use passport.js for the login system
 			Node Authentication Tutorial with Passport.js
 			https://www.youtube.com/watch?v=gYjHDMPrkWU&list=PLpPnRKq7eNW3Qm2OfoJ3Hyvf-36TulLDp
 
 
 	small shoutout to Ben Awad
-		he taught me how to automatically send confirmation emails using nodemailer
+		Ben taught me how to automatically send confirmation emails using nodemailer
 			https://www.youtube.com/watch?v=YU3qstG74nw - How to Send an Email in Node.js
 
 */
@@ -105,12 +105,20 @@ var ACCEPTED_EMAIL_DOMAINS;
 
 
 
+// this code is used to backup the database
+//
 // How to Make a backup:
 //     run the following neo4j commands
 //         MATCH (u:User) RETURN u.email, u.addCount
 //         MATCH (u:User)-[r:HAS]-(t:Tag) RETURN t.description, u.email ORDER BY t.description
 //     save that data on some Google spreadsheet
 //     note: the strings should have quotations marks around them. i included substring(1, str.length-1) in the code to account for this
+//..........
+// Restoring a backup:
+//     open /backupuser /backuptag
+//     paste in the data from the Google spreadsheet
+//     type the password hit enter
+//
 
 
 // Backup user
@@ -150,9 +158,12 @@ app.post('/backupuser', function (req, res) {
                 });
 
 
-        res.redirect('/backupuser');
+	res.redirect('/backupuser');
 
+    } else {
+	res.send('incorrect password');
     }
+
 });
 
 // Backup tag
@@ -182,10 +193,14 @@ app.post('/backuptag', function (req, res) {
                 });
 	}
 
-        res.redirect('/backuptag');
+	res.redirect('/backuptag');
 
+    } else {
+	res.send('incorrect password');
     }
+
 });
+
 
 
 
@@ -315,8 +330,18 @@ fs.readFile('emailDomains.txt', function(err, data) {
                                 });
     }
 
-    if (!email.endsWith(".edu")) {
-        req.flash('danger', 'Your email didn\'t end in .edu');
+    // https://stackoverflow.com/questions/8885052/regular-expression-to-validate-email-ending-in-edu
+    // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_regexp_test2
+    // .edu
+    var patt = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.edu$");
+    // .edu.XX
+    var patt2 = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.edu\.[a-zA-Z0-9.+-]+$");
+    // .ac.XX
+    var patt3 = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.ac\.[a-zA-Z0-9.+-]+$");
+  
+
+    if (!(patt.test(email) || (patt2.test(email) || patt3.test(email)))) {
+        req.flash('danger', 'Your email didn\'t end in .edu or .edu.XX or .ac.XX');
         return res.json({"success": false});
     }
     
@@ -398,6 +423,7 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                     html: 'Hello,<br><br>You requested an invite. Click here to login:<br>&lt;<span style="font-size:14.2px;"><a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, confirmationURL.indexOf("confirmation")+12) + '</a></span>&gt;<br><br>'
                                 };
 
+
                                 // send mail with defined transport object
                                 transporter.sendMail(mailOptions, (error, info) => {
                                     if (error) {
@@ -410,6 +436,7 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
                                     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
                                 });
+
 
 		                neo4j_session.close();
 //                                req.flash('success', 'I sent you an email.');
