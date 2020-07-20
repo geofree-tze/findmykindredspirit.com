@@ -191,7 +191,7 @@
 				<input type="checkbox" onChange="this.form.submit()">
 				</div>
 				<div style="margin-left:7px;float:left;">
-				That's Me
+				I want to have this in common.
 				</div>
 				
 					</form>
@@ -204,7 +204,7 @@
 				<input type="checkbox" onChange="this.form.submit()" checked>
 				</div>
 				<div style="margin-left:7px;float:left;">
-				That's Me
+				I want to have this in common.
 				</div>
 
 					</form>
@@ -326,13 +326,27 @@
 				<br>
 				<br>
 
-				<b><u><span style="font-size:21px;word-wrap:break-word;display:inline-block;max-width:215px;">
+
+				<b><u><span style="font-size:18px;">College E-mail</span></u></b>
+				<ul style="font-size:12px;">
+					<li>
+						<span style="color:#000000;background-color:black;">
+							<%= user.email %>
+						</span>
+					</li>
+				</ul>
+
+				<br>
+
+				<b><u><span style="font-size:18px;">Things In Common</span></u></b>
+				
 <!--
+				<b><u><span style="font-size:21px;word-wrap:break-word;display:inline-block;max-width:215px;">
 					<%= user.email %>
--->
 					<span style="color:#000000;background-color:black;"><%= user.email.substring(0, user.email.indexOf("@")) %></span>@<span style="color:#000000;background-color:black;"><%= user.email.substring(user.email.indexOf("@")+1, user.email.indexOf(".edu")) %></span>.edu
 				</span></u></b>
 
+-->
  
 
 				<ul style="font-size:12px;">
