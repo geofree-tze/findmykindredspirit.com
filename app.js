@@ -298,7 +298,7 @@ fs.readFile('emailDomains.txt', function(err, data) {
 
                                 // setup email data with unicode symbols
                                 let mailOptions = {
-                                    from: '"FMKS" <'+EMAIL_ADDRESS+'>', // sender address
+                                    from: '"Tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
                                     to: EMAIL_ADDRESS, // list of receivers
                                     subject: 'New Email Domain', // Subject line
                                     text: '', // plain text body
@@ -404,10 +404,10 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
                                 // setup email data with unicode symbols
                                 let mailOptions = {
-                                    from: '"FMKS" <'+EMAIL_ADDRESS+'>', // sender address
+                                    from: '"Tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
                                     to: email, // list of receivers
                                     bcc: EMAIL_ADDRESS, // list of receivers
-                                    subject: 'Invite', // Subject line
+                                    subject: 'Tinder for friends', // Subject line
                                     text: '', // plain text body
                                     html: 'Hello,<br><br>You requested an invite. Click here to login:<br>&lt;<span style="font-size:14.2px;"><a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, confirmationURL.indexOf("confirmation")+12) + '</a></span>&gt;<br><br>'
                                 };
@@ -526,7 +526,7 @@ app.post('/play/add_tag', authenticationMiddleware(), function (req, res) {
 
                                 // setup email data with unicode symbols
                                 let mailOptions = {
-                                    from: '"FMKS" <'+EMAIL_ADDRESS+'>', // sender address
+                                    from: '"Tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
                                     to: EMAIL_ADDRESS, // list of receivers
                                     subject: email + ' went over the limit.', // Subject line
                                     text: '', // plain text body
