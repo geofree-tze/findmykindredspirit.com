@@ -206,10 +206,17 @@ app.post('/backuptag', function (req, res) {
 
 
 
+// Author Route
+app.get('/author', function (req, res) {
+	res.render('author');
+});
+
+
 // Invited Route
 app.get('/invite_sent', isLoggedInMiddleware(), function (req, res) {
 	res.render('invite_sent');
 });
+
 
 
 
@@ -220,24 +227,7 @@ app.get('/', isLoggedInMiddleware(), function (req, res) {
 	});
 });
 
-// there was a bug in the code. the first time you tried to send the invite, it did not work.
-// my guess is that the web browser had to cache a cookie the 1st time.
-// my workaround was to cache a cookie on the home page when they click the play button
 app.post('/', function (req, res) {
-	return res.json({"success": true});
-});
-
-
-
-
-// Email Invite page
-app.get('/email', isLoggedInMiddleware(), function (req, res) {
-	res.render('email', {
-	    domainName: DOMAIN_NAME
-	});
-});
-
-app.post('/email', function (req, res) {
 
     var email = req.body.email.toLowerCase();
 
@@ -259,7 +249,6 @@ app.post('/email', function (req, res) {
         req.flash('danger', 'Not a valid email.');
         return res.json({"success": false});
     }
-
 
 
 let date_ob = new Date();
@@ -361,7 +350,7 @@ fs.readFile('emailDomains.txt', function(err, data) {
     request(verifyUrl, (err, response, body) => {
         body = JSON.parse(body);
 
-        // was captcha successful?
+	// was captcha successful?
         if(body.success !== undefined && !body.success){
             req.flash('danger', 'Failed captcha verification. Please try again.');
             return res.json({"success": false});
@@ -445,7 +434,7 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
             .catch(function (error) {
                 console.log(error);
             });
-    });
+	});
 });
 
 app.get('/confirmation/:token', isLoggedInMiddleware(), function (req, res) {
@@ -472,7 +461,7 @@ app.get('/confirmation/:token', isLoggedInMiddleware(), function (req, res) {
 
     } catch (err) {
 	req.flash('danger', 'Your login expired, please re-verify.');
-	res.redirect('/email');
+	res.redirect('/');
     }
 });
 
@@ -663,7 +652,7 @@ if (allSchools) {
         			.then(function (result4) {
 
 		        	    neo4j_session.close();
-//				    req.flash('danger', 'Is ' + email + ' a Peeping Tom?');
+				    req.flash('danger', 'Is ' + email + ' a Peeping Tom?');
         			    res.redirect('/play');
 
 			        })
@@ -701,7 +690,7 @@ if (allSchools) {
         			.then(function (result7) {
 
 		        	    neo4j_session.close();
-//				    req.flash('danger', 'Is ' + email + ' a Peeping Tom?');
+				    req.flash('danger', 'Is ' + email + ' a Peeping Tom?');
         			    res.redirect('/play');
 
 			        })
@@ -1012,7 +1001,7 @@ function authenticationMiddleware() {
         if (req.isAuthenticated()) {
             return next();
         } else {
-            res.redirect('/email');
+            res.redirect('/');
         }
 	}
 }
