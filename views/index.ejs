@@ -4,13 +4,43 @@
 <style>
 /* https://codepen.io/aaroniker/pen/XxPNqY */
 .bottom_left {
-  position: fixed;
+/*  position: fixed; */
   display: block;
   left: 10px;
   bottom: 0px;
 }
 
+/* https://stackoverflow.com/questions/27411581/centering-no-captcha-recaptcha */
+    .text-xs-center {
+        text-align: center;
+    }
+
+    .g-recaptcha {
+        display: inline-block;
+    }
+
 </style>
+
+<script>
+// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show
+function myFunction() {
+    document.getElementById('myDIV').style.display = 'block';
+
+    // https://stackoverflow.com/questions/49475935/on-button-click-focus-input-in-javascript/49475954
+    document.getElementById('email').focus();
+}
+
+function myFunction2() {
+    document.getElementById('not_a_college_email_message').style.display = 'block';
+    document.getElementById('email').value = '';
+    document.getElementById('email').placeholder= 'email@college.edu';
+}
+
+function isCaptchaChecked() {
+  return grecaptcha && grecaptcha.getResponse().length !== 0;
+}
+
+</script>
 
 
 
@@ -19,8 +49,6 @@
     
     <div class="container">
         
-
-
 
 	<br>
 	<br>
@@ -31,26 +59,87 @@
 
 
 		<div style="text-align:center;">
-			<div style="text-align:left;">
+
 				<span style="color:white;">
-					<h3><span style="color:#ff0000;">k</span><span style="color:#ff4000;">i</span><span style="color:#ff7f00;">n</span><span style="color:#ffbf00;">d</span><span style="color:#ffff00;">r</span><span style="color:#aaff00;">e</span><span style="color:#55ff00;">d</span><span style="color:#00ff00;"> </span><span style="color:#00ff80;">s</span><span style="color:#00ffff;">p</span><span style="color:#0080ff;">i</span><span style="color:#0000ff;">r</span><span style="color:#4600ff;">i</span><span style="color:#8b00ff;">t</span> <span style="font-size:10px;">(noun)</span></h3>
-					a person whose interests, attitudes, or experiences<br>
-					are similar to one's own
+				<h2>
+					hey you
+				</h2>
+				</span>
+
+				<br>
+
+			<iframe width="331px;" height="185px;" style="border: 5px solid #ffff44;" src="https://www.youtube.com/embed/yFhPyoWlMuI?start=553&end=584" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+				<br>
+
+			<div style="text-align:center;">
+				<span style="color:white;">
+				<h2>
+					.<br>
+					.<br>
+					.<br>
+					<br>
+					want friends?
+				</h2>
+				<br>
+				<h4 style="line-height:1.6;font-size:16px;">
+					want to <span style="color:red;"><b><i>swipe less</i></b></span> and just <span style="color:orange;"><b>cherry-pick the best</b>?</span><br>
+					<br>
+					want <span style="color:yellow;"><b><u>Personality as queen</u></b></span> and <span style="color:#00ff00;"><b>profile pictures <i>aren't even a thing</i></b>?</span><br>
+					<br>
+					want an algorithm that optimizes for <span style="color:#00ffff;"><b>affinity</b></span> instead of <span style="color:#808080;">white lies</span> & <span style="color:#ff005a;"><i>decimated virginity</i>?</span>
+				</h4>
 				</span>
 			</div>
+
+					<br>
+			<div style="text-align:center;">
+				<span style="color:white;">
+					Well want no more my isolated amigo.
+				</span>
+			</div>
+
 			<br>
-			<iframe style="border: 5px solid #ff44ff;" src="https://www.youtube.com/embed/mbFn05xdisc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<br>
+
+			<iframe style="border: 5px solid #ff44ff;" src="https://www.youtube.com/embed/oJSXk13JNdo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+			<br>
+			<br>
+			<br>
+
+			<div style="text-align:center;">
+				<span style="color:white;">
+					introducing... <span style="font-size:18px;font-weight:bold;">Tinder for friends</span>
+				</span>
+			</div>
+
+
+			<img src="https://i.imgur.com/lOUtNcQ.png" width="200px;" alt="logo">
+
+			<br>
+
+			<div style="text-align:center;">
+				<span style="color:white;">
+					Where commonality is the game<span style="color:#ff44ff;"><i>!</i></span><br>
+					<span style="font-size:12.5px;">(and originality is not in the name)</span><br>
+				</span>
+			</div>
+
 		</div>
 
 		<br>
+		<br>
+		<br>
 
-		<form id="yes" style="text-align:right;">
-			<button type="submit" id="redirect" name="redirect" class="btn btn-default btn-lg" value="login">
+		<div style="text-align:center;">
+			<button onclick="myFunction()" class="btn btn-default btn-md">
 			<span style="color:blue;font-weight:bold;">
-				login
+				<i class="fas fa-play-circle"></i> Click here to get started.
 			</span>		
 			</button>
-		</form>
+		</div>
+
 
 	</div>
 	</div>
@@ -60,26 +149,144 @@
 	<br>
 
 
+	<div id="myDIV" style="display: none;">
+	<form id="login" style="text-align:center;background-color:black;">
 
 
+		<br>
+		<br>
+		<br>
 
-	<a class="bottom_left" href="https://github.com/geofree-tze/findmykindredspirit.com" target="_blank">
+<table style="text-align:center;display:inline-block;">
+<tr>
+<td>
+		<span style="color:white;">Step 1.&nbsp;&nbsp;</span>
+
+		<br>
+		<br>
+
+</td>
+<td>
+		<span style="color:white;">enter your&nbsp;&nbsp;</span>
+		<input type="email" name="email" id="email" placeholder="college email" maxlength="100" required="required" autofocus>
+		<div id="not_a_college_email_message" style="display: none;color:red;font-weight:bold;">
+			Sorry, your email didn't end in .edu<br><span style="font-size:10px;">or .edu.XX or .ac.XX</span>
+		</div>
+
+		<br>
+		<br>
+</td>
+</tr>
+
+<tr>
+<td>
+		<span style="color:white;">Step 2.&nbsp;&nbsp;</span>
+</td>
+<td>
+			<div class="g-recaptcha" data-sitekey="6LdN2IMUAAAAANfZxaaec6_Lx_JOCD1mGhvHD1FF"></div>
+</td>
+</tr>
+
+<tr>
+<td>
+		<br>
+
+		<span style="color:white;">Step 3.&nbsp;&nbsp;</span>
+</td>
+<td>
+		<br>
+
+		<span style="color:white;">double click --&gt;</span>
+		<input type="submit" value="Go">
+
+</td>
+</tr>
+
+
+<tr>
+<td>
+		<br>
+
+		<span style="color:white;">P.S.&nbsp;&nbsp;</span>
+</td>
+<td>
+		<br>
+		<br>
+		<span style="color:white;">
+			<b>I WON'T spam you or sell your data.</b><br>
+			I'll email you to verify your college address,<br>and that's it. 
+		</span>
+</td>
+</tr>
+</table>
+	</form>
+	</div>
+
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+
+	<div class="bottom_left" href="https://github.com/geofree-tze/socialclient">
+
+	<a href="https://github.com/geofree-tze/findmykindredspirit.com" target="_blank">
+
 		<span style="font-size:42px;"><i class="fab fa-github"></i></span>
 		<span style="font-size:14px;"><b>github</b></span>
 	</a>
 
+	<br>
+
+	<a href="/author" target="_blank">
+
+		<span style="font-size:42px;"><i class="fas fa-child"></i></span>
+		<span style="font-size:14px;"><b>about me</b></span>
+	</a>
+
+	</div>
+
+
+
+
+
 
 <script>
-
-// there was a bug in the code. the 1st time a user tried to either sign up or login, it did not work.
-// my guess is that the web browser had to cache a cookie the 1st time.
-// my workaround was to cache a cookie on the home page when they click the sign up or login button
-
-    document.getElementById('yes').addEventListener('submit', submitForm);
+    document.getElementById('login').addEventListener('submit', submitForm);
     function submitForm(e){
         e.preventDefault();
 
-        const redirect = document.querySelector('#redirect').value;
+        const email = document.querySelector('#email').value;
+        const captcha = document.querySelector('#g-recaptcha-response').value;
+
+
+
+
+
+    // https://stackoverflow.com/questions/8885052/regular-expression-to-validate-email-ending-in-edu
+    // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_regexp_test2
+    // .edu
+    var patt = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.edu$");
+    // .edu.XX
+    var patt2 = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.edu\.[a-zA-Z0-9.+-]+$");
+    // .ac.XX
+    var patt3 = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.ac\.[a-zA-Z0-9.+-]+$");
+  
+
+    if (!(patt.test(email) || (patt2.test(email) || patt3.test(email)))) {
+
+	myFunction2();
+
+    } else {
       
         fetch('/', {
             method:'POST',
@@ -87,14 +294,21 @@
                 'Accept': 'application/json, text/plain, */*',
                 'Content-type':'application/json'
             },
-            body:JSON.stringify({redirect: redirect})
+//            body:JSON.stringify({email: email})
+            body:JSON.stringify({email: email, captcha: captcha})
         })
         .then((res) => res.json())
         .then((data) => {
-                document.location.replace('https://<%= domainName %>/email');
+            if (data.success == true) {
+		document.location.replace('https://<%= domainName %>/invite_sent');
+	    } else {
+		document.location.replace('https://<%= domainName %>/');
+	    }
         });
     }
+    }
 </script>
+
 
 
 </div>
