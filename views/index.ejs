@@ -2,44 +2,74 @@
 
 
 <style>
+
+.iframe-container{
+  position: relative;
+  width: 100%;
+  padding-bottom: 58.35%; 
+  height: 0;
+}
+.iframe-container iframe{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
 /* https://codepen.io/aaroniker/pen/XxPNqY */
 .bottom_left {
 /*  position: fixed; */
   display: block;
-  left: 10px;
-  bottom: 0px;
+  left: 40px;
+  bottom: 20px;
 }
 
-/* https://stackoverflow.com/questions/27411581/centering-no-captcha-recaptcha */
-    .text-xs-center {
-        text-align: center;
-    }
 
-    .g-recaptcha {
-        display: inline-block;
-    }
+/* https://codepen.io/nohoid/pen/kIfto */
+.wrapper { 
+  height: 75px;
+  width: 250px;
+background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+background-size: 1800% 1800%;
 
+-webkit-animation: rainbow 18s ease infinite;
+-z-animation: rainbow 18s ease infinite;
+-o-animation: rainbow 18s ease infinite;
+  animation: rainbow 18s ease infinite;}
+
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
 </style>
 
 <script>
 // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show
 function myFunction() {
+    document.getElementById('start2').style.display = 'none';
     document.getElementById('myDIV').style.display = 'block';
 
     // https://stackoverflow.com/questions/49475935/on-button-click-focus-input-in-javascript/49475954
     document.getElementById('email').focus();
 }
-
-function myFunction2() {
-    document.getElementById('not_a_college_email_message').style.display = 'block';
-    document.getElementById('email').value = '';
-    document.getElementById('email').placeholder= 'email@college.edu';
-}
-
-function isCaptchaChecked() {
-  return grecaptcha && grecaptcha.getResponse().length !== 0;
-}
-
 </script>
 
 
@@ -48,6 +78,7 @@ function isCaptchaChecked() {
     <body style="background-color:black;">      
     
     <div class="container">
+        <%- messages('message', locals) %>
         
 
 	<br>
@@ -60,92 +91,47 @@ function isCaptchaChecked() {
 
 		<div style="text-align:center;">
 
-				<span style="color:white;">
-				<h2>
-					hey you
-				</h2>
-				</span>
 
-				<br>
-
-			<iframe width="331px;" height="185px;" style="border: 5px solid #ffff44;" src="https://www.youtube.com/embed/yFhPyoWlMuI?start=553&end=584" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-				<br>
-
-			<div style="text-align:center;">
-				<span style="color:white;">
-				<h2>
-					.<br>
-					.<br>
-					.<br>
-					<br>
-					want friends?
-				</h2>
-				<br>
-				<h4 style="line-height:1.6;font-size:16px;">
-					want to <span style="color:red;"><b><i>swipe less</i></b></span> and just <span style="color:orange;"><b>cherry-pick the best</b>?</span><br>
-					<br>
-					want <span style="color:yellow;"><b><u>Personality as queen</u></b></span> and <span style="color:#00ff00;"><b>profile pictures <i>aren't even a thing</i></b>?</span><br>
-					<br>
-					want an algorithm that optimizes for <span style="color:#00ffff;"><b>affinity</b></span> instead of <span style="color:#808080;">white lies</span> & <span style="color:#ff005a;"><i>decimated virginity</i>?</span>
-				</h4>
-				</span>
-			</div>
-
-					<br>
-			<div style="text-align:center;">
-				<span style="color:white;">
-					Well want no more my isolated amigo.
-				</span>
-			</div>
-
-			<br>
-			<br>
-
-			<iframe style="border: 5px solid #ff44ff;" src="https://www.youtube.com/embed/oJSXk13JNdo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-			<br>
-			<br>
-			<br>
-
-			<div style="text-align:center;">
-				<span style="color:white;">
-					introducing... <span style="font-size:18px;font-weight:bold;">Tinder for friends</span>
+			<div style="text-align:center;max-width:365px;">
+				<span style="color:white;letter-spacing:2px;">
+				<h1>
+					Tinder for friends
+				</h1>
 				</span>
 			</div>
 
 
-			<img src="https://i.imgur.com/lOUtNcQ.png" width="200px;" alt="logo">
-
+			<br>
 			<br>
 
-			<div style="text-align:center;">
-				<span style="color:white;">
-					Where commonality is the game<span style="color:#ff44ff;"><i>!</i></span><br>
-					<span style="font-size:12.5px;">(and originality is not in the name)</span><br>
-				</span>
+	<div style="max-width:400px;margin:auto;min-width:350px;">
+	<div class="iframe-container" style="display:inline-block;">
+		<iframe style="border: 5px solid #ff44ff;" src="https://www.youtube.com/embed/mCF7PBBFgMc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	</div>
+
+			<br>
+			<br>
+			<br>
+
+			<div id="start2" style="display:block;">
+			<div class="wrapper" style="display:inline-block;">
+			<br>
+			<div id="start" style="text-align:center;">
+				<button onclick="myFunction()" class="btn btn-default btn-md">
+				<span style="color:blue;font-weight:bold;">
+					<i class="fas fa-play-circle"></i> Click here to get started.
+				</span>		
+				</button>
+			</div>
+			</div>
 			</div>
 
 		</div>
 
-		<br>
-		<br>
-		<br>
-
-		<div style="text-align:center;">
-			<button onclick="myFunction()" class="btn btn-default btn-md">
-			<span style="color:blue;font-weight:bold;">
-				<i class="fas fa-play-circle"></i> Click here to get started.
-			</span>		
-			</button>
-		</div>
-
-
 	</div>
 	</div>
 
-	<br>
-	<br>
 	<br>
 
 
@@ -153,11 +139,8 @@ function isCaptchaChecked() {
 	<form id="login" style="text-align:center;background-color:black;">
 
 
-		<br>
-		<br>
-		<br>
 
-<table style="text-align:center;display:inline-block;">
+<table style="text-align:right;display:inline-block;">
 <tr>
 <td>
 		<span style="color:white;">Step 1.&nbsp;&nbsp;</span>
@@ -169,12 +152,14 @@ function isCaptchaChecked() {
 <td>
 		<span style="color:white;">enter your&nbsp;&nbsp;</span>
 		<input type="email" name="email" id="email" placeholder="college email" maxlength="100" required="required" autofocus>
-		<div id="not_a_college_email_message" style="display: none;color:red;font-weight:bold;">
-			Sorry, your email didn't end in .edu<br><span style="font-size:10px;">or .edu.XX or .ac.XX</span>
-		</div>
 
-		<br>
-		<br>
+		<span id="not_a_college_email_message" style="display: none;color:red;font-weight:bold;">
+			Sorry, your email didn't end in .edu<br><span style="font-size:10px;">or .edu.XX or .ac.XX</span>
+		</span>
+
+		<span id="not_a_college_email_message2" style="display:block;">
+			<br>
+		</span>
 </td>
 </tr>
 
@@ -183,7 +168,10 @@ function isCaptchaChecked() {
 		<span style="color:white;">Step 2.&nbsp;&nbsp;</span>
 </td>
 <td>
-			<div class="g-recaptcha" data-sitekey="6LdN2IMUAAAAANfZxaaec6_Lx_JOCD1mGhvHD1FF"></div>
+		<div class="g-recaptcha" data-sitekey="6LdN2IMUAAAAANfZxaaec6_Lx_JOCD1mGhvHD1FF"></div>
+		<div id="captcha_not_checked_message" style="display: none;color:red;font-weight:bold;">
+			Bee-boo-boo-bop.<br><span style="font-size:10px;">(please confirm you're not a robot)</span>
+		</div>
 </td>
 </tr>
 
@@ -196,45 +184,14 @@ function isCaptchaChecked() {
 <td>
 		<br>
 
-		<span style="color:white;">double click --&gt;</span>
-		<input type="submit" value="Go">
+		<span style="color:white;">click --&gt;</span>
+		<input type="submit" value="Send Email">
 
-</td>
-</tr>
-
-
-<tr>
-<td>
-		<br>
-
-		<span style="color:white;">P.S.&nbsp;&nbsp;</span>
-</td>
-<td>
-		<br>
-		<br>
-		<span style="color:white;">
-			<b>I WON'T spam you or sell your data.</b><br>
-			I'll email you to verify your college address,<br>and that's it. 
-		</span>
 </td>
 </tr>
 </table>
 	</form>
 	</div>
-
-
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 
 
 	<div class="bottom_left" href="https://github.com/geofree-tze/socialclient">
@@ -247,7 +204,7 @@ function isCaptchaChecked() {
 
 	<br>
 
-	<a href="/author" target="_blank">
+	<a href="/about" target="_blank">
 
 		<span style="font-size:42px;"><i class="fas fa-child"></i></span>
 		<span style="font-size:14px;"><b>about me</b></span>
@@ -270,8 +227,6 @@ function isCaptchaChecked() {
 
 
 
-
-
     // https://stackoverflow.com/questions/8885052/regular-expression-to-validate-email-ending-in-edu
     // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_regexp_test2
     // .edu
@@ -280,13 +235,23 @@ function isCaptchaChecked() {
     var patt2 = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.edu\.[a-zA-Z0-9.+-]+$");
     // .ac.XX
     var patt3 = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.ac\.[a-zA-Z0-9.+-]+$");
-  
+
 
     if (!(patt.test(email) || (patt2.test(email) || patt3.test(email)))) {
+	document.getElementById('not_a_college_email_message').style.display = 'block';
+	document.getElementById('not_a_college_email_message2').style.display = 'block';
+	document.getElementById('email').value = '';
+	document.getElementById('email').placeholder= 'email@college.edu';
+	document.getElementById('captcha_not_checked_message').style.display = 'none';
+    }
 
-	myFunction2();
+    else if (!(grecaptcha && grecaptcha.getResponse().length !== 0)) {
+	document.getElementById('not_a_college_email_message').style.display = 'none';
+	document.getElementById('not_a_college_email_message2').style.display = 'block';
+	document.getElementById('captcha_not_checked_message').style.display = 'block';
+    }
 
-    } else {
+    else {
       
         fetch('/', {
             method:'POST',

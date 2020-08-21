@@ -1,0 +1,119 @@
+<% include ../views/partials/header %>
+
+    </head>
+    <body style="background-color:#ff44ff;">          
+
+<% include ../views/partials/header2 %>
+
+
+<div id="text-carousel" class="carousel" style="background-color:#ffffff;" data-interval="false">
+    <!-- Wrapper for slides -->
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-8">
+            <div class="carousel-inner" style="min-height:200px;margin-left:0px;margin-bottom:70px;">
+
+
+<% if (kindred.length > 0) { %>
+
+		<% var j = 1; %>
+                <% kindred.forEach(function(user) { %>
+
+                <div class="item <% if (j == 1) { %>active<% } %>">
+                    <div class="carousel-content">
+                        <div>
+				<br>
+				<br>
+
+				<span style="font-size:14px;">
+					<%= j++ %> of <%= kindred.length %> matches
+				</span>
+
+				<br>
+				<br>
+
+
+				<b><u><span style="font-size:18px;">College E-mail</span></u></b>
+				<ul style="font-size:12px;">
+					<li>
+						<span style="color:#000000;background-color:black;">
+							<%= user.email %>
+						</span>
+					</li>
+				</ul>
+
+				<br>
+
+				<b><u><span style="font-size:18px;">Quirks In Common</span></u></b>
+				
+<!--
+				<b><u><span style="font-size:21px;word-wrap:break-word;display:inline-block;max-width:215px;">
+					<%= user.email %>
+					<span style="color:#000000;background-color:black;"><%= user.email.substring(0, user.email.indexOf("@")) %></span>@<span style="color:#000000;background-color:black;"><%= user.email.substring(user.email.indexOf("@")+1, user.email.indexOf(".edu")) %></span>.edu
+				</span></u></b>
+
+-->
+ 
+
+				<div style="font-size:12px;">
+                	        <% user.tags.forEach(function(tag) { %>
+	                            <input type="checkbox" checked> &nbsp;<%= tag %><br>
+        	                <% }); %>
+				</div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <% }); %>
+<% } else { %>
+
+
+
+                <div class="item active">
+                    <div class="carousel-content">
+                        <div style="text-align:center;">
+
+        			<br>
+        			<br>
+
+ 
+
+		        			<b><u><span style="font-family: 'Times New Roman', Times, serif;font-size:21px;word-wrap:break-word;display:inline-block;max-width:210px;">
+	        	        			No matches <i class="far fa-frown"></i>
+						</span></u></b>
+
+						<br>
+						(try the <a href="/search">search</a> section)
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+<% } %>
+            </div>
+        </div>
+    </div>
+
+
+<% if (kindred.length > 0) { %>
+
+    <!-- Controls --> <a class="left carousel-control" href="#text-carousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+ <a class="right carousel-control" href="#text-carousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+
+<% } %>
+
+</div>
+
+
+
+
+
+		</div>
+	</div>
+<% include ../views/partials/footer %>
