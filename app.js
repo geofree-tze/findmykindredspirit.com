@@ -139,7 +139,7 @@ app.post('/backupuser', function (req, res) {
 	var userLength = emailArr.length;
 	for (i = 0; i < userLength; i++) {
             neo4j_session
-                .run("CREATE (u:User { email: {emailParam}, addCount: {addCountParam}, allSchools: false, currentIndex: false, statementQuery: '' })", { emailParam: emailArr[i].substring(1, emailArr[i].length-1), addCountParam: addCountArr[i] })
+                .run("CREATE (u:User { email: {emailParam}, addCount: {addCountParam}, allSchools: true, currentIndex: false, statementQuery: '' })", { emailParam: emailArr[i].substring(1, emailArr[i].length-1), addCountParam: addCountArr[i] })
                 .then(function (result) {
 	                neo4j_session.close();
                 })
@@ -206,9 +206,15 @@ app.post('/backuptag', function (req, res) {
 
 
 
-// Author Route
-app.get('/author', function (req, res) {
-	res.render('author');
+// Frozen Route
+app.get('/frozen', function (req, res) {
+	res.render('frozen');
+});
+
+
+// About Route
+app.get('/about', function (req, res) {
+	res.render('about');
 });
 
 
@@ -364,7 +370,7 @@ fs.readFile('emailDomains.txt', function(err, data) {
 		
                 if (result.records[0]._fields[0] == null) {
                         neo4j_session
-                            .run("CREATE (u:User { email: {emailParam}, addCount: 0, allSchools: false, currentIndex: false, statementQuery: '' })", { emailParam: email })
+                            .run("CREATE (u:User { email: {emailParam}, addCount: 0, allSchools: true, currentIndex: false, statementQuery: '' })", { emailParam: email })
                             .then(function (result2) {
 		                neo4j_session.close();
                             })
@@ -409,7 +415,7 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                     bcc: EMAIL_ADDRESS, // list of receivers
                                     subject: 'Tinder for friends', // Subject line
                                     text: '', // plain text body
-                                    html: 'Hello,<br><br>You requested an invite. Click here to login:<br>&lt;<span style="font-size:14.2px;"><a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, confirmationURL.indexOf("confirmation")+12) + '</a></span>&gt;<br><br>'
+                                    html: 'Hello,<br><br>You entered your email address on Tinder for friends.<br><br>Click here to login:<br>&lt;<a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, confirmationURL.indexOf("confirmation")+12) + '</a>&gt;<br><br>'
                                 };
 
 
@@ -456,12 +462,12 @@ app.get('/confirmation/:token', isLoggedInMiddleware(), function (req, res) {
 	});
 
 	req.login(email, function(err) {
-	    res.redirect('/play');
+	    res.redirect('/search');
 	});
 
     } catch (err) {
-	req.flash('danger', 'Your login expired, please re-verify.');
-	res.redirect('/');
+//	req.flash('danger', 'Your login expired, please re-verify.');
+	res.send('Sorry, invalid or expired token. Please <a href="/#start">go back</a> and enter your email address again.<br><span style="font-size:12px;">&#40;The link expires 5 minutes after the email is sent.&#41;</span>');
     }
 });
 
@@ -491,18 +497,20 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
     });
 });
 
-// Add Tag Route
-app.get('/play/add_tag', authenticationMiddleware(), function (req, res) {
-    res.redirect('/play');
+
+
+
+// Search Add Tag Route
+app.get('/search/add_tag', authenticationMiddleware(), function (req, res) {
+    res.redirect('/search');
 });
-app.post('/play/add_tag', authenticationMiddleware(), function (req, res) {
+app.post('/search/add_tag', authenticationMiddleware(), function (req, res) {
     var email = req.user;
     var tag = req.body.tag.trim();
-    var isUpload = req.body.upload;
 
     if (tag.length > 100) {
 	req.flash('danger', 'Exceeds 100 characters. Please try again.');
-	res.redirect('/play');
+	res.redirect('/search');
     } else {
 
     neo4j_session
@@ -546,7 +554,7 @@ app.post('/play/add_tag', authenticationMiddleware(), function (req, res) {
                                     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
                                 });
 
-                res.redirect('/play');
+                res.redirect('/search');
             }
             else {
                 neo4j_session
@@ -571,7 +579,7 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
                		        neo4j_session.close();
 
-				res.redirect('/play');
+				res.redirect('/search');
 
 	                    })
         	            .catch(function (error) {
@@ -592,11 +600,15 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
 
 
-// Remove Tag Route
-app.get('/play/remove_tag', authenticationMiddleware(), function (req, res) {
-    res.redirect('/play');
+
+
+
+
+// Search Remove Tag Route
+app.get('/search/remove_tag', authenticationMiddleware(), function (req, res) {
+    res.redirect('/search');
 });
-app.post('/play/remove_tag', authenticationMiddleware(), function (req, res) {
+app.post('/search/remove_tag', authenticationMiddleware(), function (req, res) {
     var email = req.user;
     var tag = req.body.tag;
 
@@ -640,7 +652,7 @@ if (allSchools) {
         			.then(function (result3) {
 
 		        	    neo4j_session.close();
-        			    res.redirect('/play');
+        			    res.redirect('/search');
 
 			        })
         			.catch(function (error) {
@@ -652,8 +664,8 @@ if (allSchools) {
         			.then(function (result4) {
 
 		        	    neo4j_session.close();
-				    req.flash('danger', 'Is ' + email + ' a Peeping Tom?');
-        			    res.redirect('/play');
+				    req.flash('danger', 'Is ' + email + ' a Peeping Tom or a Fickle Fiona?');
+        			    res.redirect('/search');
 
 			        })
         			.catch(function (error) {
@@ -678,7 +690,7 @@ if (allSchools) {
         			.then(function (result6) {
 
 		        	    neo4j_session.close();
-        			    res.redirect('/play');
+        			    res.redirect('/search');
 
 			        })
         			.catch(function (error) {
@@ -690,8 +702,8 @@ if (allSchools) {
         			.then(function (result7) {
 
 		        	    neo4j_session.close();
-				    req.flash('danger', 'Is ' + email + ' a Peeping Tom?');
-        			    res.redirect('/play');
+				    req.flash('danger', 'Is ' + email + ' a Peeping Tom or a Fickle Fiona?');
+        			    res.redirect('/search');
 
 			        })
         			.catch(function (error) {
@@ -750,24 +762,37 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
 
 
-// Statement Query Route
-app.get('/play/search', authenticationMiddleware(), function (req, res) {
-    res.redirect('/play');
+// Search Query Route
+app.get('/search/query', authenticationMiddleware(), function (req, res) {
+    res.redirect('/search');
 });
-app.post('/play/search', authenticationMiddleware(), function (req, res) {
+app.post('/search/query', authenticationMiddleware(), function (req, res) {
     var email = req.user;
     var statementQuery = req.body.statementQuery;
 
     if (statementQuery.length > 100) {
 	req.flash('danger', 'Exceeds 100 characters. Please try again.');
-	res.redirect('/play');
+	res.redirect('/search');
     }
+
+
+let date_ob = new Date();
+let date = ("0" + date_ob.getDate()).slice(-2);
+let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+let year = date_ob.getFullYear();
+let hours = date_ob.getHours();
+let minutes = date_ob.getMinutes();
+let seconds = date_ob.getSeconds();
+fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nSEARCH\n"+statementQuery, (err) => {
+    if (err) throw err;
+});
+
 
     neo4j_session
         .run("MATCH (u:User) WHERE u.email={emailParam} SET u.statementQuery={statementQueryParam}, u.currentIndex=false", { emailParam: email, statementQueryParam: statementQuery })
         .then(function (result) {
             neo4j_session.close();
-            res.redirect('/play');
+            res.redirect('/search');
         })
         .catch(function (error) {
             console.log(error);
@@ -775,41 +800,13 @@ app.post('/play/search', authenticationMiddleware(), function (req, res) {
 });
 
 
-// Profile Route
-app.get('/play', authenticationMiddleware(), function (req, res) {
+
+
+
+// Match Route
+app.get('/match', authenticationMiddleware(), function (req, res) {
     var email = req.user;
 
-    neo4j_session
-        .run("MATCH(u:User) WHERE u.email={emailParam} RETURN u.addCount, u.allSchools, u.currentIndex, u.statementQuery", {emailParam: email})
-        .then(function(result){
-            var addCount = result.records[0]._fields[0].low;
-            var allSchools = result.records[0]._fields[1];
-            var currentIndex = result.records[0]._fields[2];
-            var statementQuery = result.records[0]._fields[3];
-
-
-	    if (addCount > MAX_ADD_COUNT) {
-		neo4j_session.close();
-
-		res.render('play', {
-		    frozen: true
-		});
-	    }
-	    else {
-
-            neo4j_session
-                .run("OPTIONAL MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email={emailParam} RETURN t", {emailParam: email})
-                .then(function(result2){
-                    var tagArr = [];
-
-                    result2.records.forEach(function (record) {
-                        if (record._fields[0] != null) {
-                            tagArr.push(record._fields[0].properties);
-                        }
-                    });
-
-
-if (allSchools) {
 
                     neo4j_session
                         .run("OPTIONAL MATCH (u:User)-[r1:HAS]->(commonTag)<-[r2:HAS]-(kindredSpirit:User) WHERE u.email={emailParam} RETURN kindredSpirit.email, commonTag.description", {emailParam: email})
@@ -854,6 +851,66 @@ if (allSchools) {
                             //console.log(sortedKindredArr.length);
 
 
+ 
+	                            neo4j_session.close();
+
+	                            res.render('match', {
+         	                        kindred: sortedKindredArr
+                        	    });
+
+		})
+		.catch(function (error) {
+		    console.log(error);
+                });
+});
+
+
+
+// Search Route
+app.get('/search', authenticationMiddleware(), function (req, res) {
+    var email = req.user;
+
+    neo4j_session
+        .run("MATCH(u:User) WHERE u.email={emailParam} RETURN u.addCount, u.allSchools, u.currentIndex, u.statementQuery", {emailParam: email})
+        .then(function(result){
+            var addCount = result.records[0]._fields[0].low;
+            var allSchools = result.records[0]._fields[1];
+            var currentIndex = result.records[0]._fields[2];
+            var statementQuery = result.records[0]._fields[3];
+
+
+	    if (addCount > MAX_ADD_COUNT) {
+		neo4j_session.close();
+
+		res.redirect('/frozen');
+	    }
+	    else if (statementQuery === "") {
+
+	                            neo4j_session.close();
+
+	                            res.render('search', {
+					query: "",
+					statementIndex: currentIndex,
+	                                searchAllSchools: allSchools,
+	                                tags: {},
+                	                tagsAll: {}
+                        	    });
+
+	    }
+	    else {
+
+            neo4j_session
+                .run("OPTIONAL MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email={emailParam} RETURN t", {emailParam: email})
+                .then(function(result2){
+                    var tagArr = [];
+
+                    result2.records.forEach(function (record) {
+                        if (record._fields[0] != null) {
+                            tagArr.push(record._fields[0].properties);
+                        }
+                    });
+
+
 			    neo4j_session
 			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE toLower(t.description) CONTAINS toLower({statementQueryParam}) RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)", {statementQueryParam: statementQuery})
 //			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)")
@@ -870,107 +927,19 @@ if (allSchools) {
  
 	                            neo4j_session.close();
 
-	                            res.render('play', {
+	                            res.render('search', {
 					query: statementQuery,
 					statementIndex: currentIndex,
-	                                frozen: false,
 	                                searchAllSchools: allSchools,
 	                                tags: tagArr,
-         	                        kindred: sortedKindredArr,
                 	                tagsAll: tagArrAll
                         	    });
+
 
 			        })
 			        .catch(function (error) {
         			    console.log(error);
 			        });
-                        })
-		        .catch(function (error) {
-        		    console.log(error);
-		        });
-} else {
-
-                    neo4j_session
-			.run("OPTIONAL MATCH (u:User)-[r1:HAS]->(commonTag)<-[r2:HAS]-(kindredSpirit:User) WHERE u.email={emailParam} AND kindredSpirit.email ENDS WITH {emailDomainParam} RETURN kindredSpirit.email, commonTag.description", {emailParam: email, emailDomainParam: email.substring(email.indexOf('@'))})
-                        .then(function (result3) {
-                            var unsortedKindredArr = [];
-
-                            result3.records.forEach(function (record) {
-                                if (record._fields[0] != null) {
-                                    //console.log(record._fields);
-                                    var kindredEmail = record._fields[0];
-                                    var kindredTag = record._fields[1];
-
-                                    unsortedKindredArr.push({ email: kindredEmail, tag: kindredTag });
-                                }
-                            });
-
-
-
-                            // https://stackoverflow.com/questions/53308478/parse-data-into-json
-                            var sortedKindredArr = unsortedKindredArr.reduce((all, record) => {
-                                var user = all.find(u => u.email === record.email);
-                                //If already exists person now contains existing person
-                                if (user) {
-                                    user.tags.push(record.tag);
-                                    //add new interest
-                                } else all.push({
-                                    email: record.email,
-                                    tags: [record.tag]
-                                    //creates new person object
-                                });
-
-                                return all;
-                            }, []).sort((a, b) => b.tags.length - a.tags.length);
-                            //sorts based on length of interest array
-
-                            //console.log(sortedKindredArr);
-                            while (sortedKindredArr.length > MAX_MATCH_COUNT) {
-                                sortedKindredArr.pop();
-                            }
-
-                            //console.log(sortedKindredArr);
-                            //console.log(sortedKindredArr.length);
-
-
-			    neo4j_session
-			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email ENDS WITH {emailDomainParam} AND toLower(t.description) CONTAINS toLower({statementQueryParam}) RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)", { emailDomainParam: email.substring(email.indexOf('@')), statementQueryParam: statementQuery })
-//			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE toLower(t.description) CONTAINS toLower({statementQueryParam}) RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)", {statementQueryParam: statementQuery})
-//			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email ENDS WITH {emailDomainParam} RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)", {emailDomainParam: email.substring(email.indexOf('@'))})
-//			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email ENDS WITH {emailDomainParam} RETURN DISTINCT t.description ORDER BY toUpper(t.description)", {emailDomainParam: email.substring(email.indexOf('@'))})
-			        .then(function (result4) {
-			            var tagArrAll = [];
-			            result4.records.forEach(function (record) {
-			                tagArrAll.push({
-//			                    description: record._fields[0]
-			                    description: record._fields[0].properties.description,
-			                    count: record._fields[1].low
-			                });
-			            });
- 
-	                            neo4j_session.close();
-
-	                            res.render('play', {
-					query: statementQuery,
-					statementIndex: currentIndex,
-	                                frozen: false,
-	                                searchAllSchools: allSchools,
-	                                tags: tagArr,
-         	                        kindred: sortedKindredArr,
-                	                tagsAll: tagArrAll
-                        	    });
-
-			        })
-			        .catch(function (error) {
-        			    console.log(error);
-			        });
-                        })
-		        .catch(function (error) {
-        		    console.log(error);
-		        });
-
-
-}
 		})
 		.catch(function (error) {
 		    console.log(error);
@@ -982,6 +951,56 @@ if (allSchools) {
         });
 });
 
+
+
+// Profile Route
+app.get('/profile', authenticationMiddleware(), function (req, res) {
+    var email = req.user;
+
+    neo4j_session
+        .run("MATCH(u:User) WHERE u.email={emailParam} RETURN u.addCount, u.allSchools", {emailParam: email})
+        .then(function(result){
+            var addCount = result.records[0]._fields[0].low;
+            var allSchools = result.records[0]._fields[1];
+
+
+	    if (addCount > MAX_ADD_COUNT) {
+		neo4j_session.close();
+
+		res.redirect('/frozen');
+	    }
+	    else {
+
+            neo4j_session
+                .run("OPTIONAL MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email={emailParam} RETURN t", {emailParam: email})
+                .then(function(result2){
+                    var tagArr = [];
+
+                    result2.records.forEach(function (record) {
+                        if (record._fields[0] != null) {
+                            tagArr.push(record._fields[0].properties);
+                        }
+                    });
+
+ 
+	                            neo4j_session.close();
+
+	                            res.render('profile', {
+	                                searchAllSchools: allSchools,
+	                                tags: tagArr
+                        	    });
+
+
+		})
+		.catch(function (error) {
+		    console.log(error);
+                });
+	    }
+	})
+	.catch(function (error) {
+	    console.log(error);
+        });
+});
 
 app.listen(5000);
 
@@ -1010,7 +1029,7 @@ function isLoggedInMiddleware() {
 	return (req, res, next) => {
 
         if (req.isAuthenticated()) {
-            res.redirect('/play');
+            res.redirect('/search');
         } else {
             return next();
         }
