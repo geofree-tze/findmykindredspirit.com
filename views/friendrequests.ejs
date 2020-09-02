@@ -1,0 +1,143 @@
+<% include ../views/partials/header %>
+
+    </head>
+    <body style="background-color:#cc44cc;">          
+
+    <div class="container">
+        <%- messages('message', locals) %>
+
+
+
+<div class="row">
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+
+			<div class="row" style="text-align:center;">
+				<div class="col-xs-3" style="background-color:#44ffff;"><br><a href="/profile" style="color:black;">Profile<br><i class="fas fa-user-circle"></i></a><br><br></div>
+				<div class="col-xs-3" style="background-color:white;"><br><a href="/search" style="color:black;">Add Quirks<br><i class="fas fa-plus-circle"></i></a><br><br></div>
+				<div class="col-xs-3">
+					<div class="row" style="text-align:center;">
+						<div class="col-xs-4" style="background-color:#ff44ff;opacity:0.35;"><br><br><br><br></div>
+						<div class="col-xs-4" style="background-color:#cc44cc;"><br><br><br><br></div>
+						<div class="col-xs-4" style="background-color:#884488;opacity:0.35;"><br><br><br><br></div>
+					</div>
+				</div>
+				<div class="col-xs-3" style="background-color:gray;"><br><a href="/logout" style="color:black;">Sign Out<br><i class="fas fa-sign-out-alt"></i></a><br><br></div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-7" style="background-color:#ff44ff;opacity:0.35;"><br></div>
+				<div class="col-xs-1" style="background-color:#cc44cc;"><br></div>
+				<div class="col-xs-4" style="background-color:#884488;opacity:0.35;"><br></div>
+			</div>
+
+			<div class="row" style="text-align:center;">
+				<div class="col-xs-4" style="background-color:#ff44ff;opacity:0.35;"><br><a href="/friendstobe" style="color:black;">Friends To Be<br><i class="far fa-paper-plane"></i> <span style="font-size:10px;"><%= friendsToBe %></span></a><br><br></div>
+				<div class="col-xs-4" style="background-color:#cc44cc;"><br><a href="/friendrequests" style="color:black;"><b>Friend Requests</b><br><i class="far fa-envelope-open"></i> <span style="font-size:10px;"><%= friendRequests %></span></a><br><br></div>
+				<div class="col-xs-4" style="background-color:#884488;opacity:0.35;"><br><a href="/friends" style="color:black;">Friends<br><i class="fas fa-user-friends"></i> <span style="font-size:10px;"><%= friends %></span></a><br><br></div>
+			</div>
+
+
+<% if (kindred.length > 0) { %>
+<div id="text-carousel" class="carousel" style="background-color:#ffffff;margin:15px;" data-interval="false">
+    <!-- Wrapper for slides -->
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-8">
+            <div class="carousel-inner" style="text-align:center;">
+
+		<% var j = 1; %>
+                <% kindred.forEach(function(user) { %>
+
+                <div class="item <% if (j == 1) { %>active<% } %>">
+                    <div class="carousel-content">
+				<br>
+				<br>
+
+				<span style="font-size:42px;">
+					<i class="fas fa-user-alt"></i>
+				</span>
+
+				<br>
+
+				<span style="font-size:14px;">
+					<%= j++ %> / <%= kindred.length %>
+				</span>
+
+				<br>
+				<br>
+
+				<b><u><span style="font-size:23px;font-family: 'Times New Roman', Times, serif;">Quirks In Common</span></u></b>
+ 
+
+				<div style="font-size:12px;text-align:left;">
+                	        <% user.tags.forEach(function(tag) { %>
+	                            <i class="fas fa-adjust"></i> <%= tag %><br>
+        	                <% }); %>
+				</div>
+
+				<br>
+
+				<table><tr><td>
+				<form class="form-inline" method="POST" action="/match/accept">
+
+					<input type="hidden" name="matchId" value="<%= user.email %>">
+
+					<button type="submit" class="btn btn-success btn-lg">
+						<i class="fas fa-user-check"></i>
+						<span style="font-size:12px;">
+							Accept
+						</span>
+					</button>
+				</form>
+				</td><td>
+				<form class="form-inline" method="POST" action="/match/reject">
+
+					<input type="hidden" name="matchId" value="<%= user.email %>">
+
+					&nbsp;
+					<button type="submit" class="btn btn-danger btn-lg">
+						<i class="fas fa-user-times"></i>
+						<span style="font-size:12px;">
+							Reject
+						</span>
+					</button>
+				</form>
+				</td></tr></table>
+
+                    </div>
+                </div>
+
+                <% }); %>
+	    <br>
+	    <br>
+	    </div>
+	</div>
+    </div>
+<% } %>
+<% if (kindred.length > 1) { %>
+    <!-- Controls --> 
+
+ <a class="left carousel-control" style="background-color:gray;" href="#text-carousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span style="font-size:14px;">back</span>
+  </a>
+
+ <a class="right carousel-control" style="background-color:gray;" href="#text-carousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span style="font-size:14px;">next</span>
+  </a>
+<% } %>
+<% if (kindred.length > 0) { %>
+</div>
+<% } %>
+
+
+
+
+
+
+		</div>
+	</div>
+
+<% include ../views/partials/footer %>

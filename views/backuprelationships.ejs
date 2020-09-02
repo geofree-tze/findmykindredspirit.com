@@ -1,0 +1,15 @@
+<% include ../views/partials/header %>
+
+
+<textarea rows="10" cols="40" name="email1" form="backuprelationships">email</textarea>
+<textarea rows="10" cols="70" name="relationshipType" form="backuprelationships">tag</textarea>
+<textarea rows="10" cols="40" name="email2" form="backuprelationships">email</textarea>
+
+<br>
+
+<form method="POST" action="/backuprelationships" id="backuprelationships">
+	    <input type="password" name="password">
+            <input type="submit" value="Submit" class="btn btn-default btn-sm">
+</form>
+
+<% include ../views/partials/footer %>
