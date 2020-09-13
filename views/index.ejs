@@ -3,6 +3,28 @@
 
 <style>
 
+		img.bg {
+			/* Set rules to fill background */
+			min-height: 100%;
+			min-width: 1024px;
+			
+			/* Set up proportionate scaling */
+			width: 100%;
+			height: auto;
+			
+			/* Set up positioning */
+			position: fixed;
+			top: 0;
+			left: 0;
+		}
+		
+		@media screen and (max-width: 1024px){
+			img.bg {
+				left: 50%;
+				margin-left: -512px; }
+		}
+
+
 .iframe-container{
   position: relative;
   width: 100%;
@@ -15,15 +37,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-
-/* https://codepen.io/aaroniker/pen/XxPNqY */
-.bottom_left {
-/*  position: fixed; */
-  display: block;
-  left: 40px;
-  bottom: 20px;
 }
 
 
@@ -75,8 +88,10 @@ function myFunction() {
 
 
     </head>
-    <body style="background-color:black;">      
+    <body>
     
+
+
     <div class="container">
         <%- messages('message', locals) %>
         
@@ -91,26 +106,14 @@ function myFunction() {
 
 		<div style="text-align:center;">
 
-
-			<div style="text-align:center;color:white;max-width:365px;">
-				<span style="letter-spacing:2px;">
-				<h1>
-					Tinder for friends
-				</h1>
-<!--				<h5>
-					f*ck loneliness
-				</h5>
--->
-				</span>
-			</div>
-
-
+			<br>
+			<br>
 			<br>
 			<br>
 
 	<div style="max-width:400px;margin:auto;min-width:350px;">
 	<div class="iframe-container" style="display:inline-block;">
-		<iframe style="border: 5px solid #ff44ff;" src="https://www.youtube.com/embed/7wxt0MIODrI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe style="border: 5px solid #ff44ff;" src="https://www.youtube.com/embed/OoOjMUwtnjk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</div>
 	</div>
 
@@ -196,26 +199,6 @@ function myFunction() {
 </table>
 	</form>
 	</div>
-
-
-	<div class="bottom_left" href="https://github.com/geofree-tze/socialclient">
-
-	<a href="https://github.com/geofree-tze/findmykindredspirit.com" target="_blank">
-
-		<span style="font-size:42px;"><i class="fab fa-github"></i></span>
-		<span style="font-size:14px;"><b>github</b></span>
-	</a>
-
-	<br>
-
-	<a href="/about" target="_blank">
-
-		<span style="font-size:42px;"><i class="fas fa-child"></i></span>
-		<span style="font-size:14px;"><b>about me</b></span>
-	</a>
-
-	</div>
-
 
 
 

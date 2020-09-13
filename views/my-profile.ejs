@@ -1,0 +1,61 @@
+<% include ../views/partials/header %>
+
+    </head>
+    <body style="background-color:#44ffff;">          
+
+<% include ../views/partials/header2 %>
+
+<div id="text-carousel" class="carousel" style="background-color:#ffffff;margin:15px;" data-interval="false">
+    <!-- Wrapper for slides -->
+    <div class="row">
+        <div class="col-xs-offset-1 col-xs-10">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="carousel-content">
+                        <div style="margin-left:0px;">
+
+        			<br>
+        			<br>
+
+				You have <%= tags.length %> potential commonalities.
+
+        			<br>
+        			<br>
+
+				<ol>
+		<%
+			var k = 1;
+			tags.reverse();
+                	tags.forEach(function(tag){
+		%>
+
+					<li>
+						&nbsp;<%= tag.description %>
+					</li>
+
+
+		<%	}); %>
+
+				</ol>
+
+        			<br>
+        			<br>
+
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+		</div>
+	</div>
+<% include ../views/partials/footer %>
