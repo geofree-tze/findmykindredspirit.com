@@ -18,23 +18,6 @@
 
 */
 
-const EMAIL_SECRET = '6qPWY1YuuZsynkDV8w1sc8NS0tAQsKiI42bXKkEB8S57'; // jsonwebtoken
-const secretKey = '6LdN2IMUAAAAAGynl6OXw3Nk5yy1llywEZtyFzV0'; // node js request
-const EXPRESS_SESSIONSTORE_SECRET = '1jjj2asdj5jjsh81ggv4ZLfK06mIysRSHcFasd33rtrPj51'; // express sessionstore middleware
-const NEO4J_USERNAME = "neo4j";
-const NEO4J_PASSWORD = "Dd0820201463115";
-const EMAIL_ADDRESS = "gat58@cornell.edu";
-const EMAIL_ADDRESS_PASSWORD = "Goodme5499!";
-const BACKUP_PASSWORD = "zxcasdfqpassword123"; // pornhub username + pw
-
-const MAX_ADD_COUNT = 88; // this is a security feature to catch data scrapers. if you add too many things, the tripwire locks you out
-const MAX_ADD_FRIEND_COUNT = 88; // this is a security feature to catch data scrapers. if you add too many things, the tripwire locks you out
-const MAX_MATCH_COUNT = 999; // users get their top matches. matches are ranked by the number of things they have in common. those things are weighted equally
-
-const DOMAIN_NAME = "tinderforfriends.com";
-const IP_ADDRESS = "164.90.145.91";
-
-
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
