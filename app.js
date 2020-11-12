@@ -13,10 +13,11 @@
 
 
 	small shoutout to Ben Awad
-		Ben taught me how to automatically send confirmation emails using nodemailer
+		Ben taught me how to automatically send login emails using nodemailer
 			https://www.youtube.com/watch?v=YU3qstG74nw - How to Send an Email in Node.js
 
 */
+
 
 var express = require('express');
 var path = require('path');
@@ -124,7 +125,7 @@ var ACCEPTED_EMAIL_DOMAINS;
 app.get('/backupuser', isAdmin(), function (req, res) {
 	res.render('backupuser');
 });
-app.post('/backupuser', function (req, res) {
+app.post('/backupuser', isAdmin(), function (req, res) {
     var email = req.body.email;
     var addCount = req.body.addCount;
     var addFriendCount = req.body.addFriendCount;
@@ -170,21 +171,23 @@ app.post('/backupuser', function (req, res) {
 app.get('/backuptag', isAdmin(), function (req, res) {
 	res.render('backuptag');
 });
-app.post('/backuptag', function (req, res) {
+app.post('/backuptag', isAdmin(), function (req, res) {
     var email = req.body.email;
     var tag = req.body.tag;
+    var weight = req.body.weight;
     var password = req.body.password;
 
     if (password.localeCompare(BACKUP_PASSWORD) == 0) {
 
 	var emailArr = email.split("\r\n");
 	var tagArr = tag.split("\r\n");
+	var weightArr = weight.split("\r\n");
 
 
 	var tagLength = emailArr.length;
 	for (i = 0; i < tagLength; i++) {
             neo4j_session
-		.run("MATCH (u:User) WHERE u.email={emailParam} MERGE (t:Tag {description:{tagParam}}) MERGE (u)-[:HAS]->(t)", { emailParam: emailArr[i].substring(1, emailArr[i].length-1), tagParam: tagArr[i].substring(1, tagArr[i].length-1) })
+		.run("MATCH (u:User) WHERE u.email={emailParam} MERGE (t:Tag {description:{tagParam}}) MERGE (u)-[:HAS {weight: {weightParam}} ]->(t)", { emailParam: emailArr[i].substring(1, emailArr[i].length-1), tagParam: tagArr[i].substring(1, tagArr[i].length-1), weightParam: weightArr[i] })
                 .then(function (result) {
 	                neo4j_session.close();
                 })
@@ -192,6 +195,15 @@ app.post('/backuptag', function (req, res) {
                     console.log(error);
                 });
 	}
+
+            neo4j_session
+                .run("MATCH ()-[r:HAS]-()-(t:Tag) SET r.weight = toInteger(r.weight)")
+                .then(function (result) {
+	                neo4j_session.close();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
 	res.redirect('/backuptag');
 
@@ -208,7 +220,7 @@ app.post('/backuptag', function (req, res) {
 app.get('/backuprelationships', isAdmin(), function (req, res) {
 	res.render('backuprelationships');
 });
-app.post('/backuprelationships', function (req, res) {
+app.post('/backuprelationships', isAdmin(), function (req, res) {
     var email1 = req.body.email1;
     var relationshipType = req.body.relationshipType;
     var email2 = req.body.email2;
@@ -233,19 +245,9 @@ app.post('/backuprelationships', function (req, res) {
                     console.log(error);
                 });
 	    }
-	    else if (relationshipTypeArr[i].localeCompare("\"FRIENDS\"") == 0) {
+	    else if (relationshipTypeArr[i].localeCompare("\"SHIPPED\"") == 0) {
             neo4j_session
-		.run("MATCH (u:User),(v:User) WHERE u.email={email1Param} AND v.email={email2Param} MERGE (u)-[:FRIENDS]-(v)", { email1Param: email1Arr[i].substring(1, email1Arr[i].length-1),  email2Param: email2Arr[i].substring(1, email2Arr[i].length-1) })
-                .then(function (result) {
-	                neo4j_session.close();
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-	    }
-	    else if (relationshipTypeArr[i].localeCompare("\"IDFWU\"") == 0) {
-            neo4j_session
-		.run("MATCH (u:User),(v:User) WHERE u.email={email1Param} AND v.email={email2Param} MERGE (u)-[:IDFWU]-(v)", { email1Param: email1Arr[i].substring(1, email1Arr[i].length-1),  email2Param: email2Arr[i].substring(1, email2Arr[i].length-1) })
+		.run("MATCH (u:User),(v:User) WHERE u.email={email1Param} AND v.email={email2Param} MERGE (u)-[:SHIPPED]-(v)", { email1Param: email1Arr[i].substring(1, email1Arr[i].length-1),  email2Param: email2Arr[i].substring(1, email2Arr[i].length-1) })
                 .then(function (result) {
 	                neo4j_session.close();
                 })
@@ -265,13 +267,114 @@ app.post('/backuprelationships', function (req, res) {
 
 
 
+// Backup search
+app.get('/backupsearch', isAdmin(), function (req, res) {
+	res.render('backupsearch');
+});
+app.post('/backupsearch', isAdmin(), function (req, res) {
+    var email = req.body.email;
+    var search = req.body.search;
+    var anonSearchCount = req.body.anonSearchCount;
+    var password = req.body.password;
+
+    if (password.localeCompare(BACKUP_PASSWORD) == 0) {
+
+	var emailArr = email.split("\r\n");
+	var searchArr = search.split("\r\n");
+	var anonSearchCountArr = anonSearchCount.split("\r\n");
+
+
+	var searchLength = emailArr.length;
+	for (i = 0; i < searchLength; i++) {
+            neo4j_session
+		.run("MATCH (u:User) WHERE u.email={emailParam} MERGE (s:Search {description:{searchParam}, anonSearchCount:{anonSearchCountParam}}) MERGE (u)-[:SEARCHED]->(s)", { emailParam: emailArr[i].substring(1, emailArr[i].length-1), searchParam: searchArr[i].substring(1, searchArr[i].length-1), anonSearchCountParam: anonSearchCountArr[i] })
+                .then(function (result) {
+	                neo4j_session.close();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+	}
+
+            neo4j_session
+                .run("MATCH (s:Search) SET s.anonSearchCount = toInteger(s.anonSearchCount)")
+                .then(function (result) {
+	                neo4j_session.close();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+	res.redirect('/backupsearch');
+
+    } else {
+	res.send('incorrect password');
+    }
+
+});
 
 
 
-// About Route
-app.get('/about', function (req, res) {
+
+// Backup anon search
+app.get('/backupanonsearch', isAdmin(), function (req, res) {
+	res.render('backupanonsearch');
+});
+app.post('/backupanonsearch', isAdmin(), function (req, res) {
+    var search = req.body.search;
+    var anonSearchCount = req.body.anonSearchCount;
+    var password = req.body.password;
+
+    if (password.localeCompare(BACKUP_PASSWORD) == 0) {
+
+	var searchArr = search.split("\r\n");
+	var anonSearchCountArr = anonSearchCount.split("\r\n");
+
+
+	var searchLength = searchArr.length;
+	for (i = 0; i < searchLength; i++) {
+            neo4j_session
+		.run("MERGE (s:Search {description:{searchParam}, anonSearchCount:{anonSearchCountParam}})", { searchParam: searchArr[i].substring(1, searchArr[i].length-1), anonSearchCountParam: anonSearchCountArr[i] })
+                .then(function (result) {
+	                neo4j_session.close();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+	}
+
+            neo4j_session
+                .run("MATCH (s:Search) SET s.anonSearchCount = toInteger(s.anonSearchCount)")
+                .then(function (result) {
+	                neo4j_session.close();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+	res.redirect('/backupanonsearch');
+
+    } else {
+	res.send('incorrect password');
+    }
+
+});
+
+
+
+
+// about Route
+app.get('/about', isLoggedInMiddleware(), function (req, res) {
 	res.render('about');
 });
+
+
+/*
+// Why Not Gmail Route
+app.get('/why-not-gmail', isLoggedInMiddleware(), function (req, res) {
+	res.render('why-not-gmail');
+});
+*/
 
 
 // Invited Route
@@ -281,17 +384,80 @@ app.get('/invite-sent', isLoggedInMiddleware(), function (req, res) {
 
 
 
-
-// Home Route
+// Index Route
 app.get('/', isLoggedInMiddleware(), function (req, res) {
 	res.render('index', {
 	    domainName: DOMAIN_NAME
 	});
 });
 
-app.post('/', function (req, res) {
 
-    var email = req.body.email.toLowerCase();
+/*
+// Index Route
+app.get('/', isLoggedInMiddleware(), function (req, res) {
+
+    neo4j_session
+        .run("MATCH (u:User) RETURN COUNT(u)")
+        .then(function (result) {
+
+		var userCount = result.records[0]._fields[0].low;
+
+    neo4j_session
+        .run("MATCH (u:User) RETURN u.email ORDER BY reverse(u.email)")
+        .then(function (result3) {
+
+                            var unsortedKindredArr = [];
+
+                            result3.records.forEach(function (record) {
+                                if (record._fields[0] != null) {
+				    var str = record._fields[0].toString();
+                                    unsortedKindredArr.push({ email: str.substring(str.indexOf("@") + 1) });
+                                }
+                            });
+
+
+                            // https://stackoverflow.com/questions/53308478/parse-data-into-json
+                            var sortedKindredArr = unsortedKindredArr.reduce((all, record) => {
+
+                                var user = all.find(u => u.email === record.email);
+
+                                if (user) {
+                                    user.count += 1;
+                                } else all.push({
+                                    email: record.email,
+				    count: 1
+                                });
+
+                                return all;
+                            }, []).sort((a, b) => b.count - a.count);
+
+
+
+
+				neo4j_session.close();
+
+				res.render('index', {
+				    domainName: DOMAIN_NAME,
+				    userCount: userCount,
+				    collegeCount: sortedKindredArr
+				});
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+});
+*/
+
+
+app.post('/send-invite', function (req, res) {
+
+    var email = req.body.email.toLowerCase().trim();
 
     // was captcha box checked?
     if(
@@ -312,77 +478,6 @@ app.post('/', function (req, res) {
         return res.json({"success": false});
     }
 
-
-let date_ob = new Date();
-let date = ("0" + date_ob.getDate()).slice(-2);
-let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-let year = date_ob.getFullYear();
-let hours = date_ob.getHours();
-let minutes = date_ob.getMinutes();
-let seconds = date_ob.getSeconds();
-
-fs.readFile('emailDomains.txt', function(err, data) {
-    if(err) throw err;
-    ACCEPTED_EMAIL_DOMAINS = data.toString().split("\n");
-});
-
-
-    /*
-       if the email domain isn't in emailDomains.txt
-       then write down the email in history.txt
-       and email yourself the unregistered email
-    */
-
-    var isDomainAccepted = false;
-    ACCEPTED_EMAIL_DOMAINS.forEach( function(domain) {
-        if (email.endsWith(domain)) {
-            isDomainAccepted = true;
-	    //break;
-        }
-    });
-    if (!isDomainAccepted) {
-	fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nNEW_EMAIL_DOMAIN", (err) => {
-    		if (err) throw err;
-	});
-	fs.appendFile('emailDomains.txt', '\n'+email.substring(email.indexOf("@")), (err) => {
-    		if (err) throw err;
-	});
-
-
-
-                                // create reusable transporter object using the default SMTP transport
-                                let transporter = nodemailer.createTransport({
-                                    host: 'smtp.gmail.com',
-                                    port: 465,
-                                    secure: true, // true for 465, false for other ports
-                                    auth: {
-                                        user: EMAIL_ADDRESS, // generated ethereal user
-                                        pass: EMAIL_ADDRESS_PASSWORD // generated ethereal password
-                                    }
-                                });
-
-                                // setup email data with unicode symbols
-                                let mailOptions = {
-                                    from: '"Tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
-                                    to: EMAIL_ADDRESS, // list of receivers
-                                    subject: 'New Email Domain', // Subject line
-                                    text: '', // plain text body
-                                    html: email
-                                };
-
-                                // send mail with defined transport object
-                                transporter.sendMail(mailOptions, (error, info) => {
-                                    if (error) {
-                                        return console.log(error);
-                                    }
-                                    //console.log('Message sent: %s', info.messageId);
-                                    // Preview only available when sending through an Ethereal account
-                                    //console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-                                    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-                                    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-                                });
-    }
 
     // https://stackoverflow.com/questions/8885052/regular-expression-to-validate-email-ending-in-edu
     // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_regexp_test2
@@ -422,26 +517,18 @@ fs.readFile('emailDomains.txt', function(err, data) {
         }
 
 
-        // is this a new or returning user?
-        neo4j_session
-            .run("OPTIONAL MATCH(u:User) WHERE u.email={emailParam} RETURN u", { emailParam: email })
-            .then(function (result) {
-		
-                if (result.records[0]._fields[0] == null) {
-                        neo4j_session
-                            .run("CREATE (u:User { email: {emailParam}, addCount: 0, addFriendCount: 0, allSchools: true, currentIndex: false, matchIndex: false, statementQuery: '' })", { emailParam: email })
-                            .then(function (result2) {
-		                neo4j_session.close();
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                            });
-                }
 
+	let date_ob = new Date();
+	let date = ("0" + date_ob.getDate()).slice(-2);
+	let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+	let year = date_ob.getFullYear();
+	let hours = date_ob.getHours();
+	let minutes = date_ob.getMinutes();
+	let seconds = date_ob.getSeconds();
 
-fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nLOGIN_EMAIL_SENT", (err) => {
-    if (err) throw err;
-});
+	fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nLOGIN_EMAIL_SENT", (err) => {
+	    if (err) throw err;
+	});
 
 
                                 var emailToken = jwt.sign(
@@ -450,11 +537,11 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                     },
                                     EMAIL_SECRET,
                                     {
-                                        expiresIn: 300, // 5 minutes = 300 seconds
+                                        expiresIn: 300, // 1 day = 86400, 5 minutes = 300 seconds
                                     }
                                 );
 
-                                var confirmationURL = "https://"+DOMAIN_NAME+"/confirmation/" + emailToken;
+                                var loginURL = "https://"+DOMAIN_NAME+"/login/" + emailToken;
 
                                 // create reusable transporter object using the default SMTP transport
                                 let transporter = nodemailer.createTransport({
@@ -469,12 +556,12 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
                                 // setup email data with unicode symbols
                                 let mailOptions = {
-                                    from: '"Tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
+                                    from: '"tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
                                     to: email, // list of receivers
                                     bcc: EMAIL_ADDRESS, // list of receivers
-                                    subject: 'Tinder for friends', // Subject line
+                                    subject: 'tinder for friends', // Subject line
                                     text: '', // plain text body
-                                    html: 'Hello,<br><br>You entered your email address on Tinder for friends.<br><br>Click here to login:<br>&lt;<a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, confirmationURL.indexOf("confirmation")+12) + '</a>&gt;<br><br><span style="font-size:10px;">P.S. that link will expire in 5 minutes for security reasons.<br>You can always get a new login link by re-entering your email at <a href="https://tinderforfriends.com/" target="_blank">Tinder for friends</a></span><br><br>'
+                                    html: 'Welcome to tinder for friends 👋<br><br>To login, click the link below:<br>&lt;<a target="_blank" href="' + loginURL + '">' + loginURL.substring(0, loginURL.indexOf("login")+5) + '?=' + email + '</a>&gt;<br><br><span style="font-size:10px;">P.S. if the link expired, you can always get a new one by re-entering your email at <a href="https://tinderforfriends.com/" target="_blank">tinder for friends</a>.<br>Links expire 5 minutes after they\'re sent for security reasons.</span><br><br>'
                                 };
 
 
@@ -491,21 +578,38 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
                                 });
 
-
-		                neo4j_session.close();
-//                                req.flash('success', 'I sent you an email.');
                                 return res.json({"success": true});
+
+    });
+});
+
+app.get('/login/:token', isLoggedInMiddleware(), function (req, res) {
+    try {
+        var decoded = jwt.verify(req.params.token, EMAIL_SECRET);
+	var email = decoded.email;
+
+
+        // is this a new or returning user?
+        neo4j_session
+            .run("OPTIONAL MATCH(u:User) WHERE u.email={emailParam} RETURN u", { emailParam: email })
+            .then(function (result) {
+		
+                if (result.records[0]._fields[0] == null) {
+                        neo4j_session
+                            .run("CREATE (u:User { email: {emailParam}, addCount: 0, addFriendCount: 0, allSchools: true, currentIndex: false, matchIndex: false, statementQuery: '' })", { emailParam: email })
+                            .then(function (result2) {
+		                neo4j_session.close();
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                }
+		                neo4j_session.close();
             })
             .catch(function (error) {
                 console.log(error);
             });
-	});
-});
 
-app.get('/confirmation/:token', isLoggedInMiddleware(), function (req, res) {
-    try {
-        var decoded = jwt.verify(req.params.token, EMAIL_SECRET);
-	var email = decoded.email;
 
 	let date_ob = new Date();
 	let date = ("0" + date_ob.getDate()).slice(-2);
@@ -515,28 +619,18 @@ app.get('/confirmation/:token', isLoggedInMiddleware(), function (req, res) {
 	let minutes = date_ob.getMinutes();
 	let seconds = date_ob.getSeconds();
 
-	if (decoded.friendRequestAccepted) {
-		fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nFRIEND_REQUEST_ACCEPTED_EMAIL_OPENED", (err) => {
-		    if (err) throw err;
-		});
-
-		req.login(email, function(err) {
-		    res.redirect('/matches');
-		});
-	} else {
 		fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nLOGIN", (err) => {
 		    if (err) throw err;
 		});
 
 		req.login(email, function(err) {
-		    res.redirect('/add-info');
+		    res.redirect('/tinder');
 		});
-	}
 
 
     } catch (err) {
 //	req.flash('danger', 'Your login expired, please re-verify.');
-	res.send('Sorry, invalid or expired token. Please <a href="/#start">go back</a> and enter your email address again.');
+	res.send('Sorry, invalid or expired token. Please <a href="/">go back</a> and enter your email address again.');
     }
 });
 
@@ -571,15 +665,15 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
 // Search Add Tag Route
 app.get('/search/add_tag', authenticationMiddleware(), function (req, res) {
-    res.redirect('/add-info');
+    res.redirect('/twitter');
 });
 app.post('/search/add_tag', authenticationMiddleware(), function (req, res) {
     var email = req.user;
     var tag = req.body.tag.trim();
+    var isUpload = req.body.isUpload;
 
     if (tag.length > 100) {
-	req.flash('danger', 'Exceeds 100 characters. Please try again.');
-	res.redirect('/add-info');
+	res.send('Exceeds 100 characters. Please try again.');
     } else {
 
     neo4j_session
@@ -589,16 +683,16 @@ app.post('/search/add_tag', authenticationMiddleware(), function (req, res) {
             if (addCount > MAX_ADD_COUNT) {
 
 
-let date_ob = new Date();
-let date = ("0" + date_ob.getDate()).slice(-2);
-let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-let year = date_ob.getFullYear();
-let hours = date_ob.getHours();
-let minutes = date_ob.getMinutes();
-let seconds = date_ob.getSeconds();
-fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nQUIRK_LIMIT_EXCEEDED", (err) => {
-    if (err) throw err;
-});
+				let date_ob = new Date();
+				let date = ("0" + date_ob.getDate()).slice(-2);
+				let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+				let year = date_ob.getFullYear();
+				let hours = date_ob.getHours();
+				let minutes = date_ob.getMinutes();
+				let seconds = date_ob.getSeconds();
+				fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nTWEET_LIMIT_EXCEEDED", (err) => {
+				    if (err) throw err;
+				});
 
 
                                 // create reusable transporter object using the default SMTP transport
@@ -614,9 +708,9 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
                                 // setup email data with unicode symbols
                                 let mailOptions = {
-                                    from: '"Tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
+                                    from: '"tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
                                     to: EMAIL_ADDRESS, // list of receivers
-                                    subject: email + ' went over the quirk limit.', // Subject line
+                                    subject: email + ' went over the add info limit.', // Subject line
                                     text: '', // plain text body
                                     html: email
                                 };
@@ -635,34 +729,44 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                 });
 
                 neo4j_session.close();
-                req.flash('danger', 'Please wait a few minutes before you add any more info.');
-                res.redirect('/add-info');
+//                req.flash('danger', 'Please wait a few minutes before you tweet any more.');
+                res.send('Daily limit exceeded. Please wait until 11am PST before you tweet any more.');
+//                res.redirect('/twitter');
             }
             else {
                 neo4j_session
-                    .run("MATCH (u:User) WHERE u.email={emailParam} MERGE (t:Tag {description:{tagParam}}) MERGE (u)-[:HAS]->(t)", { emailParam: email, tagParam: tag })
+                    .run("MATCH (u:User) WHERE u.email={emailParam} MERGE (t:Tag {description:{tagParam}}) MERGE (u)-[:HAS {weight: 1}]->(t)", { emailParam: email, tagParam: tag })
                     .then(function (result2) {
 
-let date_ob = new Date();
-let date = ("0" + date_ob.getDate()).slice(-2);
-let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-let year = date_ob.getFullYear();
-let hours = date_ob.getHours();
-let minutes = date_ob.getMinutes();
-let seconds = date_ob.getSeconds();
-fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nADD_TAG\n"+tag, (err) => {
-    if (err) throw err;
-});
+			let date_ob = new Date();
+			let date = ("0" + date_ob.getDate()).slice(-2);
+			let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+			let year = date_ob.getFullYear();
+			let hours = date_ob.getHours();
+			let minutes = date_ob.getMinutes();
+			let seconds = date_ob.getSeconds();
+			fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nTWEETED\n"+tag, (err) => {
+			    if (err) throw err;
+			});
 
 	                neo4j_session
         	            .run("MATCH (u:User) WHERE u.email={emailParam} SET u.currentIndex = {tagParam}", { emailParam: email, tagParam: tag })
                 	    .then(function (result3) {
 
-
-               		        neo4j_session.close();
-
-				res.redirect('/add-info');
-
+				if (isUpload) {
+			                neo4j_session
+        			            .run("MATCH (u:User) WHERE u.email={emailParam} SET u.statementQuery = {tagParam}", { emailParam: email, tagParam: tag })
+                	    		    .then(function (result4) {
+	        	       		        neo4j_session.close();
+						res.redirect('/twitter');
+			                    })
+        			            .catch(function (error) {
+        	        		        console.log(error);
+                			    });
+				} else {
+        	       		        neo4j_session.close();
+					res.redirect('/twitter');
+				}
 	                    })
         	            .catch(function (error) {
                 	        console.log(error);
@@ -688,7 +792,7 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
 // Search Remove Tag Route
 app.get('/search/remove_tag', authenticationMiddleware(), function (req, res) {
-    res.redirect('/add-info');
+    res.redirect('/twitter');
 });
 app.post('/search/remove_tag', authenticationMiddleware(), function (req, res) {
     var email = req.user;
@@ -703,7 +807,7 @@ let year = date_ob.getFullYear();
 let hours = date_ob.getHours();
 let minutes = date_ob.getMinutes();
 let seconds = date_ob.getSeconds();
-fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nREMOVE_TAG\n"+tag, (err) => {
+fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nUNTWEETED\n"+tag, (err) => {
     if (err) throw err;
 });
 
@@ -734,7 +838,7 @@ if (allSchools) {
         			.then(function (result3) {
 
 		        	    neo4j_session.close();
-        			    res.redirect('/add-info');
+        			    res.redirect('/twitter');
 
 			        })
         			.catch(function (error) {
@@ -747,7 +851,7 @@ if (allSchools) {
 
 		        	    neo4j_session.close();
 //				    req.flash('danger', 'are you a Peeping Tom?');
-        			    res.redirect('/add-info');
+        			    res.redirect('/twitter');
 
 			        })
         			.catch(function (error) {
@@ -772,7 +876,7 @@ if (allSchools) {
         			.then(function (result6) {
 
 		        	    neo4j_session.close();
-        			    res.redirect('/add-info');
+        			    res.redirect('/twitter');
 
 			        })
         			.catch(function (error) {
@@ -785,7 +889,7 @@ if (allSchools) {
 
 		        	    neo4j_session.close();
 //				    req.flash('danger', 'are you a Peeping Tom?');
-        			    res.redirect('/add-info');
+        			    res.redirect('/twitter');
 
 			        })
         			.catch(function (error) {
@@ -809,7 +913,7 @@ if (allSchools) {
 });
 
 
-
+/*
 // All Schools Route
 app.get('/play/all_schools', authenticationMiddleware(), function (req, res) {
     res.redirect('/play');
@@ -841,20 +945,20 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
             console.log(error);
         });
 });
-
+*/
 
 
 // Search Query Route
 app.get('/search/query', authenticationMiddleware(), function (req, res) {
-    res.redirect('/add-info');
+    res.redirect('/twitter');
 });
 app.post('/search/query', authenticationMiddleware(), function (req, res) {
     var email = req.user;
-    var statementQuery = req.body.statementQuery;
+    var statementQuery = req.body.statementQuery.toLowerCase().trim();
 
     if (statementQuery.length > 100) {
 	req.flash('danger', 'Exceeds 100 characters. Please try again.');
-	res.redirect('/add-info');
+	res.redirect('/twitter');
     }
 
 
@@ -871,14 +975,17 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
 
     neo4j_session
-        .run("MATCH (u:User) WHERE u.email={emailParam} SET u.statementQuery={statementQueryParam}, u.currentIndex=false", { emailParam: email, statementQueryParam: statementQuery })
+        .run("MATCH (u:User) WHERE u.email={emailParam} SET u.statementQuery={statementQueryParam}, u.currentIndex=false MERGE (s:Search {description:{searchParam}}) ON CREATE SET s.anonSearchCount = 0 MERGE (u)-[:SEARCHED]->(s)", { emailParam: email, statementQueryParam: statementQuery, searchParam: statementQuery })
         .then(function (result) {
             neo4j_session.close();
-            res.redirect('/add-info');
+            res.redirect('/twitter');
         })
         .catch(function (error) {
             console.log(error);
         });
+
+
+
 });
 
 
@@ -888,37 +995,25 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
 
 
-// Swipe Route
-app.get('/swipe', authenticationMiddleware(), function (req, res) {
+// tinder Route
+app.get('/tinder', authenticationMiddleware(), function (req, res) {
     var email = req.user;
 
 
 	neo4j_session
-	    .run("OPTIONAL MATCH (u:User)-[:HAS]-(commonTag:Tag)-[:HAS]-(kindredSpirit:User) WHERE NOT (kindredSpirit:User)-[:FRIENDS]-(u:User) AND NOT (kindredSpirit:User)<-[:SENT]-(u:User) AND u.email={emailParam} RETURN COUNT(DISTINCT(kindredSpirit))", {emailParam: email})
-            .then(function (result) {
-		var friendsToBeCount = result.records[0]._fields[0];
-
-
-	neo4j_session
-	    .run("OPTIONAL MATCH (u:User)-[:HAS]-(commonTag:Tag)-[:HAS]-(kindredSpirit:User) WHERE (kindredSpirit:User)-[:FRIENDS]-(u:User) AND u.email={emailParam} RETURN COUNT(DISTINCT(kindredSpirit))", {emailParam: email})
+	    .run("OPTIONAL MATCH (u:User)-[:HAS]-(commonTag:Tag)-[:HAS]-(kindredSpirit:User) WHERE u.email={emailParam} AND (kindredSpirit:User)-[:SHIPPED]-(u:User) RETURN COUNT(DISTINCT(kindredSpirit))", {emailParam: email})
             .then(function (result3) {
 		var friendsCount = result3.records[0]._fields[0];
 
 
-
-
                     neo4j_session
-                        .run("OPTIONAL MATCH (u:User)-[:HAS]-(commonTag:Tag)-[:HAS]-(kindredSpirit:User) WHERE NOT (kindredSpirit:User)-[:FRIENDS]-(u:User) AND NOT (kindredSpirit:User)<-[:SENT]-(u:User) AND u.email={emailParam} RETURN ID(kindredSpirit), commonTag.description ORDER BY ID(kindredSpirit)", {emailParam: email})
+                        .run("OPTIONAL MATCH (u:User)-[r1:HAS]-(commonTag:Tag)-[r2:HAS]-(kindredSpirit:User) WHERE u.email={emailParam} AND (NOT (kindredSpirit:User)-[]-(u:User) OR (kindredSpirit:User)-[:SENT]->(u:User)) RETURN ID(kindredSpirit), commonTag.description, toInt(r1.weight), toInt(r2.weight) ORDER BY ID(kindredSpirit)", {emailParam: email})
                         .then(function (result4) {
                             var unsortedKindredArr = [];
 
                             result4.records.forEach(function (record) {
                                 if (record._fields[0] != null) {
-                                    //console.log(record._fields);
-                                    var kindredEmail = record._fields[0].toString();
-                                    var kindredTag = record._fields[1];
-
-                                    unsortedKindredArr.push({ email: kindredEmail, tag: kindredTag });
+                                    unsortedKindredArr.push({ email: record._fields[0].low.toString(), tag: record._fields[1], weight1: record._fields[2].low, weight2: record._fields[3].low });
                                 }
                             });
 
@@ -928,25 +1023,38 @@ app.get('/swipe', authenticationMiddleware(), function (req, res) {
                             var sortedKindredArr = unsortedKindredArr.reduce((all, record) => {
                                 var user = all.find(u => u.email === record.email);
                                 //If already exists person now contains existing person
+
+				var affinityValue = 0;
+
+				if (record.weight1 > -1 && record.weight2 > -1) {
+				    affinityValue = Math.min(record.weight1, record.weight2);
+				} else if (record.weight1 < 0 && record.weight2 < 0) {
+				    affinityValue = Math.abs(Math.max(record.weight1, record.weight2));
+				} else {
+				    affinityValue = -Math.abs(record.weight1 - record.weight2);
+				}
+
+
                                 if (user) {
-                                    user.tags.push(record.tag);
+                                    user.tags.push([record.tag, record.weight1, record.weight2]);
+                                    user.weightSum += affinityValue;
                                     //add new interest
                                 } else all.push({
                                     email: record.email,
-                                    tags: [record.tag]
+                                    tags: [[record.tag, record.weight1, record.weight2]],
+				    weightSum: affinityValue
                                     //creates new person object
                                 });
 
                                 return all;
-                            }, []).sort((a, b) => b.tags.length - a.tags.length);
+                            }, []).sort((a, b) => b.weightSum - a.weightSum);
                             //sorts based on length of interest array
 
 
 
 				neo4j_session.close();
 
-				res.render('swipe', {
-       	        		    friendsToBe: friendsToBeCount,
+				res.render('tinder', {
        	        		    friends: friendsCount,
 				    kindred: sortedKindredArr
 				});
@@ -959,10 +1067,6 @@ app.get('/swipe', authenticationMiddleware(), function (req, res) {
 	    .catch(function (error) {
 	        console.log(error);
 	    });
-	    })
-	    .catch(function (error) {
-	        console.log(error);
-	    });
 });
 
 
@@ -974,37 +1078,30 @@ app.get('/swipe', authenticationMiddleware(), function (req, res) {
 
 
 
-// Matches Route
+
+
+
+
+
+// matches Route
 app.get('/matches', authenticationMiddleware(), function (req, res) {
     var email = req.user;
 
 
 	neo4j_session
-	    .run("OPTIONAL MATCH (u:User)-[:HAS]-(commonTag:Tag)-[:HAS]-(kindredSpirit:User) WHERE NOT (kindredSpirit:User)-[:FRIENDS]-(u:User) AND u.email={emailParam} RETURN COUNT(DISTINCT(kindredSpirit))", {emailParam: email})
+	    .run("OPTIONAL MATCH (u:User)-[:HAS]-(commonTag:Tag)-[:HAS]-(kindredSpirit:User) WHERE u.email={emailParam} AND (NOT (kindredSpirit:User)-[]-(u:User) OR (kindredSpirit:User)<-[:SENT]-(u:User)) RETURN COUNT(DISTINCT(kindredSpirit))", {emailParam: email})
             .then(function (result) {
 		var friendsToBeCount = result.records[0]._fields[0];
 
 
-	neo4j_session
-	    .run("OPTIONAL MATCH (u:User)-[:HAS]-(commonTag:Tag)-[:HAS]-(kindredSpirit:User) WHERE (kindredSpirit:User)-[:FRIENDS]-(u:User) AND u.email={emailParam} RETURN COUNT(DISTINCT(kindredSpirit))", {emailParam: email})
-            .then(function (result3) {
-		var friendsCount = result3.records[0]._fields[0];
-
-
-
-
                     neo4j_session
-			.run("OPTIONAL MATCH (u:User)-[:HAS]-(commonTag:Tag)-[:HAS]-(kindredSpirit:User) WHERE (kindredSpirit:User)-[:FRIENDS]-(u:User) AND u.email={emailParam} RETURN kindredSpirit.email, commonTag.description ORDER BY kindredSpirit.email", {emailParam: email})
+                        .run("OPTIONAL MATCH (u:User)-[r1:HAS]-(commonTag:Tag)-[r2:HAS]-(kindredSpirit:User) WHERE u.email={emailParam} AND (kindredSpirit:User)-[:SHIPPED]-(u:User) RETURN kindredSpirit.email, commonTag.description, toInt(r1.weight), toInt(r2.weight) ORDER BY kindredSpirit.email", {emailParam: email})
                         .then(function (result4) {
                             var unsortedKindredArr = [];
 
                             result4.records.forEach(function (record) {
                                 if (record._fields[0] != null) {
-                                    //console.log(record._fields);
-                                    var kindredEmail = record._fields[0].toString();
-                                    var kindredTag = record._fields[1];
-
-                                    unsortedKindredArr.push({ email: kindredEmail, tag: kindredTag });
+                                    unsortedKindredArr.push({ email: record._fields[0], tag: record._fields[1], weight1: record._fields[2].low, weight2: record._fields[3].low });
                                 }
                             });
 
@@ -1014,17 +1111,31 @@ app.get('/matches', authenticationMiddleware(), function (req, res) {
                             var sortedKindredArr = unsortedKindredArr.reduce((all, record) => {
                                 var user = all.find(u => u.email === record.email);
                                 //If already exists person now contains existing person
+
+				var affinityValue = 0;
+
+				if (record.weight1 > -1 && record.weight2 > -1) {
+				    affinityValue = Math.min(record.weight1, record.weight2);
+				} else if (record.weight1 < 0 && record.weight2 < 0) {
+				    affinityValue = Math.abs(Math.max(record.weight1, record.weight2));
+				} else {
+				    affinityValue = -Math.abs(record.weight1 - record.weight2);
+				}
+
+
                                 if (user) {
-                                    user.tags.push(record.tag);
+                                    user.tags.push([record.tag, record.weight1, record.weight2]);
+                                    user.weightSum += affinityValue;
                                     //add new interest
                                 } else all.push({
                                     email: record.email,
-                                    tags: [record.tag]
+                                    tags: [[record.tag, record.weight1, record.weight2]],
+				    weightSum: affinityValue
                                     //creates new person object
                                 });
 
                                 return all;
-                            }, []).sort((a, b) => b.tags.length - a.tags.length);
+                            }, []).sort((a, b) => b.weightSum - a.weightSum);
                             //sorts based on length of interest array
 
 
@@ -1033,7 +1144,6 @@ app.get('/matches', authenticationMiddleware(), function (req, res) {
 
 				res.render('matches', {
        	        		    friendsToBe: friendsToBeCount,
-       	        		    friends: friendsCount,
 				    kindred: sortedKindredArr
 				});
 
@@ -1045,18 +1155,24 @@ app.get('/matches', authenticationMiddleware(), function (req, res) {
 	    .catch(function (error) {
 	        console.log(error);
 	    });
-	    })
-	    .catch(function (error) {
-	        console.log(error);
-	    });
 });
 
 
 
 
 
-// Search Route
-app.get('/add-info', authenticationMiddleware(), function (req, res) {
+
+
+
+
+
+
+
+
+
+
+// twitter Route
+app.get('/twitter', authenticationMiddleware(), function (req, res) {
     var email = req.user;
 
     neo4j_session
@@ -1072,12 +1188,13 @@ app.get('/add-info', authenticationMiddleware(), function (req, res) {
 
 	                            neo4j_session.close();
 
-	                            res.render('add-info', {
+	                            res.render('twitter', {
 					query: "",
 					statementIndex: currentIndex,
 	                                searchAllSchools: allSchools,
 	                                tags: {},
-                	                tagsAll: {}
+                	                tagsAll: {},
+					searchCount: 0
                         	    });
 
 	    }
@@ -1096,7 +1213,7 @@ app.get('/add-info', authenticationMiddleware(), function (req, res) {
 
 
 			    neo4j_session
-			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE toLower(t.description) CONTAINS toLower({statementQueryParam}) RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description) LIMIT 10", {statementQueryParam: statementQuery})
+			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) WHERE toLower(t.description) CONTAINS toLower({statementQueryParam}) RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)", {statementQueryParam: statementQuery})
 //			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) RETURN t, COUNT(r), t.description ORDER BY toUpper(t.description)")
 //			        .run("MATCH (u:User)-[r:HAS]->(t:Tag) RETURN DISTINCT t.description ORDER BY toUpper(t.description)")
 			        .then(function (result4) {
@@ -1109,17 +1226,28 @@ app.get('/add-info', authenticationMiddleware(), function (req, res) {
 			                });
 			            });
  
-	                            neo4j_session.close();
 
-	                            res.render('add-info', {
-					query: statementQuery,
-					statementIndex: currentIndex,
-	                                searchAllSchools: allSchools,
-	                                tags: tagArr,
-                	                tagsAll: tagArrAll
-                        	    });
+			            neo4j_session
+			                .run("MATCH (u:User)-[r:SEARCHED]-(s:Search) WHERE s.description={statementQueryParam} RETURN COUNT(r)", {statementQueryParam: statementQuery})
+			                .then(function(result5){
+				            var queryCount = result5.records[0]._fields[0].low;
 
 
+			                            neo4j_session.close();
+
+		        	                    res.render('twitter', {
+							query: statementQuery,
+							statementIndex: currentIndex,
+		                	       	        searchAllSchools: allSchools,
+		                        	        tags: tagArr,
+                		                	tagsAll: tagArrAll,
+							searchCount: queryCount
+        	                		    });
+
+				        })
+				        .catch(function (error) {
+        				    console.log(error);
+				        });
 			        })
 			        .catch(function (error) {
         			    console.log(error);
@@ -1136,9 +1264,34 @@ app.get('/add-info', authenticationMiddleware(), function (req, res) {
 });
 
 
+// view all tweets route
+app.get('/view-all-tweets', authenticationMiddleware(), function (req, res) {
+	    neo4j_session
+	        .run("MATCH (:User)-[r:HAS]->(t:Tag) RETURN t.description, COUNT(r) ORDER BY toUpper(t.description)")
+	        .then(function (result4) {
+	            var tagArrAll = [];
+	            result4.records.forEach(function (record) {
+	                tagArrAll.push({
+	                    description: record._fields[0],
+	                    count: record._fields[1].low
+	                });
+	            });
+ 
+                    neo4j_session.close();
 
-// My Profile Route
-app.get('/my-profile', authenticationMiddleware(), function (req, res) {
+                    res.render('view-all-tweets', {
+     	                tagsAll: tagArrAll
+               	    });
+		})
+		.catch(function (error) {
+		    console.log(error);
+        	});
+});
+
+
+
+// weights Route
+app.get('/weights', authenticationMiddleware(), function (req, res) {
     var email = req.user;
 
     neo4j_session
@@ -1149,20 +1302,20 @@ app.get('/my-profile', authenticationMiddleware(), function (req, res) {
 
 
             neo4j_session
-                .run("OPTIONAL MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email={emailParam} RETURN t", {emailParam: email})
+                .run("OPTIONAL MATCH (u:User)-[r:HAS]->(t:Tag) WHERE u.email={emailParam} RETURN t.description, toInt(r.weight) ORDER BY r.weight DESC", {emailParam: email})
                 .then(function(result2){
                     var tagArr = [];
 
                     result2.records.forEach(function (record) {
                         if (record._fields[0] != null) {
-                            tagArr.push(record._fields[0].properties);
+                            tagArr.push({ description: record._fields[0], weight: record._fields[1].low });
                         }
                     });
 
  
 	                            neo4j_session.close();
 
-	                            res.render('my-profile', {
+	                            res.render('weights', {
 	                                searchAllSchools: allSchools,
 	                                tags: tagArr
                         	    });
@@ -1182,12 +1335,73 @@ app.get('/my-profile', authenticationMiddleware(), function (req, res) {
 
 
 
-
-// Match Send Route
-app.get('/match/send', authenticationMiddleware(), function (req, res) {
-    res.redirect('/swipe');
+// Change Weight Route
+app.get('/change-weight', authenticationMiddleware(), function (req, res) {
+    res.redirect('/weights');
 });
-app.post('/match/send', authenticationMiddleware(), function (req, res) {
+app.post('/change-weight', authenticationMiddleware(), function (req, res) {
+    var email = req.user;
+    var tag = req.body.tag;
+    var weight = parseInt(req.body.weight);
+
+    if ((weight > 100 || weight < -100) || tag.length > 100) {
+	res.send('error');
+    } else {
+
+	let date_ob = new Date();
+	let date = ("0" + date_ob.getDate()).slice(-2);
+	let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+	let year = date_ob.getFullYear();
+	let hours = date_ob.getHours();
+	let minutes = date_ob.getMinutes();
+	let seconds = date_ob.getSeconds();
+
+
+	if (weight == 0) {
+
+	    fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nUNTWEETED\n"+tag, (err) => {
+	        if (err) throw err;
+	    });
+
+	    neo4j_session
+        	.run("OPTIONAL MATCH(u:User)-[r:HAS]-(t:Tag) WHERE u.email={emailParam} AND t.description={tagParam} DELETE r", { emailParam: email, tagParam: tag })
+	        .then(function(result){
+			neo4j_session.close();
+                	res.redirect('/weights');
+	        })
+        	.catch(function (error) {
+	            console.log(error);
+        	});
+
+	} else {
+
+	    fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nCHANGE_WEIGHT\n"+tag+"\n"+weight, (err) => {
+	        if (err) throw err;
+	    });
+
+	    neo4j_session
+        	.run("OPTIONAL MATCH(u:User)-[r:HAS]-(t:Tag) WHERE u.email={emailParam} AND t.description={tagParam} SET r.weight={weightParam}", { emailParam: email, tagParam: tag, weightParam: weight })
+	        .then(function(result){
+			neo4j_session.close();
+                	res.redirect('/weights');
+	        })
+        	.catch(function (error) {
+	            console.log(error);
+        	});
+	}
+    }
+});
+
+
+
+
+
+
+// Match Swipe Route
+app.get('/match/swipe', authenticationMiddleware(), function (req, res) {
+    res.redirect('/tinder');
+});
+app.post('/match/swipe', authenticationMiddleware(), function (req, res) {
     var email = req.user;
     var matchId = parseInt(req.body.matchId);
 
@@ -1198,16 +1412,17 @@ app.post('/match/send', authenticationMiddleware(), function (req, res) {
 
 	    if (addFriendCount > MAX_ADD_FRIEND_COUNT) {
 
-let date_ob = new Date();
-let date = ("0" + date_ob.getDate()).slice(-2);
-let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-let year = date_ob.getFullYear();
-let hours = date_ob.getHours();
-let minutes = date_ob.getMinutes();
-let seconds = date_ob.getSeconds();
-fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nMATCH_LIMIT_EXCEEDED", (err) => {
-    if (err) throw err;
-});
+			let date_ob = new Date();
+			let date = ("0" + date_ob.getDate()).slice(-2);
+			let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+			let year = date_ob.getFullYear();
+			let hours = date_ob.getHours();
+			let minutes = date_ob.getMinutes();
+			let seconds = date_ob.getSeconds();
+			fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nSWIPE_LIMIT_EXCEEDED", (err) => {
+			    if (err) throw err;
+			});
+
 
                                 // create reusable transporter object using the default SMTP transport
                                 let transporter = nodemailer.createTransport({
@@ -1222,7 +1437,7 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
                                 // setup email data with unicode symbols
                                 let mailOptions = {
-                                    from: '"Tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
+                                    from: '"tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
                                     to: EMAIL_ADDRESS, // list of receivers
                                     subject: email + ' went over the match limit.', // Subject line
                                     text: '', // plain text body
@@ -1243,10 +1458,34 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                 });
 
 		neo4j_session.close();
-		req.flash('danger', 'Please wait a few minutes before you swipe any more.');
-                res.redirect('/swipe');
+//		req.flash('danger', 'Please wait a few minutes before you like any more.');
+                res.send('Daily limit exceeded. Please wait until 11am PST before you swipe any more.');
+//                res.redirect('/tinder');
 	    }
 	    else {
+
+		neo4j_session
+		    .run("OPTIONAL MATCH (u:User)-[:HAS]-(commonTag:Tag)-[:HAS]-(v:User) WHERE u.email={emailParam} AND ID(v)={matchIdParam} RETURN commonTag.description", {emailParam: email, matchIdParam: matchId })
+		    .then(function (result5) {
+
+		    	var commonTags = [];
+
+			result5.records.forEach(function (record) {
+                            if (record._fields[0] != null) {
+                                commonTags.push(record._fields[0]);
+			    }
+                        });
+
+			var commonTagsString = '';
+		        var commonTagsString2 = '';
+
+			commonTags.forEach(function (tag) {
+			    commonTagsString = commonTagsString + "\n" + tag;
+			    commonTagsString2 = commonTagsString2 + "<br>&nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;" + tag;
+			});
+
+
+
 		    neo4j_session
 		        .run("OPTIONAL MATCH (u:User)<-[r:SENT]-(v:User) WHERE u.email={emailParam} AND ID(v)={matchIdParam} RETURN r IS NOT NULL", { emailParam: email, matchIdParam: matchId })
 		        .then(function (result2) {
@@ -1256,44 +1495,163 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 				if (friendRequestEdgeCase) {
 
 
-
-
-
-			    neo4j_session
-				.run("OPTIONAL MATCH (u:User)<-[r:SENT]-(v:User) WHERE u.email={emailParam} AND ID(v)={matchIdParam} DELETE r", { emailParam: email, matchIdParam: matchId })
-			        .then(function (result3) {
+				    neo4j_session
+					.run("OPTIONAL MATCH (u:User)<-[r:SENT]-(v:User) WHERE u.email={emailParam} AND ID(v)={matchIdParam} DELETE r", { emailParam: email, matchIdParam: matchId })
+				        .then(function (result3) {
 
 				    neo4j_session
-				        .run("OPTIONAL MATCH (u:User), (v:User) WHERE u.email={emailParam} AND ID(v)={matchIdParam} SET u.matchIndex={matchIdParam} MERGE (u)-[:FRIENDS]-(v) RETURN v.email", { emailParam: email, matchIdParam: matchId })
+				        .run("OPTIONAL MATCH (u:User), (v:User) WHERE u.email={emailParam} AND ID(v)={matchIdParam} SET u.matchIndex={matchIdParam} MERGE (u)-[:SHIPPED]-(v) RETURN v.email", { emailParam: email, matchIdParam: matchId })
 				        .then(function (result4) {
 					    var matchEmail = result4.records[0]._fields[0];
 
 
-let date_ob = new Date();
-let date = ("0" + date_ob.getDate()).slice(-2);
-let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-let year = date_ob.getFullYear();
-let hours = date_ob.getHours();
-let minutes = date_ob.getMinutes();
-let seconds = date_ob.getSeconds();
-fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nFRIEND_REQUEST_ACCEPTED\n"+matchEmail, (err) => {
-    if (err) throw err;
+
+						let date_ob = new Date();
+						let date = ("0" + date_ob.getDate()).slice(-2);
+						let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+						let year = date_ob.getFullYear();
+						let hours = date_ob.getHours();
+						let minutes = date_ob.getMinutes();
+						let seconds = date_ob.getSeconds();
+						fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\n"+matchEmail+"\nMATCHED"+commonTagsString, (err) => {
+						    if (err) throw err;
+						});
+
+
+
+		                                // create reusable transporter object using the default SMTP transport
+                		                let transporter = nodemailer.createTransport({
+		                                    host: 'smtp.gmail.com',
+                		                    port: 465,
+                                		    secure: true, // true for 465, false for other ports
+		                                    auth: {
+                		                        user: EMAIL_ADDRESS, // generated ethereal user
+                                		        pass: EMAIL_ADDRESS_PASSWORD // generated ethereal password
+		                                    }
+                		                });
+
+		                                // setup email data with unicode symbols
+                		                let mailOptions = {
+                                		    from: '"tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
+		                                    to: [matchEmail, email], // list of receivers
+                		                    bcc: EMAIL_ADDRESS, // list of receivers
+                                		    subject: 'You got a new match!', // Subject line
+		                                    text: '', // plain text body
+                		                    html: 
+
+							'This email is to ' + matchEmail + ' & ' + email + '.<br>' + 
+							'Congratulations. You both swiped right on each other!<br>' + 
+							'<br>' +
+							'Here\'s what both of you tweeted:' + 
+							commonTagsString2 + '<br>' + 
+							'<br>' + 
+							'Thanks for using <a href="https://tinderforfriends.com/" target="_blank">tinder for friends</a> :)<br>'
+ 		                               };
+
+                		                // send mail with defined transport object
+		                                transporter.sendMail(mailOptions, (error, info) => {
+                		                    if (error) {
+                                		        return console.log(error);
+		                                    }
+                		                    //console.log('Message sent: %s', info.messageId);
+                                		    // Preview only available when sending through an Ethereal account
+		                                    //console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+                		                    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+                                		    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+		                                });
+
+
+
+
+		    			    neo4j_session.close();
+					    req.flash('success', 'It\'s a match!');
+  				            res.redirect('/tinder');
+  				        })
+ 				        .catch(function (error) {
+					    console.log(error);
+	 			        });
+  					})
+ 					.catch(function (error) {
+				    	console.log(error);
+		 			});
+				} else {
+				    neo4j_session
+				        .run("OPTIONAL MATCH (u:User), (v:User) WHERE u.email={emailParam} AND ID(v)={matchIdParam} MERGE (u)-[:SENT]->(v) RETURN v.email", { emailParam: email, matchIdParam: matchId })
+				        .then(function (result3) {
+					   var matchEmail = result3.records[0]._fields;
+
+
+						let date_ob = new Date();
+						let date = ("0" + date_ob.getDate()).slice(-2);
+						let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+						let year = date_ob.getFullYear();
+						let hours = date_ob.getHours();
+						let minutes = date_ob.getMinutes();
+						let seconds = date_ob.getSeconds();
+						fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nSWIPE\n"+matchEmail+commonTagsString, (err) => {
+						    if (err) throw err;
+						});
+
+
+		    			   neo4j_session.close();
+  				           res.redirect('/tinder');
+  				      })
+ 				       .catch(function (error) {
+					   console.log(error);
+	 			      });
+				}
+  		      })
+ 		      .catch(function (error) {
+ 		          console.log(error);
+ 		      });
+
+  		      })
+ 		      .catch(function (error) {
+ 		          console.log(error);
+ 		      });
+	    }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 });
 
 
+/*
+// Report Route
+app.get('/report/:accused', authenticationMiddleware(), function (req, res) {
+	res.render('report', {
+		poop: req.params.accused
+	});
+});
 
-                                var emailToken = jwt.sign(
-                                    {
-                                        email: matchEmail,
-					friendRequestAccepted: true
-                                    },
-                                    EMAIL_SECRET,
-                                    {
-                                        expiresIn: 300, // 5 minutes = 300 seconds
-                                    }
-                                );
 
-                                var confirmationURL = "https://"+DOMAIN_NAME+"/confirmation/" + emailToken;
+app.post('/report/:accused', authenticationMiddleware(), function (req, res) {
+
+	var email = req.user;
+	var accused = req.params.accused;
+	var message = req.body.message;
+
+
+    // is message too long?
+    if (message.length > 10000) {
+	res.send('Please keep it under 10,000 characters.');
+    } else {
+
+
+	let date_ob = new Date();
+	let date = ("0" + date_ob.getDate()).slice(-2);
+	let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+	let year = date_ob.getFullYear();
+	let hours = date_ob.getHours();
+	let minutes = date_ob.getMinutes();
+	let seconds = date_ob.getSeconds();
+
+	fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nREPORTED\n"+accused, (err) => {
+	    if (err) throw err;
+	});
+
 
                                 // create reusable transporter object using the default SMTP transport
                                 let transporter = nodemailer.createTransport({
@@ -1308,12 +1666,11 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
 
                                 // setup email data with unicode symbols
                                 let mailOptions = {
-                                    from: '"Tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
-                                    to: matchEmail, // list of receivers
-                                    bcc: EMAIL_ADDRESS, // list of receivers
-                                    subject: 'Someone accepted your friend request!', // Subject line
+                                    from: '"tinder for friends" <'+EMAIL_ADDRESS+'>', // sender address
+                                    to: EMAIL_ADDRESS, // list of receivers
+                                    subject: email+' reported '+accused, // Subject line
                                     text: '', // plain text body
-                                    html: 'Hello,<br><br>' + email + ' accepted your friend request!<br><br>Click here to see what quirks you two have in common:<br>&lt;<a target="_blank" href="' + confirmationURL + '">' + confirmationURL.substring(0, confirmationURL.indexOf("confirmation")+12) + '</a>&gt;<br><br><span style="font-size:10px;">P.S. that link will expire in 5 minutes for security reasons.<br>You can always get a new login link by re-entering your email at <a href="https://tinderforfriends.com/" target="_blank">Tinder for friends</a></span><br><br>'
+                                    html: message
                                 };
 
 
@@ -1330,66 +1687,11 @@ fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hour
                                     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
                                 });
 
-
-		    			    neo4j_session.close();
-					    req.flash('success', 'It\'s a match!');
-  				            res.redirect('/swipe');
-  				        })
- 				        .catch(function (error) {
-					    console.log(error);
-	 			        });
-  				})
- 				.catch(function (error) {
-				    console.log(error);
-	 			});
-
-
-
-
-
-
-
-
-
-				} else {
-				    neo4j_session
-				        .run("OPTIONAL MATCH (u:User), (v:User) WHERE u.email={emailParam} AND ID(v)={matchIdParam} MERGE (u)-[:SENT]->(v) RETURN v.email", { emailParam: email, matchIdParam: matchId })
-				        .then(function (result3) {
-					   var matchEmail = result3.records[0]._fields;
-
-
-let date_ob = new Date();
-let date = ("0" + date_ob.getDate()).slice(-2);
-let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-let year = date_ob.getFullYear();
-let hours = date_ob.getHours();
-let minutes = date_ob.getMinutes();
-let seconds = date_ob.getSeconds();
-fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nFRIEND_REQUEST_SENT\n"+matchEmail, (err) => {
-    if (err) throw err;
+	res.send('I received your report. Thanks for keeping the community safe!');
+    }
 });
+*/
 
-
-		    			   neo4j_session.close();
-  				           res.redirect('/swipe');
-  				      })
- 				       .catch(function (error) {
-					   console.log(error);
-	 			      });
-				}
-  		      })
- 		      .catch(function (error) {
- 		          console.log(error);
- 		      });
-	    }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
-
-
-});
 
 
 
@@ -1420,7 +1722,7 @@ function isLoggedInMiddleware() {
 	return (req, res, next) => {
 
         if (req.isAuthenticated()) {
-            res.redirect('/add-info');
+            res.redirect('/tinder');
         } else {
             return next();
         }
@@ -1430,9 +1732,7 @@ function isLoggedInMiddleware() {
 function isAdmin() {
 	return (req, res, next) => {
 
-        if (req.user == null) {
-            res.redirect('/');
-        } else if (req.user.localeCompare(EMAIL_ADDRESS) == 0) {
+        if (req.user.localeCompare(EMAIL_ADDRESS) == 0) {
             return next();
         } else {
             res.redirect('/');
