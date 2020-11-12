@@ -101,6 +101,7 @@ var neo4j_session = driver.session();
 
 
 var ACCEPTED_EMAIL_DOMAINS;
+var BLACKLISTED_EMAILS;
 
 
 
@@ -501,6 +502,36 @@ app.post('/send-invite', function (req, res) {
         return res.json({"success": false});
     }
 
+
+let date_ob = new Date();
+let date = ("0" + date_ob.getDate()).slice(-2);
+let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+let year = date_ob.getFullYear();
+let hours = date_ob.getHours();
+let minutes = date_ob.getMinutes();
+let seconds = date_ob.getSeconds();
+
+    // check if person is blacklisted
+    fs.readFile('blacklist.txt', function(err, data) {
+	if(err) throw err;
+	BLACKLISTED_EMAILS = data.toString().split("\n");
+    });
+
+    var isBlacklisted = false;
+    BLACKLISTED_EMAILS.forEach( function(blacklisted_email) {
+        if (email.localeCompare(blacklisted_email) == 0) {
+            isBlacklisted = true;
+	    //break;
+        }
+    });
+
+    if (isBlacklisted) {
+	fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nBLACKLIST_LOGIN_DENIED", (err) => {
+    		if (err) throw err;
+	});
+
+        return res.json({"success": false});
+    }
 
 
     // Verify URL
