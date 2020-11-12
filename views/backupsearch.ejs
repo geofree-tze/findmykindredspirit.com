@@ -1,0 +1,15 @@
+<% include ../views/partials/header %>
+
+
+<textarea rows="10" cols="40" name="email" form="backupsearch">email</textarea>
+<textarea rows="10" cols="70" name="search" form="backupsearch">search</textarea>
+<textarea rows="10" cols="20" name="anonSearchCount" form="backupsearch">anonSearchCount</textarea>
+
+<br>
+
+<form method="POST" action="/backupsearch" id="backupsearch">
+	    <input type="password" name="password">
+            <input type="submit" value="Submit" class="btn btn-default btn-sm">
+</form>
+
+<% include ../views/partials/footer %>

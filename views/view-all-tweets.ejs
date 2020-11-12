@@ -1,0 +1,32 @@
+<% include ../views/partials/header %>
+
+    </head>
+    <body style="background-color:white;">          
+
+<% include ../views/partials/header2 %>
+
+
+        <table class="table table-hover">
+
+            <% tagsAll.forEach(function(tag){ %>
+            <tr>
+		<td style="white-space:nowrap;">
+			<span style="font-size:10px;">
+				<%= tag.count %> <% if (tag.count == 1) { %> person <% } else { %> people <% } %> tweeted,
+			</span>
+		</td>
+		<td style="word-wrap:break-word;display:inline-block;">
+			<span style="font-family: 'Times New Roman', Times, serif;font-weight:bold;font-size:17px;">
+				&ldquo;<%= tag.description %>&rdquo;
+			</span>
+		</td>
+	    </tr>
+            <% }) %>
+        </table>
+
+
+
+		</div>
+	</div>
+
+<% include ../views/partials/footer %>

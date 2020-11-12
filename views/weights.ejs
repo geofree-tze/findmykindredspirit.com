@@ -1,0 +1,76 @@
+<% include ../views/partials/header %>
+
+    </head>
+    <body style="background-color:#44ffff;">          
+
+<% include ../views/partials/header2 %>
+
+<div id="text-carousel" class="carousel" style="background-color:#ffffff;margin:15px;" data-interval="false">
+    <!-- Wrapper for slides -->
+    <div class="row">
+        <div class="col-xs-offset-1 col-xs-10">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="carousel-content">
+                        <div style="margin-left:0px;">
+
+        			<br>
+        			<br>
+
+				<% if (tags.length == 0) { %> 
+					You didn't <a href="/twitter">tweet</a> anything.
+				<% } else { %> 
+					Suggested scale:<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Gotta Have It &nbsp;&nbsp;= &nbsp;100<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Love It &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;10<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Like It &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;1<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Neutral &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;0<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Dislike It &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;-1<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Hate It &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;-10<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Can't Stand It &nbsp;= &nbsp;-100<br>
+					<br>
+					<b>Note:</b> hit enter↵ after you change a number.
+					<br><br><br>
+				<% } %> 
+
+				<table>
+				<% tags.forEach(function(tag){ %>
+					<tr style="line-height:14px;"><td>
+						<%= tag.description %>
+						<br>
+						<br>
+					</td><td style="padding-left:15px;">
+						<form class="form-inline" method="POST" action="/change-weight">
+						  <input type="hidden" name="tag" value="<%= tag.description %>">
+						  <input type="number" name="weight" min="-100" max="100" placeholder="<%= tag.weight %>" required>
+						  <br>
+						  <input type="submit" value="enter">
+						  <br>
+						  <br>
+						</form>
+					</td></tr>
+				<% }); %>
+				</table>
+				<br>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+		</div>
+	</div>
+<% include ../views/partials/footer %>

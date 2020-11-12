@@ -1,0 +1,13 @@
+<% include ../views/partials/header %>
+
+<textarea rows="10" cols="70" name="search" form="backupanonsearch">search</textarea>
+<textarea rows="10" cols="20" name="anonSearchCount" form="backupanonsearch">anonSearchCount</textarea>
+
+<br>
+
+<form method="POST" action="/backupanonsearch" id="backupanonsearch">
+	    <input type="password" name="password">
+            <input type="submit" value="Submit" class="btn btn-default btn-sm">
+</form>
+
+<% include ../views/partials/footer %>

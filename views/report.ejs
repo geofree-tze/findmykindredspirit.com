@@ -1,0 +1,25 @@
+<% include ../views/partials/header %>
+
+<div style="text-align:center;">
+
+<br>
+<br>
+
+What did <span style="font-size:10px;font-weight:bold;"><%= poop %></span> do wrong?
+
+<br>
+<br>
+
+<textarea rows="10" cols="50" maxlength="10000" name="message" form="report" required>
+e.g. They sent me inappropriate messages.
+</textarea>
+
+<br>
+
+<form method="POST" action="/report/<%= poop %>" id="report">
+            <input type="submit" value="Send Report" class="btn btn-default btn-sm">
+</form>
+
+
+</div>
+<% include ../views/partials/footer %>
