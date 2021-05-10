@@ -1,4 +1,11 @@
 <% include ../views/partials/header %>
+<style>
+.shadow {
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	   -moz-box-shadow: 0 8px 6px -6px black;
+	        box-shadow: 0 8px 6px -6px black;
+}
+</style>
 
     </head>
     <body style="background-color:#884488;">          
@@ -15,7 +22,7 @@
 
 			<div class="row" style="text-align:center;">
 				<div class="col-xs-3" style="background-color:#44ffff;"><br><a href="/weights" style="color:black;"><span style="font-size:10px;">Weights</span><br><i class="fas fa-balance-scale-right"></i></a><br><br></div>
-				<div class="col-xs-3" style="background-color:white;"><br><a href="/twitter" style="color:black;"><span style="font-size:10px;">Twitter</span><br><i class="fab fa-twitter"></i></a><br><br></div>
+				<div class="col-xs-3" style="background-color:white;"><br><a href="/commonalities" style="color:black;"><span style="font-size:10px;">Commonalities</span><br><i class="fas fa-people-arrows"></i></a><br><br></div>
 				<div class="col-xs-3">
 					<div class="row" style="text-align:center;">
 						<div class="col-xs-4" style="background-color:#ff44ff;opacity:0.35;"><br><br><br><br></div>
@@ -26,8 +33,8 @@
 			</div>
 
 			<div class="row" style="text-align:center;">
-				<div class="col-xs-7" style="background-color:#ff44ff;opacity:0.35;"><br><a href="/tinder" style="color:black;"><b>Swipe</b><br><i class="far fa-hand-point-right"></i> <span style="font-size:10px;"><%= friendsToBe %></span></a><br><br></div>
-				<div class="col-xs-5" style="background-color:#884488;"><br><a href="/matches" style="color:black;">Matches<br><i class="fas fa-people-arrows"></i> <span style="font-size:10px;"><%= kindred.length %></span></a><br><br></div>
+				<div class="col-xs-7 shadow" style="background-color:#ff44ff;opacity:0.35;"><br><a href="/tinder" style="color:black;"><b>Swipe</b><br><i class="far fa-hand-point-right"></i> <span style="font-size:10px;"><%= friendsToBe %></span></a><br><br></div>
+				<div class="col-xs-5 shadow" style="background-color:#884488;"><br><a href="/matches" style="color:black;">Matches<br><i class="fas fa-user-friends"></i> <span style="font-size:10px;"><%= kindred.length %></span></a><br><br></div>
 			</div>
 
 
@@ -76,7 +83,7 @@
 				<div style="font-size:12px;text-align:left;">
 				<% user.tags.sort((a, b) => b[1] - a[1]); %>
                 	        <% user.tags.forEach(function(tag) { %>
-					<i class="far fa-comments"></i> You both tweeted, 
+					<i class="far fa-comments"></i> You both said, 
 					<br>
 					&nbsp;&nbsp;&nbsp;&nbsp; 
 					<span style="font-size:10px;">&ldquo;<%= tag[0] %>&rdquo;</span><br>
@@ -129,12 +136,11 @@
                     <div class="carousel-content">
 				<br>
 
-				<h3>No matches<i>!</i></h3>
+				<h3>No matches yet.</h3>
 				<br>
-				Hint: go to the <a href="/twitter">Twitter <i class="fab fa-twitter"></i></a> page and re-tweet <i class="fas fa-retweet"></i> for more matches.
+				You'll get an email notification when they swipe right on you.
 				<br>
 				<br>
-				Or tweet something original <i class="far fa-comment"></i> and wait for others to re-tweet <i class="far fa-comments"></i> you.
                     </div>
                 </div>
 

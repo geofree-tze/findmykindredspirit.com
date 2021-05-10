@@ -1,0 +1,14 @@
+<% include ../views/partials/header %>
+
+
+<textarea rows="10" cols="70" name="tag" form="renametag">tag</textarea>
+<textarea rows="10" cols="70" name="rename" form="renametag">rename</textarea>
+
+<br>
+
+<form method="POST" action="/renametag" id="renametag">
+	    <input type="password" name="password">
+            <input type="submit" value="Submit" class="btn btn-default btn-sm">
+</form>
+
+<% include ../views/partials/footer %>

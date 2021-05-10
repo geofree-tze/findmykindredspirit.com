@@ -1,0 +1,100 @@
+<% include ../views/partials/header %>
+    </head>
+    <body>          
+
+<% include ../views/partials/header2 %>
+
+<br>
+<br>
+
+        <table class="table table-hover" style="background-color:#dddddd;">
+
+	    <% var i = 0 %>
+            <% tagsAll.forEach(function(tag){ %>
+	    <% i++ %>
+
+            <tr><td>
+			<span style="font-size:10px;">
+				<%= tag.count %> <% if (tag.count == 1) { %> person <% } else { %> people <% } %>
+			</span>
+
+			<br>
+
+			<span style="font-family: 'Times New Roman', Times, serif;font-weight:bold;font-size:17px;">
+				<%= tag.description %>
+			</span>
+	    
+			<br>
+
+
+                                <%# this chunk of code makes sure that a plus sign only appears in front of tags that the user hasn't added yet %>
+                                <%
+                                    var fooBarTagWeight = 0;
+                                    if (tags.length > 0) {
+                                        tags.forEach(function(userTag) {
+                                            if (userTag.description == tag.description) {
+                                                fooBarTagWeight = userTag.weight;
+                                            }
+                                        })
+                                    }
+                                %>
+
+						<form class="form-inline" method="POST" action="/change-value-all">
+						  <input type="hidden" name="tag" value="<%= tag.description %>">
+
+						  <div class="slidecontainer">
+						      <input onchange="this.form.submit()" type="range" name="weight" min="-100" max="100" value="<%= fooBarTagWeight %>" class="slider" id="myRange<%= i %>" required>
+						      <p style="text-align:right;">Your Value: <span id="demo<%= i %>"></span></p>
+						  </div>
+
+						</form>
+	    </td></tr>
+            <% }) %>
+        </table>
+
+
+
+
+		</div>
+	</div>
+</div>
+</div>
+<script   src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script>
+<% var i = 0 %>
+<% tagsAll.forEach(function(tag){ %>
+<% i++ %>
+
+var slider<%= i %> = document.getElementById("myRange<%= i %>");
+var output<%= i %> = document.getElementById("demo<%= i %>");
+output<%= i %>.innerHTML = slider<%= i %>.value;
+
+slider<%= i %>.oninput = function() {
+  output<%= i %>.innerHTML = this.value;
+}
+
+<% }); %>
+</script>
+
+<!-- http://jsfiddle.net/h6su67rn/ -->
+<!-- https://stackoverflow.com/questions/34261365/retain-scrollbar-position-even-after-reloading-using-javascript -->
+<script>
+$(window).scroll(function() {
+  sessionStorage.scrollTop = $(this).scrollTop();
+});
+
+$(document).ready(function() {
+  if (sessionStorage.scrollTop != "undefined") {
+    $(window).scrollTop(sessionStorage.scrollTop);
+  }
+});
+</script>
+
+</body>
+</html>
+
+
+
+

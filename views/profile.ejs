@@ -1,0 +1,200 @@
+<% include ../views/partials/header %>
+<style>
+
+/* https://css-tricks.com/snippets/css/css-box-shadow/ */
+.shadow2 {
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #888;
+}
+
+
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_rangeslider_round */
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 0.7), rgba(111, 111, 111, 0.7), rgba(0, 128, 0, 0.7));
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 1), rgba(0, 128, 0, 1));
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #555;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
+
+    </head>
+    <body style="background-color:#44ffff;">          
+
+<% include ../views/partials/header2 %>
+
+<div id="text-carousel" class="carousel shadow2" style="background-color:#ffffff;margin:15px;" data-interval="false">
+    <!-- Wrapper for slides -->
+    <div class="row">
+        <div class="col-xs-offset-1 col-xs-10">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="carousel-content">
+                        <div style="margin-left:0px;">
+
+        			<br>
+        			<br>
+
+				<% if (tags.length == 0) { %> 
+					You didn't add any <a href="/commonalities">commonalities</a>.
+				<% } else { %> 
+					<!--
+					<div style="padding:25px;background-color:#ccc;">
+					<b>Suggested scale:</b><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Gotta Have It &nbsp;&nbsp;= &nbsp;100<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Love It &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;10<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Like It &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;1<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Delete &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;0<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Dislike It &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;-1<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Hate It &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;-10<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Can't Stand It &nbsp;= &nbsp;-100<br>
+					</div>
+					<br><br><br>
+					-->
+				<% } %> 
+
+				<table>
+				<% var i = 0 %>
+				<% tags.forEach(function(tag){ %>
+				<% i++ %>
+					<tr style="line-height:14px;">
+						<span style="font-family:serif;font-weight:bold;">
+						  <%= tag.description %>
+						</span>
+						<br>
+						<br>
+					</tr><tr style="padding-left:5px;">
+						<form class="form-inline" method="POST" action="/change-value-profile">
+						  <input type="hidden" name="tag" value="<%= tag.description %>">
+
+
+						  <div class="slidecontainer">
+						      <input onchange="this.form.submit()" type="range" name="weight" min="-100" max="100" value="<%= tag.weight %>" class="slider" id="myRange<%= i %>" required>
+						      <p style="text-align:right;">Value: <span id="demo<%= i %>"></span></p>
+						  </div>
+
+						  <br>
+						  <br>
+						</form>
+					</tr>
+				<% }); %>
+				</table>
+				<br>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+    <div class="row">
+        <div class="col-xs-offset-1 col-xs-10">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="carousel-content">
+                        <div style="margin-left:0px;text-align:right;">
+
+        			<br>
+        			<br>
+
+					<a class="btn btn-danger" href="/forget-me" role="button">Forget Me &nbsp;<i class="fas fa-trash-alt"></i></a><br>
+					<span style="font-size:10px;color:black;">
+						i stole this idea from --&gt;
+						<a style="font-size:10px;" href="https://youtu.be/UOEpe17nPhE?t=3387" target="_blank">Ryan Schiller</a>
+					</span>
+        			<br>
+        			<br>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+</div>
+<script   src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script>
+<% var i = 0 %>
+<% tags.forEach(function(tag){ %>
+<% i++ %>
+
+var slider<%= i %> = document.getElementById("myRange<%= i %>");
+var output<%= i %> = document.getElementById("demo<%= i %>");
+output<%= i %>.innerHTML = slider<%= i %>.value;
+
+slider<%= i %>.oninput = function() {
+  output<%= i %>.innerHTML = this.value;
+}
+
+<% }); %>
+</script>
+
+<!-- http://jsfiddle.net/h6su67rn/ -->
+<!-- https://stackoverflow.com/questions/34261365/retain-scrollbar-position-even-after-reloading-using-javascript -->
+<script>
+$(window).scroll(function() {
+  sessionStorage.scrollTop = $(this).scrollTop();
+});
+
+$(document).ready(function() {
+  if (sessionStorage.scrollTop != "undefined") {
+    $(window).scrollTop(sessionStorage.scrollTop);
+  }
+});
+</script>
+
+</body>
+</html>
+
+
+
+

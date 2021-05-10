@@ -3,6 +3,32 @@
 
 <style>
 
+img {
+  max-width:400px; 
+//  border: 5px solid #424242;
+  width: 100%;
+}
+
+td {
+  vertical-align: top;
+}
+
+table {
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+/*
+table, th, td {
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+}
+*/
+
+
 /* https://css-tricks.com/snippets/css/css-box-shadow/ */
 .shadow {
    -moz-box-shadow:    inset 0 0 10px #000000;
@@ -15,16 +41,6 @@
   -webkit-box-shadow: 3px 3px 5px 6px #888;
   box-shadow:         3px 3px 5px 6px #888;
 }
-
-td {
-  vertical-align: top;
-}
-
-table {
-  margin-left: auto; 
-  margin-right: auto;
-}
-
 
 
 /* https://codepen.io/aaroniker/pen/XxPNqY */
@@ -52,15 +68,16 @@ table {
 
 /* https://codepen.io/nohoid/pen/kIfto */
 .wrapper { 
-  height: 75px;
-  width: 270px;
-background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+  border-radius: 50px;
+  height: 400px;
+  width: 400px;
+background: linear-gradient(24deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
 background-size: 1800% 1800%;
 
--webkit-animation: rainbow 18s ease infinite;
--z-animation: rainbow 18s ease infinite;
--o-animation: rainbow 18s ease infinite;
-  animation: rainbow 18s ease infinite;}
+-webkit-animation: rainbow 38s ease infinite;
+-z-animation: rainbow 38s ease infinite;
+-o-animation: rainbow 38s ease infinite;
+  animation: rainbow 38s ease infinite;}
 
 @-webkit-keyframes rainbow {
     0%{background-position:0% 82%}
@@ -82,21 +99,11 @@ background-size: 1800% 1800%;
     50%{background-position:100% 19%}
     100%{background-position:0% 82%}
 }
+
 </style>
 
-<script>
-// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show
-function getStartedButtonClicked() {
-    document.getElementById('start2').style.display = 'none';
-    document.getElementById('myDIV').style.display = 'block';
-
-    // https://stackoverflow.com/questions/49475935/on-button-click-focus-input-in-javascript/49475954
-    document.getElementById('email').focus();
-}
-</script>
-
     </head>
-    <body style="background-color:black;">
+    <body style="background-color:black;color:white;">
     
 
 
@@ -105,111 +112,64 @@ function getStartedButtonClicked() {
 
 		<br>
 		<br>
-
-	<div id="start2">
-		<div style="text-align:center;">
-			<span style="font-size:18px;color:white;">
-				tinder for friends
-			</span>
-
-			<br>
-			<br>
-
-			<a href="about"><img width="100%" style="max-width:250px;" src="https://i.imgur.com/Bwe0vKx.gif" alt="internet globe"></a>
-
-			<br>
-			<br>
-
-			<span style="font-size:12px;color:white;">
-				find people you relate to
-			</span>
-
-			<br>
-			<br>
-			<br>
-
-			<a href="about"><img width="67px" src="https://i.imgur.com/mLmudut.png" alt="da rules fairly odd parents"></a>
-			<a href="about"><span style="font-size:12px;"><b>Click here to read the rules.</b></span></a>
-
-			<br>
-			<br>
-
-			<div class="wrapper" style="display:inline-block;"><br>
-			<div id="start" style="text-align:center;">
-				<button onclick="getStartedButtonClicked()" class="btn btn-default btn-md">
-				<span style="color:blue;font-weight:bold;">
-					<i class="fas fa-play-circle"></i> Click here to play the game.
-				</span>		
-				</button>
-			</div>
-			</div>
-		</div>
-	</div>
-
-	<br>
+		<br>
 
 
+<div style="text-align:center;">
+<div style="display: inline-block; text-align: left;">
+
+<h3 style="text-align:center;color:white;">
+tinder for friends
+</h3>
+
+<h6 style="text-align:center;color:gray;">
+<!-- find people you have a lot in common with<i>!</i> -->
+we're so alike<i>!</i>
+</h6>
+
+<img src="https://i.imgur.com/IcS8Kz8.png" alt="venn diagram people">
+
+<br>
+<br>
+
+<div style="text-align:center;color:gray;">
+<span style="font-size:12px;">As of</span> <span id="time" style="color:white;"></span> <span style="font-size:12px;">there's</span> <span style="color:white;"><%= userCount %></span> <span style="font-size:12px;"><span style="color:white;">people</span> signed up.</span>
+</div>
+
+<br>
+<br>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<div id="myDIV" style="display: none;">
+<div class="wrapper">
 	<form id="login" style="text-align:center;">
+<br>
+<br>
 
-<br>
-<br>
-<br>
-<br>
-<br>
+		<h3 style="color:black;">Login <i class="fas fa-sign-in-alt"></i></h3>
+
+		<br>
+		<br>
 
 <table style="text-align:right;display:inline-block;">
 <tr>
-<td>
-		<span style="color:white;">Step 1.&nbsp;&nbsp;</span>
-
+<td style="white-space: nowrap;">
+		<span style="color:black;font-size:12px;">Step 1.&nbsp;&nbsp;</span>
+</td>
+<td style="padding-left:10px;">
+		<div class="g-recaptcha" data-sitekey="6LdN2IMUAAAAANfZxaaec6_Lx_JOCD1mGhvHD1FF"></div>
+		<div id="captcha_not_checked_message" style="display: none;color:red;font-weight:bold;">
+			Bee-boo-boo-bop.<br><span style="font-size:10px;">(please confirm you're not a robot)</span>
+		</div>
 		<br>
-		<br>
+</td>
+</tr>
 
+<tr>
+<td style="white-space: nowrap;">
+		<span style="color:black;font-size:12px;">Step 2.&nbsp;&nbsp;</span>
 </td>
 <td>
-		<span style="color:white;">enter your&nbsp;&nbsp;</span>
-		<input type="email" name="email" id="email" placeholder="college email" maxlength="100" required="required" autofocus>
+		<input style="color:black;" type="email" name="email" id="email" placeholder="your college email" maxlength="100" required="required">
 
 		<span id="not_a_college_email_message" style="display: none;color:red;font-weight:bold;">
 			Sorry, your email didn't end in .edu<br><span style="font-size:10px;">or .edu.XX or .ac.XX</span>
@@ -217,40 +177,83 @@ function getStartedButtonClicked() {
 
 		<span id="not_a_college_email_message2" style="display:block;">
 <!--			<a href="why-not-gmail" target="_blank">why not gmail?</a><br><br> -->
-			<br><br>
+			<br>
 		</span>
 </td>
 </tr>
 
 <tr>
-<td>
-		<span style="color:white;">Step 2.&nbsp;&nbsp;</span>
+<td style="white-space: nowrap;">
+		<span style="color:black;font-size:12px;">Step 3.&nbsp;&nbsp;</span>
 </td>
 <td>
-		<div class="g-recaptcha" data-sitekey="6LdN2IMUAAAAANfZxaaec6_Lx_JOCD1mGhvHD1FF"></div>
-		<div id="captcha_not_checked_message" style="display: none;color:red;font-weight:bold;">
-			Bee-boo-boo-bop.<br><span style="font-size:10px;">(please confirm you're not a robot)</span>
-		</div>
-</td>
-</tr>
-
-<tr>
-<td>
-		<br>
-
-		<span style="color:white;">Step 3.&nbsp;&nbsp;</span>
-</td>
-<td>
-		<br>
-
-		<span style="color:white;">click --&gt;</span>
-		<input type="submit" value="Send Invite">
-
+		<span style="font-size:11px;">double click <i class="fas fa-long-arrow-alt-right"></i></span>
+		<input class="btn btn-success btn-sm" type="submit" value="Go">
 </td>
 </tr>
 </table>
 	</form>
-	</div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div style="line-height:1.5;text-align:right;">
+
+<!--
+	<span style="font-size:12px;">
+		Feel free to contact me
+	</span>
+
+	<br>
+
+	<span style="font-size:10px;color:gray;">
+		geofree.tze@gmail.com
+	</span>
+
+	<br>
+-->
+	<a href="https://github.com/geofree-tze/socialclient" target="_blank"><span style="font-size:21px;color:white;"><i class="fab fa-github"></i></span></a>
+	<a href="https://github.com/geofree-tze/socialclient" target="_blank">
+		<span style="font-size:12px;"><b>GitHub</b></span>
+	</a>
+
+	<br>
+
+	<a href="https://www.youtube.com/channel/UCBXq1qIHJXvfm8YXgA5TAEg" target="_blank"><span style="font-size:21px;color:red;"><i class="fab fa-youtube"></i></span></a>
+	<a href="https://www.youtube.com/channel/UCBXq1qIHJXvfm8YXgA5TAEg" target="_blank">
+		<span style="font-size:12px;"><b>YouTube</b></span>
+	</a>
+
+</div>
+
+
+<br>
+<br>
+</div>
+</div>
+
+
+
+
+
+<script>
+// https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript
+var today = new Date();
+var dd = String(today.getDate());
+var mm = String(today.getMonth() + 1); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
+
+document.getElementById('time').innerHTML=today;
+</script>
+
 
 <script>
     document.getElementById('login').addEventListener('submit', submitForm);

@@ -1,0 +1,236 @@
+<% include ../views/partials/header %>
+
+    </head>
+    <body style="background-color:white;">          
+
+<% include ../views/partials/header2 %>
+
+
+	<div class="row">
+	<div class="col-md-12">
+            <div class="well" style="background-color:#dddddd;margin:15px;">
+            <form class="form-inline" method="POST" action="/search/query">
+                <div class="row">
+
+                    <div class="col-xs-6" style="text-align:right;">
+                        <input type="text" name="statementQuery" placeholder="<% if (query ==="") { %>e.g. &ldquo;music&rdquo;<% } else { %><%= query %><% } %>" maxlength="100" <% if (query === "") { %>autofocus<% } %>>
+                    </div>
+
+                    <div class="col-xs-1"></div>
+
+                    <div class="col-xs-4" style="text-align:left;">
+			<button type="submit" class="btn btn-success" style="background-color:#44dd44;">
+                            <span style="font-size:11px;font-family:Helvetica;font-weight:bold;color:#e5e5e5;"><i class="fas fa-search"></i> SEARCH</span>
+			</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+	</div>
+	</div>
+
+
+	<div class="row">
+	<div class="col-md-12">
+            <div style="margin:15px;">
+            <form class="form-inline" method="POST" action="/search/query">
+                <div class="row">
+
+                    <div class="col-xs-6"></div>
+
+                    <div class="col-xs-1"></div>
+
+                    <div class="col-xs-4" style="text-align:left;">
+			<a class="btn btn-info btn-md" href="/view-all-commonalities" target="_blank" style="font-size:12.5px;font-weight:bold;color:white;"><i class="fas fa-eye"></i> View all</a>
+                    </div>
+                </div>
+            </form>
+            </div>
+	</div>
+	</div>
+
+
+
+
+
+
+<% if (tagsAll.length > 0) { %>
+
+        <!-- answered by DJ18 https://stackoverflow.com/questions/9707397/making-a-div-vertically-scrollable-using-css -->
+        <div id="poop" onscroll="myFunction()" style="overflow-y:scroll; overflow-x:hidden; height:350px;margin:15px;">
+        <table class="table table-hover" style="background-color:#dddddd;">
+
+	    <% var i = 0 %>
+            <% tagsAll.forEach(function(tag){ %>
+	    <% i++ %>
+
+            <tr><td>
+			<span style="font-size:10px;">
+				<%= tag.count %> <% if (tag.count == 1) { %> person <% } else { %> people <% } %>
+			</span>
+
+			<br>
+
+			<span style="font-family: 'Times New Roman', Times, serif;font-weight:bold;font-size:17px;">
+				<%= tag.description.substring(0, tag.description.toLowerCase().indexOf(query.toLowerCase())) %><span style="background-color:yellow;"><%= tag.description.substring(tag.description.toLowerCase().indexOf(query.toLowerCase()), tag.description.toLowerCase().indexOf(query.toLowerCase())+query.length) %></span><%= tag.description.substring(tag.description.toLowerCase().indexOf(query.toLowerCase())+query.length, tag.description.length) %>
+			</span>
+	    
+			<br>
+
+
+                                <%# this chunk of code makes sure that a plus sign only appears in front of tags that the user hasn't added yet %>
+                                <%
+                                    var fooBarTagWeight = 0;
+                                    if (tags.length > 0) {
+                                        tags.forEach(function(userTag) {
+                                            if (userTag.description == tag.description) {
+                                                fooBarTagWeight = userTag.weight;
+                                            }
+                                        })
+                                    }
+                                %>
+
+						<form class="form-inline" method="POST" action="/change-value">
+						  <input type="hidden" name="tag" value="<%= tag.description %>">
+
+						  <div class="slidecontainer">
+						      <input onchange="this.form.submit()" type="range" name="weight" min="-100" max="100" value="<%= fooBarTagWeight %>" class="slider" id="myRange<%= i %>" required>
+						      <p style="text-align:right;">Your Value: <span id="demo<%= i %>"></span></p>
+						  </div>
+
+						</form>
+	    </td></tr>
+            <% }) %>
+            <tr><td><div class="row">
+		<form class="form-inline" method="POST" action="/search/add_tag">
+		<div class="col-xs-7" style="word-wrap:break-word;display:inline-block;">
+
+			<br>
+
+        		<input type="hidden" name="isUpload" value="true">
+        		<input type="text" name="tag" placeholder="write something new?" maxlength="100" required="required">
+
+			<br>
+			<br>
+
+		</div>
+		<div class="col-xs-5" style="text-align:left;">                            
+			<br>
+			<button type="submit" class="btn btn-primary">
+	                    <span style="font-size:9px;font-family:Helvetica;font-weight:bold;">ADD</span> <span style="font-size:12px;"><i class="fas fa-plus"></i></span>
+			</button>
+		</div>
+		</form>
+	    </div></td></tr>
+        </table>
+        </div>
+<% } %>
+
+
+
+
+
+
+<% if (tagsAll.length == 0 && query !== "") { %>
+
+	<br>
+
+	<% if (searchCount < 2) { %>
+
+		<span style="font-family: 'Times New Roman', Times, serif;font-weight:bold;font-size:17px;">
+			No results found.
+		</span>
+
+	<% } else { %>
+
+				<br>
+				<span style="color:red;">Bad news:</span>
+				<span style="font-size:11px;">
+					No results for &ldquo;<%= query %>&rdquo; yet.
+				</span>
+				<br>
+				<span style="color:green;">Good news:</span>
+				<span style="font-size:11px;">
+					<%= searchCount - 1 %> other 
+					<% if (searchCount == 2) { %> 
+						person 
+					<% } else { %>
+						people 
+					<% } %>
+					searched for &ldquo;<%= query %>&rdquo;<br>
+				</span>
+	<% } %>
+
+	<br>
+
+	<div class="row">
+	<div class="col-md-12">
+            <div class="well" style="background-color:#dddddd;margin:15px;">
+            <form class="form-inline" method="POST" action="/search/add_tag">
+                <div class="row">
+
+                    <div class="col-xs-6" style="word-wrap:break-word;display:inline-block;">
+        		<input type="hidden" name="isUpload" value="true">
+        		<input type="text" name="tag" placeholder="write about &ldquo;<%= query %>&rdquo;?" maxlength="100" required="required" autofocus>
+
+				<br>
+				<span style="font-size:10px;">
+					You can be the first<i>!</i>
+				</span>
+
+                    </div>
+
+                    <div class="col-xs-1"></div>
+
+                    <div class="col-xs-4" style="text-align:left;">
+			<button type="submit" class="btn btn-primary">
+	                    <span style="font-size:9px;font-family:Helvetica;font-weight:bold;">ADD</span> <span style="font-size:12px;"><i class="fas fa-plus"></i></span>
+			</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+	</div>
+	</div>
+<% } %>
+
+
+
+
+		</div>
+	</div>
+
+
+
+
+</div>
+</div>
+<script   src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_scrollleft -->
+<script>
+function myFunction() {
+  localStorage.setItem("scrollPos", document.getElementById("poop").scrollTop);
+}
+window.onload = function () { 
+  document.getElementById("poop").scrollTop = localStorage.getItem("scrollPos");
+}
+</script>
+
+
+<script>
+<% var i = 0 %>
+<% tagsAll.forEach(function(tag){ %>
+<% i++ %>
+
+var slider<%= i %> = document.getElementById("myRange<%= i %>");
+var output<%= i %> = document.getElementById("demo<%= i %>");
+output<%= i %>.innerHTML = slider<%= i %>.value;
+
+slider<%= i %>.oninput = function() {
+  output<%= i %>.innerHTML = this.value;
+}
+
+<% }); %>
+</script>
