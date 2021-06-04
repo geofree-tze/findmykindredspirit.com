@@ -18,6 +18,9 @@
 
 */
 
+const DOMAIN_NAME = "tinderforfriends.com";
+const IP_ADDRESS = "164.90.145.91";
+
 
 var express = require('express');
 var path = require('path');
@@ -102,6 +105,7 @@ var neo4j_session = driver.session();
 
 var ACCEPTED_EMAIL_DOMAINS;
 var BLACKLISTED_EMAILS;
+var GUESTLIST_EMAILS;
 
 
 
@@ -574,9 +578,9 @@ app.post('/send-invite', function (req, res) {
     var patt3 = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.ac\.[a-zA-Z0-9.+-]+$");
   
 
-    if (!(patt.test(email) || (patt2.test(email) || patt3.test(email)))) {
-        req.flash('danger', 'Your email didn\'t end in .edu or .edu.XX or .ac.XX');
-        return res.json({"success": false});
+    var isCollegeEmail = false;
+    if (patt.test(email) || (patt2.test(email) || patt3.test(email))) {
+    	isCollegeEmail = true;
     }
 
 
@@ -614,6 +618,33 @@ let seconds = date_ob.getSeconds();
     }
 
 
+
+
+
+
+    // check if person is on the guestlist
+    fs.readFile('guestlist.txt', function(err, data) {
+	if(err) throw err;
+	GUESTLIST_EMAILS = data.toString().split("\n");
+    });
+
+    var isOnGuestList = false;
+    GUESTLIST_EMAILS.forEach( function(guestlist_email) {
+        if (email.localeCompare(guestlist_email) == 0) {
+            isOnGuestList = true;
+	    //break;
+        }
+    });
+
+    if (!isOnGuestList && !isCollegeEmail) {
+	fs.appendFile('history.txt', '\n\n'+year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds+"\n"+email+"\nUNINVITED_LOGIN_DENIED", (err) => {
+    		if (err) throw err;
+	});
+
+        return res.json({"success": false});
+    }
+
+
     // Verify URL
     const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
 
@@ -639,7 +670,7 @@ let seconds = date_ob.getSeconds();
                                     },
                                     EMAIL_SECRET,
                                     {
-                                        expiresIn: 300, // 1 day = 86400, 5 minutes = 300 seconds
+                                        expiresIn: 300, // 1 day = 86400 seconds, 5 minutes = 300 seconds
                                     }
                                 );
 
@@ -663,7 +694,7 @@ let seconds = date_ob.getSeconds();
                                     bcc: EMAIL_ADDRESS, // list of receivers
                                     subject: 'tinder for friends', // Subject line
                                     text: '', // plain text body
-                                    html: 'Welcome to tinder for friends 👋<br><br>To login, click the link below:<br>&lt;<a target="_blank" href="' + loginURL + '">' + loginURL.substring(0, loginURL.indexOf("login")+5) + '?=' + email + '</a>&gt;<br><br><span style="font-size:10px;">P.S. if the link expired, you can always get a new one by re-entering your email at <a href="https://tinderforfriends.com/" target="_blank">tinder for friends</a>.<br>Links expire 5 minutes after they\'re sent for security reasons.</span><br><br>'
+                                    html: 'Welcome to tinder for friends ðŸ‘‹<br><br>To login, click the link below:<br>&lt;<a target="_blank" href="' + loginURL + '">' + loginURL.substring(0, loginURL.indexOf("login")+5) + '?=' + email + '</a>&gt;<br><br><span style="font-size:10px;">P.S. if the link expired, you can always get a new one by re-entering your email at <a href="https://tinderforfriends.com/" target="_blank">tinder for friends</a>.<br>Links expire 5 minutes after they\'re sent for security reasons.</span><br><br>'
                                 };
 
 
@@ -1791,7 +1822,7 @@ app.post('/match/swipe', authenticationMiddleware(), function (req, res) {
 							'Here\'s your commonalities and values:' +
 							commonTagsEmailString + '<br>' + 
 							'<br>' + 
-							'Thanks for using <a href="https://tinderforfriends.com/" target="_blank">tinder for friends</a> 🙂<br>'
+							'Thanks for using <a href="https://tinderforfriends.com/" target="_blank">tinder for friends</a> ðŸ™‚<br>'
  		                               };
 
                 		                // send mail with defined transport object
